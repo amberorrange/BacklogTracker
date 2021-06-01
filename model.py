@@ -26,7 +26,7 @@ class User(db.Model):
                         autoincrement= True,
                         primary_key=True)
     fname = db.Column(db.String(30), nullable=False)
-    lname - bd.Column(db.String(30), nullable=False)                    
+    lname = db.Column(db.String(30), nullable=False)                    
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(20), nullable=False)
 
@@ -45,7 +45,7 @@ class Game(db.Model):
     game_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text())
-    genre_id = db.Column(db.Integer, db.foreign_key('genres.genre_id')) #questions
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id')) #questions
     igdb_id = db.Column(db.Integer) #uhhhhh
 
 
@@ -60,8 +60,8 @@ class Backlog(db.Model):
     _tablename__ = 'backlogs'
 
     backlog_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.foreign_key('users.user_id') nullable=False)
-    game_id = db.Column(db.Integer, db.foreign_key('games.game_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'), nullable=False)
     ownership_status = db.Column(db.String(30), nullable=False) 
     play_status = db.Column(db.Boolean, nullable=False, default=False) 
 
@@ -92,8 +92,8 @@ class Review(db.Model):
     _tablename__ = 'reviews'
 
     review_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.foreign_key('users.user_id') nullable=False)
-    game_id = db.Column(db.Integer, db.foreign_key('games.game_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'), nullable=False)
     body = db.Column(db.Text(), nullable=False) 
     score = db.Column(db.Integer, nullable=False) 
     completion_time = db.Column(db.Integer)
