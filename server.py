@@ -72,4 +72,5 @@ def add_review():
 
 if __name__ == '__main__':
     connect_to_db(app)
+    app.debug = True
     app.run(host='0.0.0.0', debug=True)
