@@ -66,10 +66,6 @@ def add_review():
     """Users can add a review for games they've played."""
 
 
-
-
-
-
 if __name__ == '__main__':
     connect_to_db(app)
     app.debug = True

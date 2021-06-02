@@ -73,14 +73,14 @@ class Backlog(db.Model):
     __tablename__ = 'backlogs'
 
     backlog_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'))
     ownership_status = db.Column(db.String(30), nullable=False) 
     play_status = db.Column(db.Boolean, nullable=False, default=False) 
 
 
     def __repr__(self):
-        return f'<Backlog Entry backlog_id={self.backlog_id} game_id={self.game_id}>'
+        return f'<Backlog Entry backlog_id={self.backlog_id} user_id={self.user_id} game_id={self.game_id}>'
 
     #has relationships with user and games
 
@@ -91,8 +91,8 @@ class Review(db.Model):
     __tablename__ = 'reviews'
 
     review_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'))
     body = db.Column(db.Text(), nullable=False) 
     score = db.Column(db.Integer, nullable=False) 
     completion_time = db.Column(db.Integer)
@@ -118,7 +118,6 @@ def connect_to_db(flask_app, db_uri='postgresql:///backlogs', echo=True):
     print('Connected to the db!')
 
 
-
 if __name__ == '__main__':
     from server import app
 
@@ -130,4 +129,12 @@ if __name__ == '__main__':
 
 
     # if len(User.query.all())
-    # >>> test_user = User(fname='testfname', lname='testlname', email='test@test.test', password='testpw')
+    # test_user = User(fname='testfname', lname='testlname', email='test@test.test', password='testpw')
+    # test_game= Game(title='testtitle')
+
+
+
+
+
+
+
