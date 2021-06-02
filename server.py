@@ -37,8 +37,8 @@ def login_confirmation():
     """Confirms a user has successfully logged in and either
     redirects to view their backlog or redirects back to the login page"""
 
-
-
+    email = request
+    password
 
 
 @app.route("/create_account")
