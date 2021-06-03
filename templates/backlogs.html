@@ -5,12 +5,19 @@
 
 {% block content %}
 
-    <h1>Welcome (USER)!</h1>
+
+    {% if current_user.is_authenticated %}<h1>
+    Welcome, {{ current_user.fname }} </h1>
+    {% endif %}
+    
     <h2>Here are your entries.</h2>
     <ul>
         <li><a href="/add_game">Click here to add a game to your backlog.</a> </li>
         <li><a href="/add_review">Click here to review a game you've completed.</a> </li>  
+        <li><a href="/logout">Log out</a></li>
     </ul>
+
+    
 
 {% endblock %}
 

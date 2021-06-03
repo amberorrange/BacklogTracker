@@ -1,11 +1,11 @@
 """Server for my app."""
 
-
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
 
+from flask_login import LoginManager, login_user, login_required, logout_user
 
-from model import connect_to_db
+from model import connect_to_db, User
 
 import crud 
 
@@ -13,7 +13,17 @@ from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "dev"
+
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 app.jinja_env.undefined = StrictUndefined
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 
 @app.route('/')
@@ -40,13 +50,25 @@ def login_confirmation():
 
     user = crud.check_login(email, password)
     if user:
-    
-        # session["user"] = user
+
+        # Call flask_login.login_user to login a user
+        login_user(user)
         flash("You have successfully logged in!")
         return redirect("/view_backlog")
+
     else:
         flash('Email or Password not found. Please try again or create an account.')
         return redirect('/login')
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    """Logs a user out of their account. """
+    logout_user()
+    flash("Successfully logged out of account.")
+
+    return redirect("/")
 
 
 
@@ -59,7 +81,7 @@ def create_account():
 
 
 @app.route("/register_account", methods=["POST"])
-def show_user():
+def register_user():
     """Register a new user"""
 
     fname = request.form.get("fname")
@@ -79,13 +101,8 @@ def show_user():
         return redirect("/login")
 
 
-
-
-
-
-
-
 @app.route('/view_backlog')
+@login_required
 def view_backlog():
     """Displays users to see their backlog entries."""
     #also includes hyperlinks to the add_game route and add_review routes
@@ -94,12 +111,14 @@ def view_backlog():
 
 
 @app.route('/add_game')
+@login_required
 def add_game():
     """Allow users to add a new entry to their backlog"""
 
 
 
 @app.route('/add_review')
+@login_required
 def add_review():
     """Users can add a review for games they've played."""
 

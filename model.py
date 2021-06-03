@@ -1,10 +1,11 @@
 """ Models for my backlog Tracking app"""
 
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     """A user."""
 
     __tablename__ = 'users'
@@ -21,6 +22,11 @@ class User(db.Model):
     backlogs = db.relationship('Backlog', backref='user') #primary key to backlogs foreign key
     reviews = db.relationship('Review', backref='user') #primaray key to reviews foreign key
 
+
+    def get_id(self):
+        """Override UserMixin.get_id."""
+        
+        return str(self.user_id)
     
 
     def __repr__(self):
