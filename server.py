@@ -30,7 +30,7 @@ def load_user(user_id):
 def homepage():
     """View Homepage of Backlog Tracker-they can login or create an account"""
 
-    if user_logged_in:
+    if current_user.is_authenticated:
 
         flash("Already logged in.")
         return redirect("/view_backlog")
@@ -42,8 +42,8 @@ def homepage():
 def login():
     """Allows users to enter their login information"""
 
-    #figture out how to not repeat this in both routes(line 33)?
-    if user_logged_in:
+    #figure out how to not repeat this in both routes(line 33)?
+    if current_user.is_authenticated:
 
         flash("Already logged in.")
         return redirect("/view_backlog")
@@ -130,12 +130,36 @@ def register_user():
 
 
 
-@app.route("/change_account_info")
+@app.route("/change_account_info_form")
 @login_required
-def change_aacount_info():
+def change_account_info_form():
     """Shows user form to change account information"""
 
     return render_template("change_account.html")
+
+
+@app.route("/change_account_info", methods=["POST"])
+@login_required
+def change_account_info():
+    """Changes a user's account information"""
+
+    fname = request.form.get("fname")
+    lname = request.form.get("lname")
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    current_email = current_user.email
+
+    updated_user = crud.change_account_info(current_email, fname, lname, email, password)
+    logout_user()
+    flash("Your account information is changed. Please log in again.")
+
+    return redirect("/")
+  
+
+
+
+
 
 
 @app.route('/view_backlog')
