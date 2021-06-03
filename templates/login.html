@@ -1,26 +1,26 @@
-<!doctype html>
-<html>
-  <head>
 
-    <title>Login</title>
-  </head>
-  <body>
-    <h1>Welcome to the Backlog Tracker</h1>
-    <h3>Please enter your login information.</h3>
+{% extends 'base.html' %}
+
+{% block title %} Log In {% endblock %} 
 
 
+{% block content %}
 
-    <form action="/login_confirmation" method="POST">
-    
-        <p>Email <input type="text" name="email"></p>
-        <p> Password <input type="password" name="password"></p>
+  <h1>Welcome to the Backlog Tracker</h1>
+  <h3>Please enter your login information.</h3>
 
-        <p><input type="submit"></p>
-    
-    </form>
-    
-       
-    <p>Don't have a login? <a href="/create_account">You can create an account.</a> </p>   
+  <form action="/login_confirmation" method="POST">
 
-  </body>
-</html>
+      <p>Email <input type="text" name="email"></p>
+      <p> Password <input type="password" name="password"></p>
+
+      <p><input type="submit"></p>
+
+  </form>
+ 
+  <p>Don't have a login? <a href="/create_account">You can create an account.</a> </p>  
+
+{% endblock %}
+
+
+

@@ -23,9 +23,6 @@ def homepage():
     return render_template('homepage.html')
 
 
-
-
-
 @app.route('/login')
 def login():
     """Allows users to enter their login information"""
@@ -43,6 +40,8 @@ def login_confirmation():
 
     user = crud.check_login(email, password)
     if user:
+    
+        # session["user"] = user
         flash("You have successfully logged in!")
         return redirect("/view_backlog")
     else:
