@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} {% if current_user.is_authenticated %}
+    {{ current_user.fname }}'s Account Information 
+    {% endif %} {% endblock %} 
+
+
+{% block content %}
+
+<h1> Account Information </h1>
+
+<p>First Name: {{ current_user.fname }}</p>
+<p>Last Name: {{ current_user.lname }}</p>
+<p>Email: {{ current_user.email }}</p>
+
+
+<!-- add an option to delete account or change account info -->
+<a href="change_account_info">Change Account Information</a> <br>
+<a href="/delete_account">Delete your account? This change is permanent.</a>
+{% endblock %}

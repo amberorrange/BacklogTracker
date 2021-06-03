@@ -3,7 +3,7 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
 
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user, user_logged_in
 
 from model import connect_to_db, User
 
@@ -30,12 +30,24 @@ def load_user(user_id):
 def homepage():
     """View Homepage of Backlog Tracker-they can login or create an account"""
 
+    if user_logged_in:
+
+        flash("Already logged in.")
+        return redirect("/view_backlog")
+
     return render_template('homepage.html')
 
 
 @app.route('/login')
 def login():
     """Allows users to enter their login information"""
+
+    #figture out how to not repeat this in both routes(line 33)?
+    if user_logged_in:
+
+        flash("Already logged in.")
+        return redirect("/view_backlog")
+
 
     return render_template('login.html')
     
@@ -72,6 +84,22 @@ def logout():
 
 
 
+@app.route("/show_user_details")
+@login_required
+def show_user_details():
+    """Shows user's account info. Gives them options to delete or alter their account. """
+
+    return render_template("user_details.html")
+
+@app.route("/delete_account")
+@login_required
+def delete_account():
+    """Delete's a user's account"""
+    email = current_user.email
+    crud.delete_account(email)
+    return redirect("/")
+
+
 
 @app.route("/create_account")
 def create_account():
@@ -89,7 +117,7 @@ def register_user():
     email = request.form.get("email")
     password = request.form.get("password")
 
-
+    
     user = crud.get_user_by_email(email)
     if user:
         flash('A user with that email already exists. Log in or Try again with a different email.')
@@ -99,6 +127,15 @@ def register_user():
         flash('Account created successfully. Please log in.')
     
         return redirect("/login")
+
+
+
+@app.route("/change_account_info")
+@login_required
+def change_aacount_info():
+    """Shows user form to change account information"""
+
+    return render_template("change_account.html")
 
 
 @app.route('/view_backlog')
@@ -114,6 +151,7 @@ def view_backlog():
 @login_required
 def add_game():
     """Allow users to add a new entry to their backlog"""
+    return render_template("add_game.html")
 
 
 
@@ -121,6 +159,7 @@ def add_game():
 @login_required
 def add_review():
     """Users can add a review for games they've played."""
+    return render_template("add_review.html")
 
 
 if __name__ == '__main__':

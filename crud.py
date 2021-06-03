@@ -28,6 +28,16 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
+def delete_account(email):
+
+    """Delete's a user's account."""
+
+    user= User.query.filter(User.email== email).first()
+    db.session.delete(user)
+    db.session.commit()
+
+
+
 
 
 

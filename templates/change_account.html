@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %} {% if current_user.is_authenticated %}
+    {{ current_user.fname }}'s Account'
+    {% endif %} {% endblock %} 
+
+
+{% block content %}
+<h1>{{ current_user.fname }} {{ current_user.lname}}'s Account </h1>
+
+{% endblock %}
