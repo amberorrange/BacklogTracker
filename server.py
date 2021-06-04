@@ -6,7 +6,7 @@ from flask import (Flask, render_template, request, flash, session,
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from model import connect_to_db, User
-
+import os
 import crud 
 import requests
 from jinja2 import StrictUndefined
@@ -19,6 +19,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 app.jinja_env.undefined = StrictUndefined
+
+API_KEY = os.environ['RAWG_KEY']
 
 
 @login_manager.user_loader
@@ -150,7 +152,7 @@ def change_account_info():
 
     current_email = current_user.email
 
-    updated_user = crud.change_account_info(current_email, fname, lname, email, password)
+    crud.change_account_info(current_email, fname, lname, email, password)
     logout_user()
     flash("Your account information is changed. Please log in again.")
 
@@ -188,7 +190,7 @@ def search_results():
     user_query = request.args.get("game")
 
     url = 'https://api.rawg.io/api/games'
-    payload = {'key': '5c888682e05f44af9b9437aa5a364842', 'search': user_query}
+    payload = {'key': f'{API_KEY}', 'search': user_query}
 
     res = requests.get(url, params=payload)
     data = res.json()
