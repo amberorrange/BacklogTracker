@@ -3,12 +3,12 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
 
-from flask_login import LoginManager, login_user, login_required, logout_user, current_user, user_logged_in
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from model import connect_to_db, User
 
 import crud 
-
+import requests
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
@@ -163,10 +163,13 @@ def change_account_info():
 
 
 @app.route('/view_backlog')
-@login_required
 def view_backlog():
     """Displays users to see their backlog entries."""
     #also includes hyperlinks to the add_game route and add_review routes
+
+    if current_user.is_authenticated == False:
+        flash('Please Log In.')
+        return redirect("/")
 
     return render_template('backlogs.html')
 
@@ -176,6 +179,22 @@ def view_backlog():
 def add_game():
     """Allow users to add a new entry to their backlog"""
     return render_template("add_game.html")
+
+@app.route("/search_results")
+@login_required
+def search_results(): 
+    """Searches for user's game and displays results"""
+
+    user_query = request.args.get("game")
+
+    url = 'https://api.rawg.io/api/games'
+    payload = {'key': '5c888682e05f44af9b9437aa5a364842', 'search': user_query}
+
+    res = requests.get(url, params=payload)
+    data = res.json()
+    results = data['results']
+
+    return render_template("/search_results.html", data=data, results=results)
 
 
 

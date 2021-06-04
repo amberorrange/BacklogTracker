@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Search Results {% endblock %} 
+
+{% block content %}
+    <h3> Games that match your results: </h3>
+    <ul>
+        {% for result in results %}
+            <a href="/view_backlog"> <li> {{ result['name'] }}</li> </a>
+            <img src="{{ result['background_image'] }}" class="background_image">
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}
