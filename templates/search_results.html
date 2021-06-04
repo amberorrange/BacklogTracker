@@ -3,11 +3,14 @@
 {% block title %} Search Results {% endblock %} 
 
 {% block content %}
-    <h3> Games that match your results: </h3>
+    
+    <h3>Select a game to add it to your backlog.</h3>
+    <h3> Search Results: </h3>
     <ul>
         {% for result in results %}
             <a href="/view_backlog"> <li> {{ result['name'] }}</li> </a>
-            <img src="{{ result['background_image'] }}" class="background_image">
+            <img class="background_image" src="{{ result['background_image'] }}" >
+            <br> <br>
 
         {% endfor %}
     </ul>
