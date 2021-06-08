@@ -67,16 +67,43 @@ def get_genres():
     return genre_names
 
 
+def create_game(title, description, rawg_id):
+    """Creates a game and returns it."""
 
-def clean_html(html):
-    """Strips HTML from string using regular expressions"""
+    game = Game(title=title, description=description, rawg_id=rawg_id)
 
-    cleanr = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
-    cleantext = re.sub(cleanr, '', html)
-    return cleantext
+    db.session.add(game)
+    db.session.commit()
+
+    return game
+
+
+def create_backlog(user_id, game_id, ownership_status, play_status):
+    """ Creates a Backlog entry and returns it."""
+
+    backlog = Backlog(user_id=user_id, game_id=game_id, ownership_status=ownership_status, play_status=play_status)
+
+    db.session.add(backlog)
+    db.session.commit()
+
+    return backlog
 
 
 
+
+def get_game_by_rawg_id(rawg_id):
+    """Checks for a game by rawg_id and returns it."""
+
+    return Game.query.filter(Game.rawg_id == rawg_id).first()
+
+
+def get_backlogs():
+
+    return Backlog.query.all()
+
+def check_backlogs(game_id):
+
+    return Backlog.query.filter(Backlog.game.game_id==game_id)
 
 
 

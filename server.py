@@ -117,6 +117,12 @@ def create_account():
 def register_user():
     """Register a new user"""
 
+    if current_user.is_authenticated:
+
+        flash("Already logged in.")
+        
+        return redirect("/view_backlog")
+
     fname = request.form.get("fname")
     lname = request.form.get("lname")
     email = request.form.get("email")
@@ -184,7 +190,7 @@ def change_account_info():
 
 
 
-@app.route('/view_backlog', methods=['POST'])
+@app.route('/view_backlog')
 def view_backlog():
     """Displays users to see their backlog entries."""
     #also includes hyperlinks to the add_game route and add_review routes
@@ -193,9 +199,12 @@ def view_backlog():
         flash('Please Log In.')
         return redirect("/")
 
-    game = requests.form.get("")
+    # game = requests.form.get("")
+    
+    backlogs = crud.get_backlogs()
 
-    return render_template('backlogs.html')
+
+    return render_template('backlogs.html', backlogs=backlogs)
 
 
 @app.route('/add_game')
@@ -206,6 +215,7 @@ def add_game():
     genres = crud.get_genres()
    
     return render_template("add_game.html", genres=genres)
+
 
 @app.route("/search_results")
 @login_required
@@ -239,9 +249,6 @@ def show_game_info(rawg_id):
     res = requests.get(url, params=payload)
     data = res.json()
 
-    #strips html from description
-    no_html_description = crud.clean_html(data['description'])
-
     #checks for esrb rating(name error prevention)
     esrb_rating = data['esrb_rating']
     if esrb_rating == None:
@@ -251,8 +258,57 @@ def show_game_info(rawg_id):
     
     return render_template("game_details.html", 
                             data=data,
-                            description=no_html_description,
                             esrb=esrb_rating) 
+
+
+
+@app.route("/backlog_validation", methods=["POST"])
+@login_required
+def add_game_and_backlog():
+    """Adds game into db if not there already and creates a backlog entry for the user"""
+
+    title = request.form.get("title")
+    description = request.form.get("description")
+    rawg_id = request.form.get("rawg_id")
+    ownership_status = request.form.get("ownership_status")
+    play_status = request.form.get("play_status")
+    if play_status == "Yes":
+        playing = True
+    else:
+        playing = False
+
+    game_image = request.form.get("game_image")
+
+
+    user = crud.get_user_by_email(current_user.email)
+    game = crud.get_game_by_rawg_id(rawg_id)
+
+    if game:
+        #adds game to db if not there and creates entry
+        new_game = crud.create_game(title, description, rawg_id) 
+        backlog_entry = crud.create_backlog(user.user_id, new_game.game_id, ownership_status, playing)
+    else:
+
+        #check if the game is already in our backlog
+        checked_entry = crud.check_backlogs(game.game_id)
+        if checked_entry:
+            flash("That game is already in your backlog.") 
+        else:
+            #creates backlog entry to game already in db
+            backlog_entry = crud.create_backlog(user.user_id, game.game_id, ownership_status, playing)    
+            flash("Game added.")
+
+
+    backlog_entries = crud.get_backlogs()
+    
+    
+    return render_template("backlogs.html", 
+                            backlogs=backlog_entries,
+                            image=game_image)
+       
+
+
+
 
 
 

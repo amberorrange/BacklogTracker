@@ -1,18 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %} Game Details {% endblock %} 
-
+{% block title %} {{ data['name'] }} Details {% endblock %} 
 
 
 
 {% block content %}
 
-    <h2>{{ data['name'] }}</h2>
+    <h1>{{ data['name'] }}</h1>
     <img class="background_image" src=" {{ data['background_image'] }}">
-    <p>Description: </p> <p> {{ description }}</p> </p>
-
-    <div id="out"></div>
-
+    <p>Description: {{ data['description'] | safe }}</p>
     <p>Metacritic Score: {{ data['metacritic'] }}</p>
     <p>Release Date: {{ data['released'] }}</p>
     <p>Website: <a href=" {{ data['website'] }}"> {{ data['website'] }}</a> </p>
@@ -23,20 +19,33 @@
     {% for platform in data['platforms'] %}
         <li> {{ platform['platform']['name'] }}</li>
     {% endfor %}
+    
 
-<!-- 
-    <form action="/view_backlog" method="POST">
-        <input type="button" value="Add Game">
-    </form> -->
+    <h2>Add game to your Backlog?</h2>
 
-    <br>
-    <form action="/add_game">
-        <input type="button" value="Back to Search"/>
+    <form action="/backlog_validation" id="details_form" method="POST">  
+        <input type="hidden" name="title" value="{{ data['name'] }}">
+        <input type="hidden" name="description" value="{{ data['description'] }}">
+        <input type="hidden" name="rawg_id" value="{{ data['id'] }}">
+        <input type="hidden" name="game_image" value=" {{ data['background_image'] }}">
+
+        Ownership Status
+        <select name="ownership_status" >
+            <option value="Owned">Owned</option>
+            <option value="Not Owned">Not Owned</option>
+            <option value="Unreleased">Unreleased</option>
+        </select> <br>
+        Are you currently playing this game?
+        <select name="play_status" >
+            <option value="owned">Yes</option>
+            <option value="notowned">No</option>
+        </select>
+ 
+        <input value="Add Game" type="submit" >
     </form>
 
-    <button onclick="location.href='/add_game'" type="button">
-         Back to Search</button>
+    <button onclick="location.href='/add_game'" type="button">Back to Search</button> 
 
-
+  
 
 {% endblock %}

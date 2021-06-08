@@ -12,6 +12,20 @@
     {% endif %}
     
     <h2>Here are your entries.</h2>
+
+
+    {% for entry in backlogs %}
+        <h3>{{ entry.game.title }}</h3>
+        <p> Ownership Status: {{ entry.ownership_status }}</p>
+        <p> Playing: {{ entry.play_status }}</p>
+
+    {% endfor %}
+
+
+
+
+
+
     <ul>
         <li><a href="/add_game">Add a game to your backlog.</a> </li>
         <li><a href="/add_review">Review a game you've completed.</a> </li> 

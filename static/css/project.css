@@ -6,12 +6,19 @@
 
 
 
-
 label {
     width: 90px;
     display: inline-block;
 }
 
+
+
 body{
     margin-left: 10px;
+}
+
+
+#details_form {
+
+    display: inline
 }
