@@ -5,12 +5,20 @@
 
 {% block content %}
 
-<form action="/search_results">
+    <form action="/search_results">
 
-    <p>Search for a game <input type="text" name="game"></p>
-    <p><input type="submit"></p>
+        Search for a game <input type="text" name="game"> &nbsp;
+        Search By Genre: 
+        <select name="genre">
 
-</form>
+            <option></option>
+            {% for genre in genres %}
+                <option value=" {{ genre.name }} "> {{ genre.name }}</option>
+            {% endfor %}
+
+        </select>
+        <input type="submit">
+    </form>
 
 
 {% endblock %}

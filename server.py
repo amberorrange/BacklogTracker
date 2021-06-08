@@ -199,7 +199,12 @@ def view_backlog():
 @login_required
 def add_game():
     """Allow users to add a new entry to their backlog"""
-    return render_template("add_game.html")
+
+    genres = crud.get_genres()
+    for genre in genres:
+        genre.name = genre.name.lower()
+
+    return render_template("add_game.html", genres=genres)
 
 @app.route("/search_results")
 @login_required
@@ -207,17 +212,15 @@ def search_results():
     """Searches for user's game and displays results"""
 
     user_query = request.args.get("game")
+    genre = request.args.get("genre")
 
     url = 'https://api.rawg.io/api/games'
-    payload = {'key': f'{API_KEY}', 'search': user_query}
-
+    payload = {'key': API_KEY,'search': user_query, 'genres': genre}
     res = requests.get(url, params=payload)
     data = res.json()
     results = data['results']
 
-    session['results'] = results
-
-    return render_template("/search_results.html", data=data, results=results)
+    return render_template("search_results.html", results=results)
 
 
 # @app.route('/add_game/rawg_id')
