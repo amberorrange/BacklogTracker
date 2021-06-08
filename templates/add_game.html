@@ -9,11 +9,11 @@
 
         Search for a game <input type="text" name="game"> &nbsp;
         Search By Genre: 
-        <select name="genre">
+        <select name="genres" >
 
             <option></option>
             {% for genre in genres %}
-                <option value=" {{ genre.name }} "> {{ genre.name }}</option>
+                <option>{{ genre }}</option>
             {% endfor %}
 
         </select>

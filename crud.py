@@ -56,9 +56,14 @@ def change_account_info(current_email, fname, lname, email, password):
 
 
 def get_genres():
-    """Returns all the genres in db. """
+    """Returns all the names of the genres in db. """
 
-    return Genre.query.all()
+    genres = Genre.query.all()
+    genre_names = []
+    for genre in genres:
+        genre_names.append(genre.name.lower())
+
+    return genre_names
 
 
 

@@ -201,9 +201,7 @@ def add_game():
     """Allow users to add a new entry to their backlog"""
 
     genres = crud.get_genres()
-    for genre in genres:
-        genre.name = genre.name.lower()
-
+   
     return render_template("add_game.html", genres=genres)
 
 @app.route("/search_results")
@@ -211,11 +209,16 @@ def add_game():
 def search_results(): 
     """Searches for user's game and displays results"""
 
-    user_query = request.args.get("game")
-    genre = request.args.get("genre")
+    user_query = request.args.get("game", "")
+    genre = request.args.get("genres", "")
+
+    if genre == "":
+        #add ability to search without genre field
+        payload =  {'key': API_KEY,'search': user_query}
+    else:
+        payload = {'key': API_KEY,'search': user_query, 'genres': genre}
 
     url = 'https://api.rawg.io/api/games'
-    payload = {'key': API_KEY,'search': user_query, 'genres': genre}
     res = requests.get(url, params=payload)
     data = res.json()
     results = data['results']
