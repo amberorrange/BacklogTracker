@@ -68,7 +68,7 @@ def login_confirmation():
 
         # Call flask_login.login_user to login a user
         login_user(user)
-        flash("You have successfully logged in!")
+        flash("You have successfully logged in.")
         return redirect("/view_backlog")
 
     else:
@@ -100,6 +100,7 @@ def delete_account():
     """Delete's a user's account"""
     email = current_user.email
     crud.delete_account(email)
+    flash("Your account has been deleted.")
     return redirect("/")
 
 
@@ -158,12 +159,21 @@ def change_account_info():
     lname = request.form.get("lname")
     email = request.form.get("email")
     password = request.form.get("password")
+    pw_confirm = request.form.get("pw_confirm")
+
+    if pw_confirm != password:
+        flash("Passwords do not match.")
+        return redirect("/change_account_info_form")
 
     current_email = current_user.email
 
-    crud.change_account_info(current_email, fname, lname, email, password)
-    logout_user()
-    flash("Your account information is changed. Please log in again.")
+    user = crud.change_account_info(current_email, fname, lname, email, password)
+    if user == None:
+        flash("Please fill all fields.")
+        return redirect("/change_account_info_form")
+    else:    
+        logout_user()
+        flash("Your account information is changed. Please log in again.")
 
     return redirect("/")
   

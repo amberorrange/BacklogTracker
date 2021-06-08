@@ -5,11 +5,13 @@
 }
 
 
-form label {
 
-    width: 240px;
-    
-   
+
+label {
+    width: 90px;
+    display: inline-block;
 }
 
-
+body{
+    margin-left: 10px;
+}

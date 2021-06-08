@@ -45,6 +45,10 @@ def delete_account(email):
 def change_account_info(current_email, fname, lname, email, password):
     """Changes a user's account information. """
 
+    if fname == "" or lname == "" or email == "" or password == "":
+
+        return None
+
     user = User.query.filter(User.email==current_email).update({User.fname: fname, User.lname: lname, User.email: email, User.password: password})
     db.session.commit()
 
