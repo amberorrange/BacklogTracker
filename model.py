@@ -60,7 +60,7 @@ class Game(db.Model):
     title = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text)
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id')) #questions
-    igdb_id = db.Column(db.Integer) #uhhhhh
+    rawg_id = db.Column(db.Integer, unique=True) #uhhhhh
 
     
     backlogs = db.relationship("Backlog", backref="game") #primary key to backlogs foreign key

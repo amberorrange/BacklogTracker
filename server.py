@@ -36,8 +36,9 @@ def homepage():
 
         flash("Already logged in.")
         return redirect("/view_backlog")
-
-    return render_template('homepage.html')
+    else:
+        return redirect("/login")
+   
 
 
 @app.route('/login')
@@ -118,17 +119,25 @@ def register_user():
     lname = request.form.get("lname")
     email = request.form.get("email")
     password = request.form.get("password")
+    pw_confirm = request.form.get("pw_confirmation")
 
-    
     user = crud.get_user_by_email(email)
+
     if user:
         flash('A user with that email already exists. Log in or Try again with a different email.')
         return redirect("/create_account")
+    elif  password != pw_confirm: #make sure passwords are the same
+        flash("Your passwords don't match. Please try again.")
+        return redirect("/create_account")
+
     else:
-        crud.create_user(fname, lname, email, password)
-        flash('Account created successfully. Please log in.')
-    
-        return redirect("/login")
+        created_user = crud.create_user(fname, lname, email, password)
+        if created_user == None: #if some of the fields are left empty, the function will return none
+            flash("Please fill out all required fields.")
+            return redirect("/create_account")
+        else:   
+            flash('Account created successfully. Please log in.')
+            return redirect("/login")
 
 
 
@@ -196,7 +205,19 @@ def search_results():
     data = res.json()
     results = data['results']
 
+    session['results'] = results
+
     return render_template("/search_results.html", data=data, results=results)
+
+
+# @app.route('/add_game/rawg_id')
+# @login_required
+# def show_game_info():
+#     """Shows user individual game info and option to add game to backlog."""
+
+#     # game_info = session['results'][]
+   
+#     # pass
 
 
 

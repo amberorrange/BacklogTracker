@@ -7,18 +7,22 @@
 {% block content %}
 
   <h1>Welcome to the Backlog Tracker</h1>
-  <h3>Please enter your login information.</h3>
-
+ 
   <form action="/login_confirmation" method="POST">
 
-      <p>Email <input type="text" name="email"></p>
-      <p> Password <input type="password" name="password"></p>
+    <h3>Please enter your login information.</h3>
 
-      <p><input type="submit"></p>
+     <Label>Email</Label> <input type="text" name="email" >
+     <Label>Password</Label> <input type="password" class="password" name="password">
+     <input type="checkbox" onclick="myFunction()">Show Password
+      <br> <br>
+      <input type="submit">
+
+      <p>Don't have an account? <a href="/create_account">Sign Up</a> </p>
 
   </form>
  
-  <p>Don't have a login? <a href="/create_account">You can create an account.</a> </p>  
+    
 
 {% endblock %}
 

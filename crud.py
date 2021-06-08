@@ -14,6 +14,10 @@ def check_login(email, password):
 def create_user(fname, lname, email, password):
     """Create and return a new user."""
 
+    if fname == "" or lname == "" or email == "" or password == "":
+
+        return None
+
     user = User(fname=fname, lname=lname, email=email, password=password)
 
     db.session.add(user)
