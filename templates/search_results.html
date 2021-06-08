@@ -8,7 +8,7 @@
     <h3> Search Results: </h3>
     <ul>
         {% for result in results %}
-            <a href="/view_backlog"> <li> {{ result['name'] }}</li> </a>
+            <a href="/show_game/{{ result['id'] }}"> <li> {{ result['name'] }}</li> </a>
             <img class="background_image" src="{{ result['background_image'] }}" >
             <br> <br>
 

@@ -11,6 +11,7 @@ import crud
 import requests
 from jinja2 import StrictUndefined
 
+
 app = Flask(__name__)
 app.secret_key = "dev"
 
@@ -183,7 +184,7 @@ def change_account_info():
 
 
 
-@app.route('/view_backlog')
+@app.route('/view_backlog', methods=['POST'])
 def view_backlog():
     """Displays users to see their backlog entries."""
     #also includes hyperlinks to the add_game route and add_review routes
@@ -191,6 +192,8 @@ def view_backlog():
     if current_user.is_authenticated == False:
         flash('Please Log In.')
         return redirect("/")
+
+    game = requests.form.get("")
 
     return render_template('backlogs.html')
 
@@ -226,14 +229,30 @@ def search_results():
     return render_template("search_results.html", results=results)
 
 
-# @app.route('/add_game/rawg_id')
-# @login_required
-# def show_game_info():
-#     """Shows user individual game info and option to add game to backlog."""
+@app.route('/show_game/<rawg_id>')
+@login_required
+def show_game_info(rawg_id):
+    """Shows user individual game info and option to add game to backlog."""
 
-#     # game_info = session['results'][]
-   
-#     # pass
+    url = f'https://api.rawg.io/api/games/{rawg_id}'
+    payload =  {'key': API_KEY}
+    res = requests.get(url, params=payload)
+    data = res.json()
+
+    #strips html from description
+    no_html_description = crud.clean_html(data['description'])
+
+    #checks for esrb rating(name error prevention)
+    esrb_rating = data['esrb_rating']
+    if esrb_rating == None:
+        esrb_rating = ""
+    else:
+        esrb_rating = data['esrb_rating']['name']
+    
+    return render_template("game_details.html", 
+                            data=data,
+                            description=no_html_description,
+                            esrb=esrb_rating) 
 
 
 

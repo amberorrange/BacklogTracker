@@ -1,6 +1,7 @@
 """CRUD Operations"""
 
 from model import db, User, Game, Genre, Review, Backlog, connect_to_db
+import re
 
 
 def check_login(email, password):
@@ -65,6 +66,14 @@ def get_genres():
 
     return genre_names
 
+
+
+def clean_html(html):
+    """Strips HTML from string using regular expressions"""
+
+    cleanr = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
+    cleantext = re.sub(cleanr, '', html)
+    return cleantext
 
 
 

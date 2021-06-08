@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Game Details {% endblock %} 
+
+
+
+
+{% block content %}
+
+    <h2>{{ data['name'] }}</h2>
+    <img class="background_image" src=" {{ data['background_image'] }}">
+    <p>Description: </p> <p> {{ description }}</p> </p>
+
+    <div id="out"></div>
+
+    <p>Metacritic Score: {{ data['metacritic'] }}</p>
+    <p>Release Date: {{ data['released'] }}</p>
+    <p>Website: <a href=" {{ data['website'] }}"> {{ data['website'] }}</a> </p>
+    <p>Average Playtime: {{ data['playtime']}} hours</p>
+    <p>ESRB Rating: {{ esrb }}</p>
+    <p>Available on:</p>
+
+    {% for platform in data['platforms'] %}
+        <li> {{ platform['platform']['name'] }}</li>
+    {% endfor %}
+
+<!-- 
+    <form action="/view_backlog" method="POST">
+        <input type="button" value="Add Game">
+    </form> -->
+
+    <br>
+    <form action="/add_game">
+        <input type="button" value="Back to Search"/>
+    </form>
+
+    <button onclick="location.href='/add_game'" type="button">
+         Back to Search</button>
+
+
+
+{% endblock %}
