@@ -61,8 +61,9 @@ class Game(db.Model):
     game_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text)
-    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id')) #questions
-    rawg_id = db.Column(db.Integer, unique=True) #uhhhhh
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id')) 
+    rawg_id = db.Column(db.Integer, unique=True) 
+    image = db.Column(db.Text, default="https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F65%2FNo-Image-Placeholder.svg%2F1200px-No-Image-Placeholder.svg.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ANo-Image-Placeholder.svg&tbnid=QXIr8O6rQhrHMM&vet=12ahUKEwjXlvXfi4vxAhUUY60KHYKNB_sQMygDegUIARCRAQ..i&docid=ldp7V-Ybx0nO3M&w=1200&h=1476&q=no%20image&ved=2ahUKEwjXlvXfi4vxAhUUY60KHYKNB_sQMygDegUIARCRAQ")
 
     
     backlogs = db.relationship("Backlog", backref="game") #primary key to backlogs foreign key

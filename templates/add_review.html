@@ -3,7 +3,22 @@
 {% block title %} Add a Review {% endblock %} 
 
 
+
 {% block content %}
-<p> The way to add a review will go here.</p>
+
+    <h4>Which game would you like to review?</h4>
+
+    
+    <form action="/review_game" class="inline">
+        <select name="game_to_review">
+                {% for backlog in backlogs %}
+                <option value="{{ backlog.game.game_id }}">{{ backlog.game.title }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
+    
+    <button onclick="location.href='/view_backlog'" type="button">Cancel</button> 
+
 
 {% endblock %}

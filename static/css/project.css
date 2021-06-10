@@ -22,3 +22,35 @@ body{
 
     display: inline
 }
+
+.backlog_image {
+
+    width: 180px;
+    height: 160px;
+    outline: auto;
+}
+
+.backlog_entry {
+
+    display: inline-block;
+    padding-inline: 30px;
+    align-items: center;
+    width: 210px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.backlog_title {
+    overflow-wrap: break-word;
+}
+
+.review_display {
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.inline {
+
+    display: inline;
+}

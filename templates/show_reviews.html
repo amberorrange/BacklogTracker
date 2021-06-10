@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ current_user.fname }}'s Reviews  {% endblock %} 
+
+
+{% block content %}
+
+    <h1>{{ current_user.fname }}'s Reviews</h1>
+
+    {% for review in reviews %}
+        <div class="review_display">
+            <h3>{{ review.game.title}}</h3>
+            <p>Review: {{ review.body }}</p>
+            <p>Score: {{ review.score}}</p>   
+            <p> Completion Time: {{ review.completion_time }} Hours</p>      
+        </div>
+    
+    {% endfor %}
+
+    <button onclick="location.href='/view_backlog'" type="button">Back</button> 
+
+{% endblock %}

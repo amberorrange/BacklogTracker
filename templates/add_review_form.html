@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Review {% endblock %} 
+
+
+{% block content %}
+
+    <h2>Review of {{ game.title }}</h2>
+
+    <form action="/review_confirmation" method="POST">
+
+        <p>Score: <input type="number" name="score" min="1" max="10"> </p>
+
+        <p>Hours Played: <input type="number" name="completion_time" min="1" max="200">  </p>
+
+        <input type="hidden" name="game_id" value="{{ game.game_id }}">
+
+        <p>Add review, notes, or comments: </p> 
+        
+        <textarea rows="8" cols="50" name="body"> </textarea>
+
+        <p><input type="submit" value="Add Review"></p>
+
+    </form>
+
+    <button onclick="location.href='/view_backlog'" type="button">Cancel</button> 
+
+
+{% endblock %}

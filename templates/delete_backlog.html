@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Delete Backlog Entry {% endblock %} 
+
+
+
+{% block content %}
+
+    <h4>Which game would you like to remove?</h4>
+
+    
+    <form action="/delete_backlog_confirmation" class="inline" method="POST">
+        <select name="deleted_backlog">
+                {% for backlog in backlogs %}
+                <option value="{{ backlog.backlog_id }}">{{ backlog.game.title }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form> 
+    
+
+    <button onclick="location.href='/view_backlog'" class="inline" type="button">Cancel</button> 
+{% endblock %}

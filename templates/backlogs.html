@@ -1,34 +1,31 @@
 {% extends 'base.html' %}
 
-{% block title %} User's Backlog {% endblock %} 
+{% block title %} {{ current_user.fname }}'s Backlog {% endblock %} 
 
 
 {% block content %}
 
-
-
     {% if current_user.is_authenticated %}<h1>
-    Welcome, {{ current_user.fname }} </h1>
+        {{ current_user.fname}}'s Backlog:</h1>
     {% endif %}
     
-    <h2>Here are your entries.</h2>
 
-
-    {% for entry in backlogs %}
-        <h3>{{ entry.game.title }}</h3>
-        <p> Ownership Status: {{ entry.ownership_status }}</p>
-        <p> Playing: {{ entry.play_status }}</p>
-
+    {% for backlog in backlogs %}
+        <div class="backlog_entry">
+            <h4 class="backlog_title">{{ backlog.game.title }}</h4>
+            <img class="backlog_image" src="{{ backlog.game.image }}">
+            Ownership Status: {{ backlog.ownership_status }} 
+            Playing: {{ backlog.play_status }}
+        </div>          
     {% endfor %}
-
-
-
 
 
 
     <ul>
         <li><a href="/add_game">Add a game to your backlog.</a> </li>
+        <li><a href="/delete_backlog">Delete a game from your backlog.</a> </li>
         <li><a href="/add_review">Review a game you've completed.</a> </li> 
+        <li><a href="/view_reviews">See Your Reviews</a> </li> 
         <li><a href="/show_user_details">See Account Details</a></li> 
         <li><a href="/logout">Log out</a></li>
     </ul>

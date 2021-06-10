@@ -29,18 +29,18 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
+
 @app.route('/')
 def homepage():
     """View Homepage of Backlog Tracker-they can login or create an account"""
 
     if current_user.is_authenticated:
 
-        flash("Already logged in.")
+        flash(f"Currently logged in as {current_user.fname}.")
         return redirect("/view_backlog")
     else:
         return redirect("/login")
    
-
 
 @app.route('/login')
 def login():
@@ -49,7 +49,7 @@ def login():
     #figure out how to not repeat this in both routes(line 33)?
     if current_user.is_authenticated:
 
-        flash("Already logged in.")
+        flash(f"Currently logged in as {current_user.fname}.")
         return redirect("/view_backlog")
 
 
@@ -88,6 +88,9 @@ def logout():
 
 
 
+
+
+
 @app.route("/show_user_details")
 @login_required
 def show_user_details():
@@ -104,11 +107,9 @@ def delete_account():
     flash("Your account has been deleted.")
     return redirect("/")
 
-
-
 @app.route("/create_account")
 def create_account():
-    """Allows user to create new accounts"""
+    """Allows user to create a new account."""
     #displays form to enter new account information
     return render_template("create_account.html")
 
@@ -118,9 +119,7 @@ def register_user():
     """Register a new user"""
 
     if current_user.is_authenticated:
-
         flash("Already logged in.")
-        
         return redirect("/view_backlog")
 
     fname = request.form.get("fname")
@@ -134,19 +133,19 @@ def register_user():
     if user:
         flash('A user with that email already exists. Log in or Try again with a different email.')
         return redirect("/create_account")
+
     elif  password != pw_confirm: #make sure passwords are the same
         flash("Your passwords don't match. Please try again.")
         return redirect("/create_account")
 
     else:
         created_user = crud.create_user(fname, lname, email, password)
-        if created_user == None: #if some of the fields are left empty, the function will return none
+        if created_user == None: #if some of the fields are left empty, the function create_user will return none
             flash("Please fill out all required fields.")
             return redirect("/create_account")
         else:   
             flash('Account created successfully. Please log in.')
             return redirect("/login")
-
 
 
 @app.route("/change_account_info_form")
@@ -168,8 +167,14 @@ def change_account_info():
     password = request.form.get("password")
     pw_confirm = request.form.get("pw_confirm")
 
+
+    user = crud.get_user_by_email(email)
+    if user and user.email != current_user.email:
+        flash('A user with that email already exists. Log in or Try again with a different email.')
+        return redirect("/change_account_info_form")
+
     if pw_confirm != password:
-        flash("Passwords do not match.")
+        flash("Your passwords don't match. Please try again.")
         return redirect("/change_account_info_form")
 
     current_email = current_user.email
@@ -186,25 +191,6 @@ def change_account_info():
   
 
 
-
-
-
-
-@app.route('/view_backlog')
-def view_backlog():
-    """Displays users to see their backlog entries."""
-    #also includes hyperlinks to the add_game route and add_review routes
-
-    if current_user.is_authenticated == False:
-        flash('Please Log In.')
-        return redirect("/")
-
-    # game = requests.form.get("")
-    
-    backlogs = crud.get_backlogs()
-
-
-    return render_template('backlogs.html', backlogs=backlogs)
 
 
 @app.route('/add_game')
@@ -262,6 +248,29 @@ def show_game_info(rawg_id):
 
 
 
+
+
+
+
+
+
+
+@app.route('/view_backlog')
+def view_backlog():
+    """Displays users to see their backlog entries."""
+    #hyperlinks to the add_game route and add_review routes
+
+    if current_user.is_authenticated == False:
+        flash('Please Log In.')
+        return redirect("/")
+
+    backlogs = crud.get_backlogs()
+    
+  
+    return render_template('backlogs.html', backlogs=backlogs)
+
+
+
 @app.route("/backlog_validation", methods=["POST"])
 @login_required
 def add_game_and_backlog():
@@ -270,6 +279,8 @@ def add_game_and_backlog():
     title = request.form.get("title")
     description = request.form.get("description")
     rawg_id = request.form.get("rawg_id")
+    image = request.form.get("game_image")
+
     ownership_status = request.form.get("ownership_status")
     play_status = request.form.get("play_status")
     if play_status == "Yes":
@@ -277,46 +288,112 @@ def add_game_and_backlog():
     else:
         playing = False
 
-    game_image = request.form.get("game_image")
-
 
     user = crud.get_user_by_email(current_user.email)
     game = crud.get_game_by_rawg_id(rawg_id)
 
-    if game:
-        #adds game to db if not there and creates entry
-        new_game = crud.create_game(title, description, rawg_id) 
-        backlog_entry = crud.create_backlog(user.user_id, new_game.game_id, ownership_status, playing)
-    else:
-
-        #check if the game is already in our backlog
+    #check if there is already a backlog entry
+    if game is not None:
         checked_entry = crud.check_backlogs(game.game_id)
-        if checked_entry:
-            flash("That game is already in your backlog.") 
-        else:
-            #creates backlog entry to game already in db
-            backlog_entry = crud.create_backlog(user.user_id, game.game_id, ownership_status, playing)    
-            flash("Game added.")
+    else:
+        checked_entry = None
+    
+    if checked_entry and checked_entry is not None:
+        flash("That game is already in your backlog.") 
+        return redirect("/view_backlog")
 
 
-    backlog_entries = crud.get_backlogs()
-    
-    
-    return render_template("backlogs.html", 
-                            backlogs=backlog_entries,
-                            image=game_image)
+
+    if game is None:
+        #adds game to db if not there and creates backlog entry
+        new_game = crud.create_game(title, description, rawg_id, image) 
+        crud.create_backlog(user.user_id, new_game.game_id, ownership_status, playing)  
+    else:
+        #creates backlog entry if game already in db
+        crud.create_backlog(user.user_id, game.game_id, ownership_status, playing)
+
+    flash("Game added.")
+    return redirect("/view_backlog") 
+                            
+                        
        
 
 
+@app.route('/delete_backlog')
+@login_required
+def delete_backlog():
+    """Shows form to delete a backlog entry. """
+
+    backlogs = crud.get_backlogs()
+
+    return render_template("delete_backlog.html", backlogs=backlogs)
+
+
+@app.route('/delete_backlog_confirmation', methods=["POST"])
+@login_required
+def confirm_delete_backlog():
+    """Delete's a backlog entry selected from form. """
+
+    backlog_entry = request.form.get("deleted_backlog")
+
+    db_backlog_entry = crud.get_backlog_by_id(backlog_entry)
+
+    crud.delete_backlog_entry_by_id(db_backlog_entry.backlog_id)
+
+    flash("Your entry has been deleted.")
+
+    return redirect("/view_backlog")
 
 
 
 
 @app.route('/add_review')
 @login_required
-def add_review():
+def select_game_to_review():
+    """Users choose which game they want to review."""
+
+    backlogs = crud.get_backlogs()
+
+    return render_template("add_review.html", backlogs=backlogs)
+
+
+@app.route('/review_game')
+@login_required
+def review_game_form():
     """Users can add a review for games they've played."""
-    return render_template("add_review.html")
+
+    game_id = request.args.get("game_to_review")
+    game = crud.get_game_by_id(game_id)
+
+    return render_template("add_review_form.html", game=game)
+
+
+@app.route('/review_confirmation', methods=["POST"])
+@login_required
+def add_review_to_db():
+    """Adds review to the db """
+
+    game_id = request.form.get("game_id")
+    user_id = current_user.user_id
+    body = request.form.get("body")
+    score =request.form.get("score")
+    completion_time =request.form.get("completion_time")
+
+
+    crud.create_review(user_id, game_id, body, score, completion_time)
+    flash("Your review has been added.")
+
+    return redirect("/view_reviews")
+
+
+@app.route('/view_reviews')
+@login_required
+def show_reviews():
+    """Displays all a users reviews. """
+
+    reviews = crud.get_reviews()
+
+    return render_template("show_reviews.html", reviews=reviews)
 
 
 if __name__ == '__main__':

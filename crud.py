@@ -67,10 +67,10 @@ def get_genres():
     return genre_names
 
 
-def create_game(title, description, rawg_id):
+def create_game(title, description, rawg_id, image):
     """Creates a game and returns it."""
 
-    game = Game(title=title, description=description, rawg_id=rawg_id)
+    game = Game(title=title, description=description, rawg_id=rawg_id, image=image)
 
     db.session.add(game)
     db.session.commit()
@@ -88,7 +88,10 @@ def create_backlog(user_id, game_id, ownership_status, play_status):
 
     return backlog
 
+def get_game_by_id(id):
+    """Returns game with the given id."""
 
+    return  Game.query.get(id)
 
 
 def get_game_by_rawg_id(rawg_id):
@@ -98,27 +101,47 @@ def get_game_by_rawg_id(rawg_id):
 
 
 def get_backlogs():
+    """Returns all Backlog Entries"""
 
     return Backlog.query.all()
 
 def check_backlogs(game_id):
+    """Returns Backlog searched by game_id"""
 
-    return Backlog.query.filter(Backlog.game.game_id==game_id)
-
-
-
+    return Backlog.query.filter(Backlog.game_id==game_id).first()
 
 
+def delete_backlog_entry_by_id(id):
+    """Delete's a backlog entry from db"""
 
-# def create_review(user, game, body, score):
-#     """Create and Retrun a review."""
+    backlog = Backlog.query.get(id)
+    db.session.delete(backlog)
+    db.session.commit()
 
-#     review = Review(user=user, game=game, body=body, score=score)
 
-#     db.session.add(review)
-#     db.session.commit()
 
-#     return review
+
+def get_backlog_by_id(id):
+    """Returns backlog entry with given id"""
+
+    return Backlog.query.get(id)
+
+
+
+def create_review(user_id, game_id, body, score, completion_time):
+    """Create and Retrun a review."""
+
+    review = Review(user_id=user_id, game_id=game_id, body=body, score=score, completion_time=completion_time)
+
+    db.session.add(review)
+    db.session.commit()
+
+    return review
+
+def get_reviews():
+    """Returns all reviews in db"""
+
+    return Review.query.all()
 
 
 
