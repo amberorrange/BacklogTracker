@@ -37,7 +37,7 @@ def delete_account(email):
 
     """Delete's a user's account."""
 
-    user= User.query.filter(User.email== email).first()
+    user= User.query.filter(User.email==email).first()
     db.session.delete(user)
     db.session.commit()
 
@@ -54,6 +54,7 @@ def change_account_info(current_email, fname, lname, email, password):
     db.session.commit()
 
     return user
+
 
 
 def get_genres():
@@ -104,6 +105,7 @@ def get_backlogs():
     """Returns all Backlog Entries"""
 
     return Backlog.query.all()
+
 
 def check_backlogs(game_id):
     """Returns Backlog searched by game_id"""

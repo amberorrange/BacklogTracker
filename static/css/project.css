@@ -1,4 +1,10 @@
-.background_image {
+.search_image {
+
+    height: 300px;
+    width: 400px;
+}
+
+#game_details_image {
 
     height: 300px;
     width: 400px;

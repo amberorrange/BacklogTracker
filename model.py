@@ -20,20 +20,26 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
 
-    #has 2 relationships
     backlogs = db.relationship('Backlog', backref='user') #primary key to backlogs foreign key
     reviews = db.relationship('Review', backref='user') #primaray key to reviews foreign key
-
 
     def get_id(self):
         """Override UserMixin.get_id."""
         
         return str(self.user_id)
-    
 
     def __repr__(self):
         return f'<User user_id={self.user_id} fname={self.fname} lname={self.lname} email={self.email}>'
+    
+    def is_game_in_backlog(self, game):
+        """Return True if `game` is in `self.backlogs`."""
+        
+        # Create a list of all games in user's backlog
+        backlogged_games = set()
+        for log in self.backlogs:
+            backlogged_games.add(log.game)
 
+        return game in backlogged_games
 
 
 class Genre(db.Model):
@@ -63,7 +69,7 @@ class Game(db.Model):
     description = db.Column(db.Text)
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id')) 
     rawg_id = db.Column(db.Integer, unique=True) 
-    image = db.Column(db.Text, default="https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F65%2FNo-Image-Placeholder.svg%2F1200px-No-Image-Placeholder.svg.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ANo-Image-Placeholder.svg&tbnid=QXIr8O6rQhrHMM&vet=12ahUKEwjXlvXfi4vxAhUUY60KHYKNB_sQMygDegUIARCRAQ..i&docid=ldp7V-Ybx0nO3M&w=1200&h=1476&q=no%20image&ved=2ahUKEwjXlvXfi4vxAhUUY60KHYKNB_sQMygDegUIARCRAQ")
+    image = db.Column(db.Text)
 
     
     backlogs = db.relationship("Backlog", backref="game") #primary key to backlogs foreign key
@@ -84,9 +90,9 @@ class Backlog(db.Model):
     backlog_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'))
+
     ownership_status = db.Column(db.String(30), nullable=False) 
     play_status = db.Column(db.Boolean, nullable=False, default=False) 
-
 
     def __repr__(self):
         return f'<Backlog Entry backlog_id={self.backlog_id} user_id={self.user_id} game_id={self.game_id}>'

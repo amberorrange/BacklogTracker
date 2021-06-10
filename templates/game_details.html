@@ -7,7 +7,7 @@
 {% block content %}
 
     <h1>{{ data['name'] }}</h1>
-    <img class="background_image" src=" {{ data['background_image'] }}">
+    <img id="game_details_image" src=" {{ data['background_image'] }}">
     <p>Description: {{ data['description'] | safe }}</p>
     <p>Metacritic Score: {{ data['metacritic'] }}</p>
     <p>Release Date: {{ data['released'] }}</p>
