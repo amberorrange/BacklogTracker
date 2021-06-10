@@ -396,6 +396,21 @@ def show_reviews():
     return render_template("show_reviews.html", reviews=reviews)
 
 
+@app.route('/delete_review', methods=["POST"])
+@login_required
+def delete_review():
+    """Delete's a review. """
+
+    review_id = request.form.get("review")
+
+    crud.delete_review(review_id)
+
+    flash("Your review has been deleted.")
+    
+    return redirect("/view_reviews")
+
+
+
 if __name__ == '__main__':
     connect_to_db(app)
     app.debug = True

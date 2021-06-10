@@ -112,7 +112,7 @@ def check_backlogs(game_id):
 
 
 def delete_backlog_entry_by_id(id):
-    """Delete's a backlog entry from db"""
+    """Deletes a backlog entry from db"""
 
     backlog = Backlog.query.get(id)
     db.session.delete(backlog)
@@ -142,6 +142,15 @@ def get_reviews():
     """Returns all reviews in db"""
 
     return Review.query.all()
+
+
+def delete_review(id):
+    """Deletes a review from db"""
+
+    review = Review.query.get(id)
+    db.session.delete(review)
+    db.session.commit()
+
 
 
 

@@ -17,6 +17,23 @@
     
     {% endfor %}
 
+
+    <h2>Delete a Review?</h2>
+
+    <h4>Which review would you like to remove?</h4>
+ 
+    <form action="/delete_review" class="inline" method="POST">
+        <select name="review">
+                {% for review in reviews %}
+                <option value="{{ review.review_id }}">{{ review.game.title }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form> 
+    
+
+
     <button onclick="location.href='/view_backlog'" type="button">Back</button> 
+   
 
 {% endblock %}
