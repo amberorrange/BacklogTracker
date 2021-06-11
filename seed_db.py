@@ -2,19 +2,18 @@
 
 import os
 import crud
-import model
 import server
 import requests
+from model import db, User, Game, Genre, Review, Backlog, Platform, connect_to_db
 
 os.system('dropdb backlogs')
 os.system('createdb backlogs')
 
-model.connect_to_db(server.app)
-model.db.create_all()
+connect_to_db(server.app)
+db.create_all()
 
 
-#want to get all the genres and add to database
-
+#get all the genres and add to db
 url = 'https://api.rawg.io/api/genres'
 payload = {'key': os.environ['RAWG_KEY']}
 res = requests.get(url, params=payload)
@@ -22,7 +21,41 @@ data = res.json()
 genres = data["results"]
 
 for genre in genres:
-	added_genre = model.Genre(name = genre["name"])
-	model.db.session.add(added_genre)
-	model.db.session.commit()
+	added_genre = Genre(name = genre["name"])
+	db.session.add(added_genre)
+	db.session.commit()
 
+
+#add platforms to db
+platforms = [ "PC",
+            "PlayStation 5",
+            "PlayStation 4",
+          	"Xbox One",
+            "Xbox Series S/X",
+         	"Nintendo Switch",
+      		"iOS",
+    		"Android",
+          	"Nintendo 3DS",
+         	"Nintendo DS",
+          	"macOS",
+         	"Linux",
+          	"Xbox 360",
+          	"Xbox",
+          	"PlayStation 3",
+          	"PlayStation 2",
+			"PlayStation",
+          	"PS Vita",
+          	"PSP",
+        	"Wii U",
+         	"Wii",
+          	"GameCube",
+         	"Nintendo 64",
+       		"Game Boy Advance",
+       		"Game Boy",
+			"Other"]
+
+
+for platform in platforms:
+	added_platform =  Platform(name = platform)
+	db.session.add(added_platform)
+	db.session.commit()

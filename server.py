@@ -101,6 +101,11 @@ def delete_account():
 @app.route("/create_account")
 def create_account():
     """Allows user to create a new account."""
+    
+    if current_user.is_authenticated:
+        flash("Already logged in.")
+        return redirect("/view_backlog")
+
     #displays form to enter new account information
     return render_template("create_account.html")
 
@@ -314,11 +319,9 @@ def confirm_delete_backlog():
     backlog_entry = request.form.get("deleted_backlog")
 
     db_backlog_entry = crud.get_backlog_by_id(backlog_entry)
-
     crud.delete_backlog_entry_by_id(db_backlog_entry.backlog_id)
 
     flash("Your entry has been deleted.")
-
     return redirect("/view_backlog")
 
 
@@ -329,7 +332,7 @@ def confirm_delete_backlog():
 def select_game_to_review():
     """Users choose which game they want to review."""
 
-    backlogs = crud.get_backlogs()
+    backlogs = crud.get_backlog_by_id(current_user.user_id)
 
     return render_template("add_review.html", backlogs=backlogs)
 
@@ -351,13 +354,11 @@ def add_review_to_db():
     """Adds review to the db """
 
     game_id = request.form.get("game_id")
-    user_id = current_user.user_id
     body = request.form.get("body")
     score =request.form.get("score")
     completion_time =request.form.get("completion_time")
 
-
-    crud.create_review(user_id, game_id, body, score, completion_time)
+    crud.create_review(current_user.user_id, game_id, body, score, completion_time)
     flash("Your review has been added.")
 
     return redirect("/view_reviews")
@@ -368,9 +369,8 @@ def add_review_to_db():
 def show_reviews():
     """Displays all a users reviews. """
 
-    reviews = crud.get_reviews()
-
-    return render_template("show_reviews.html", reviews=reviews)
+    users_reviews = crud.get_reviews_by_user_id(current_user.user_id)
+    return render_template("show_reviews.html", reviews=users_reviews)
 
 
 @app.route('/delete_review', methods=["POST"])

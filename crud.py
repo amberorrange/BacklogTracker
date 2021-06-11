@@ -1,7 +1,7 @@
 """CRUD Operations"""
 
-from model import db, User, Game, Genre, Review, Backlog, connect_to_db
-import re
+from model import db, User, Game, Genre, Review, Backlog, Platform, connect_to_db
+
 
 
 def check_login(email, password):
@@ -101,10 +101,14 @@ def get_game_by_rawg_id(rawg_id):
     return Game.query.filter(Game.rawg_id == rawg_id).first()
 
 
-def get_backlogs():
-    """Returns all Backlog Entries"""
 
-    return Backlog.query.all()
+
+
+
+def get_backlog_by_user(user_id):
+    """Returns backlog entries of a user"""
+
+    return Backlog.query.filter(Backlog.user_id==user_id).all()
 
 
 def check_backlogs(game_id):
@@ -121,12 +125,14 @@ def delete_backlog_entry_by_id(id):
     db.session.commit()
 
 
-
-
 def get_backlog_by_id(id):
     """Returns backlog entry with given id"""
 
     return Backlog.query.get(id)
+
+
+
+
 
 
 
@@ -140,10 +146,10 @@ def create_review(user_id, game_id, body, score, completion_time):
 
     return review
 
-def get_reviews():
-    """Returns all reviews in db"""
+def get_reviews_by_user_id(user_id):
+    """Returns all reviews from a user"""
 
-    return Review.query.all()
+    return Review.query.filter(Review.user_id==user_id).all()
 
 
 def delete_review(id):

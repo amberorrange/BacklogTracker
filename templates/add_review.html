@@ -11,7 +11,7 @@
     
     <form action="/review_game" class="inline">
         <select name="game_to_review">
-                {% for backlog in backlogs %}
+            {% for backlog in backlogs %}
                 <option value="{{ backlog.game.game_id }}">{{ backlog.game.title }}</option>
             {% endfor %}
         </select>

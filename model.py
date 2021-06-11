@@ -50,13 +50,20 @@ class Genre(db.Model):
     genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(30), nullable=False) 
     
-
     def __repr__(self):
         return f'<Genre genre_id={self.genre_id} name={self.name}>'
 
-    #has relationship with game
-    games = db.relationship("Game", backref="genres") #primary key to games foreign key
 
+class Platform(db.Model):
+    """A platform(of a game)"""
+
+    __tablename__ = 'platforms'
+
+    platform_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    name = db.Column(db.String(30), nullable=False) 
+    
+    def __repr__(self):
+        return f'<Platform platform_id={self.genre_id} name={self.name}>'
 
 
 class Game(db.Model):
@@ -67,19 +74,15 @@ class Game(db.Model):
     game_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text)
-    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id')) 
     rawg_id = db.Column(db.Integer, unique=True) 
     image = db.Column(db.Text)
-
-    
+    genre = db.Column(db.String(20)) 
+ 
     backlogs = db.relationship("Backlog", backref="game") #primary key to backlogs foreign key
     reviews = db.relationship("Review", backref="game") #primary key to reviews foreign key
 
-
-
     def __repr__(self):
         return f'<Game game_id={self.game_id} title={self.title} igdb_id={self.igdb_id}>'
-
 
 
 class Backlog(db.Model):
@@ -93,6 +96,7 @@ class Backlog(db.Model):
 
     ownership_status = db.Column(db.String(30), nullable=False) 
     play_status = db.Column(db.Boolean, nullable=False, default=False) 
+    platform = db.Column(db.String(30)) 
 
     def __repr__(self):
         return f'<Backlog Entry backlog_id={self.backlog_id} user_id={self.user_id} game_id={self.game_id}>'
@@ -111,15 +115,12 @@ class Review(db.Model):
     body = db.Column(db.Text(), nullable=False) 
     score = db.Column(db.Integer, nullable=False) 
     completion_time = db.Column(db.Integer)
-
+    platform = db.Column(db.String(30)) 
 
     #has relationships with user and games
 
-
     def __repr__(self):
         return f'<Review review_id={self.review_id} score={self.score}>'
-
-
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///backlogs', echo=True):
@@ -139,13 +140,8 @@ if __name__ == '__main__':
     # Call connect_to_db(app, echo=False) if your program output gets
     # too annoying; this will tell SQLAlchemy not to print out every
     # query it executes.
-
     connect_to_db(app)
 
-
-    # if len(User.query.all())
-    # test_user = User(fname='testfname', lname='testlname', email='test@test.test', password='testpw')
-    # test_game= Game(title='testtitle')
 
 
 
