@@ -68,10 +68,10 @@ def get_genres():
     return genre_names
 
 
-def create_game(title, description, rawg_id, image):
+def create_game(title, description, rawg_id, image, genre):
     """Creates a game and returns it."""
 
-    game = Game(title=title, description=description, rawg_id=rawg_id, image=image)
+    game = Game(title=title, description=description, rawg_id=rawg_id, image=image, genre=genre)
 
     db.session.add(game)
     db.session.commit()
@@ -79,10 +79,10 @@ def create_game(title, description, rawg_id, image):
     return game
 
 
-def create_backlog(user_id, game_id, ownership_status, play_status):
+def create_backlog(user_id, game_id, ownership_status, play_status, platform):
     """ Creates a Backlog entry and returns it."""
 
-    backlog = Backlog(user_id=user_id, game_id=game_id, ownership_status=ownership_status, play_status=play_status)
+    backlog = Backlog(user_id=user_id, game_id=game_id, ownership_status=ownership_status, play_status=play_status, platform=platform)
 
     db.session.add(backlog)
     db.session.commit()
@@ -136,10 +136,10 @@ def get_backlog_by_id(id):
 
 
 
-def create_review(user_id, game_id, body, score, completion_time):
+def create_review(user_id, game_id, body, score, completion_time, platform):
     """Create and Retrun a review."""
 
-    review = Review(user_id=user_id, game_id=game_id, body=body, score=score, completion_time=completion_time)
+    review = Review(user_id=user_id, game_id=game_id, body=body, score=score, completion_time=completion_time, platform=platform)
 
     db.session.add(review)
     db.session.commit()

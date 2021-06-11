@@ -63,7 +63,7 @@ class Platform(db.Model):
     name = db.Column(db.String(30), nullable=False) 
     
     def __repr__(self):
-        return f'<Platform platform_id={self.genre_id} name={self.name}>'
+        return f'<Platform platform_id={self.platform_id} name={self.name}>'
 
 
 class Game(db.Model):

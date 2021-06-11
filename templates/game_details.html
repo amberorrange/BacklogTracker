@@ -36,14 +36,31 @@
             <option value="Owned">Owned</option>
             <option value="Not Owned">Not Owned</option>
             <option value="Unreleased">Unreleased</option>
-        </select> <br>
+        </select> &nbsp;
         Are you currently playing this game?
         <select name="play_status" >
             <option value="owned">Yes</option>
             <option value="notowned">No</option>
-        </select>
- 
+        </select> &nbsp;
+
+        Genre: 
+        <select name="genres" >
+            <option></option>
+            {% for genre in genres %}
+                <option value="{{ genre.name }}">{{ genre.name }}</option>
+            {% endfor %}
+        </select> &nbsp;
+
+        Platform:
+        <select name="platforms" >
+            <option></option>
+            {% for platform in platforms %}
+                <option value="{{ platform.name}}">{{ platform.name }}</option>
+            {% endfor %}
+        </select> &nbsp;
+
         <input value="Add Game" type="submit" >
+
     </form>
 
     <button onclick="location.href='/add_game'" type="button">Back to Search</button> 

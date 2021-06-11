@@ -5,7 +5,7 @@ from flask import (Flask, render_template, request, flash, session,
 
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
-from model import connect_to_db, User, db
+from model import connect_to_db, User, db, Platform, Genre, Review, Backlog
 import os
 import crud 
 import requests
@@ -243,10 +243,15 @@ def show_game_info(rawg_id):
         esrb_rating = ""
     else:
         esrb_rating = data['esrb_rating']['name']
-    
+
+    #for form in game_details.html
+    platforms = Platform.query.all() 
+    genres = Genre.query.all()
     return render_template("game_details.html", 
                             data=data,
-                            esrb=esrb_rating) 
+                            esrb=esrb_rating,
+                            platforms=platforms,
+                            genres=genres) 
 
 
 @app.route('/view_backlog')
@@ -270,9 +275,11 @@ def add_game_and_backlog():
     description = request.form.get("description")
     rawg_id = request.form.get("rawg_id")
     image = request.form.get("game_image")
+    genre = request.form.get("genres")
 
     ownership_status = request.form.get("ownership_status")     
     play_status = request.form.get('play_status') == 'Yes'
+    platform = request.form.get("platforms")
 
    #get user object and all its data 
     user = User.query.options(
@@ -291,11 +298,11 @@ def add_game_and_backlog():
     #checks if game is in our db or not
     if game is None:
         #if game isn't in db, adds the game to db and then creates backlog entry
-        new_game = crud.create_game(title, description, rawg_id, image) 
-        crud.create_backlog(user.user_id, new_game.game_id, ownership_status, play_status)  
+        new_game = crud.create_game(title, description, rawg_id, image, genre) 
+        crud.create_backlog(user.user_id, new_game.game_id, ownership_status, play_status, platform)  
     else:
         #creates backlog entry of a game that's already in our db
-        crud.create_backlog(user.user_id, game.game_id, ownership_status, play_status)
+        crud.create_backlog(user.user_id, game.game_id, ownership_status, play_status, platform)
 
     flash("Game added.")
     return redirect("/view_backlog") 
@@ -306,7 +313,7 @@ def add_game_and_backlog():
 def delete_backlog():
     """Shows form to delete a backlog entry. """
 
-    backlogs = crud.get_backlogs_by_user(current_user.id)
+    backlogs = current_user.backlogs
 
     return render_template("delete_backlog.html", backlogs=backlogs)
 
@@ -332,7 +339,7 @@ def confirm_delete_backlog():
 def select_game_to_review():
     """Users choose which game they want to review."""
 
-    backlogs = crud.get_backlog_by_id(current_user.user_id)
+    backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).all()
 
     return render_template("add_review.html", backlogs=backlogs)
 
@@ -357,8 +364,9 @@ def add_review_to_db():
     body = request.form.get("body")
     score =request.form.get("score")
     completion_time =request.form.get("completion_time")
+    platform = "Test" #FIX- get from review form
 
-    crud.create_review(current_user.user_id, game_id, body, score, completion_time)
+    crud.create_review(current_user.user_id, game_id, body, score, completion_time, platform)
     flash("Your review has been added.")
 
     return redirect("/view_reviews")
@@ -369,8 +377,9 @@ def add_review_to_db():
 def show_reviews():
     """Displays all a users reviews. """
 
-    users_reviews = crud.get_reviews_by_user_id(current_user.user_id)
-    return render_template("show_reviews.html", reviews=users_reviews)
+    reviews = Review.query.filter(Review.user_id==current_user.user_id).all()
+
+    return render_template("show_reviews.html", reviews=reviews)
 
 
 @app.route('/delete_review', methods=["POST"])
@@ -379,9 +388,7 @@ def delete_review():
     """Delete's a review. """
 
     review_id = request.form.get("review")
-
     crud.delete_review(review_id)
-
     flash("Your review has been deleted.")
     
     return redirect("/view_reviews")

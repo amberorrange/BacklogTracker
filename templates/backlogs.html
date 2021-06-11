@@ -14,8 +14,11 @@
         <div class="backlog_entry">
             <h4 class="backlog_title">{{ backlog.game.title }}</h4>
             <img class="backlog_image" src="{{ backlog.game.image }}">
-            Ownership Status: {{ backlog.ownership_status }} 
-            Playing: {{ backlog.play_status }}
+            Genre: {{ backlog.game.genre }} <br>
+            Ownership Status: {{ backlog.ownership_status }} <br>
+            Play Status: {{ backlog.play_status }} <br>
+            Playing On: {{ backlog.platform}}
+
         </div>          
     {% endfor %}
 
