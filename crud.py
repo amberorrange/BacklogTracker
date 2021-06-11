@@ -3,20 +3,16 @@
 from model import db, User, Game, Genre, Review, Backlog, Platform, connect_to_db
 
 
-
 def check_login(email, password):
-    """returns a user if their login information exists in db"""
+    """Returns a user if their login information exists in db"""
 
     user = User.query.filter( (User.email == email) & (User.password == password) ).first()
-
     return user
-
-    
+     
 def create_user(fname, lname, email, password):
     """Create and return a new user."""
 
     if fname == "" or lname == "" or email == "" or password == "":
-
         return None
 
     user = User(fname=fname, lname=lname, email=email, password=password)
@@ -26,12 +22,10 @@ def create_user(fname, lname, email, password):
 
     return user
 
-
 def get_user_by_email(email):
     """Return a user by their email"""
 
     return User.query.filter(User.email == email).first()
-
 
 def delete_account(email):
 
@@ -41,21 +35,16 @@ def delete_account(email):
     db.session.delete(user)
     db.session.commit()
 
-
-
 def change_account_info(current_email, fname, lname, email, password):
     """Changes a user's account information. """
 
     if fname == "" or lname == "" or email == "" or password == "":
-
         return None
 
     user = User.query.filter(User.email==current_email).update({User.fname: fname, User.lname: lname, User.email: email, User.password: password})
     db.session.commit()
 
     return user
-
-
 
 def get_genres():
     """Returns all the names of the genres in db. """
@@ -67,7 +56,6 @@ def get_genres():
 
     return genre_names
 
-
 def create_game(title, description, rawg_id, image, genre):
     """Creates a game and returns it."""
 
@@ -77,7 +65,6 @@ def create_game(title, description, rawg_id, image, genre):
     db.session.commit()
 
     return game
-
 
 def create_backlog(user_id, game_id, ownership_status, play_status, platform):
     """ Creates a Backlog entry and returns it."""
@@ -100,22 +87,15 @@ def get_game_by_rawg_id(rawg_id):
 
     return Game.query.filter(Game.rawg_id == rawg_id).first()
 
-
-
-
-
-
 def get_backlog_by_user(user_id):
     """Returns backlog entries of a user"""
 
     return Backlog.query.filter(Backlog.user_id==user_id).all()
 
-
 def check_backlogs(game_id):
     """Returns Backlog searched by game_id"""
 
     return Backlog.query.filter(Backlog.game_id==game_id).first()
-
 
 def delete_backlog_entry_by_id(id):
     """Deletes a backlog entry from db"""
@@ -124,13 +104,10 @@ def delete_backlog_entry_by_id(id):
     db.session.delete(backlog)
     db.session.commit()
 
-
 def get_backlog_by_id(id):
     """Returns backlog entry with given id"""
 
     return Backlog.query.get(id)
-
-
 
 def create_review(user_id, game_id, body, score, completion_time, platform):
     """Create and Retrun a review."""
@@ -147,7 +124,6 @@ def get_reviews_by_user_id(user_id):
 
     return Review.query.filter(Review.user_id==user_id).all()
 
-
 def delete_review(id):
     """Deletes a review from db"""
 
@@ -155,13 +131,11 @@ def delete_review(id):
     db.session.delete(review)
     db.session.commit()
 
-
 def check_play_status(status):
     """Checks play status of game and returns boolean """
     if status == "Yes":
             return True
     return False
-
 
 
 if __name__ == '__main__':

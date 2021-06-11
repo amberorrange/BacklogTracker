@@ -78,10 +78,6 @@ def logout():
     flash("Successfully logged out of account.")
     return redirect("/")
 
-
-
-
-
 @app.route("/show_user_details")
 @login_required
 def show_user_details():
@@ -189,13 +185,6 @@ def change_account_info():
         flash("Your account information is changed. Please log in again.")
 
     return redirect("/")
-  
-
-
-
-
-
-
 
 @app.route('/add_game')
 @login_required
@@ -398,8 +387,6 @@ def delete_review():
     flash("Your review has been deleted.")
     
     return redirect("/view_reviews")
-
-
 
 if __name__ == '__main__':
     connect_to_db(app)
