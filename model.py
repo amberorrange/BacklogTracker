@@ -95,7 +95,7 @@ class Backlog(db.Model):
     game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'))
 
     ownership_status = db.Column(db.String(30), nullable=False) 
-    play_status = db.Column(db.Boolean, nullable=False, default=False) 
+    play_status = db.Column(db.Boolean, nullable=False) 
     platform = db.Column(db.String(30)) 
 
     def __repr__(self):

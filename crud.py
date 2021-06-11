@@ -132,10 +132,6 @@ def get_backlog_by_id(id):
 
 
 
-
-
-
-
 def create_review(user_id, game_id, body, score, completion_time, platform):
     """Create and Retrun a review."""
 
@@ -160,6 +156,11 @@ def delete_review(id):
     db.session.commit()
 
 
+def check_play_status(status):
+    """Checks play status of game and returns boolean """
+    if status == "Yes":
+            return True
+    return False
 
 
 

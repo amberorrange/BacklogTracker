@@ -278,7 +278,7 @@ def add_game_and_backlog():
     genre = request.form.get("genres")
 
     ownership_status = request.form.get("ownership_status")     
-    play_status = request.form.get('play_status') == 'Yes'
+    play_status = crud.check_play_status(request.form.get("play_status"))
     platform = request.form.get("platforms")
 
    #get user object and all its data 
@@ -352,7 +352,9 @@ def review_game_form():
     game_id = request.args.get("game_to_review")
     game = crud.get_game_by_id(game_id)
 
-    return render_template("add_review_form.html", game=game)
+    platforms = Platform.query.all()
+
+    return render_template("add_review_form.html", game=game, platforms=platforms)
 
 
 @app.route('/review_confirmation', methods=["POST"])
@@ -364,7 +366,11 @@ def add_review_to_db():
     body = request.form.get("body")
     score =request.form.get("score")
     completion_time =request.form.get("completion_time")
-    platform = "Test" #FIX- get from review form
+    platform = request.form.get("platforms")
+
+    if score == "" or completion_time == "":
+        flash("Please fill out all fields.")
+        return redirect("/add_review")
 
     crud.create_review(current_user.user_id, game_id, body, score, completion_time, platform)
     flash("Your review has been added.")

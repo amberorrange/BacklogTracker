@@ -10,9 +10,10 @@
     {% for review in reviews %}
         <div class="review_display">
             <h3>{{ review.game.title}}</h3>
-            <p>Review: {{ review.body }}</p>
             <p>Score: {{ review.score}}</p>   
-            <p> Completion Time: {{ review.completion_time }} Hours</p>      
+            <p>Played On: {{ review.platform }}</p>
+            <p> Completion Time: {{ review.completion_time }} Hours</p>  
+            <p>Review: {{ review.body }}</p>    
         </div>
     
     {% endfor %}
@@ -28,7 +29,7 @@
                 <option value="{{ review.review_id }}">{{ review.game.title }}</option>
             {% endfor %}
         </select>
-        <input type="submit">
+        <input value="Delete" type="submit">
     </form> 
 
     <button onclick="location.href='/view_backlog'" type="button">Back</button> 

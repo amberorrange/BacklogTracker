@@ -13,6 +13,14 @@
 
         <p>Hours Played: <input type="number" name="completion_time" min="1" max="500">  </p>
 
+        Platform: 
+        <select name="platforms" >
+            <option></option>
+            {% for platform in platforms %}
+                <option value="{{ platform.name}}">{{ platform.name }}</option>
+            {% endfor %}
+        </select>
+
         <input type="hidden" name="game_id" value="{{ game.game_id }}">
 
         <p>Add review, notes, or comments: </p> 
