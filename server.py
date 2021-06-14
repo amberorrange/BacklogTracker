@@ -287,11 +287,11 @@ def add_game_and_backlog():
     #checks if game is in our db or not
     if game is None:
         #if game isn't in db, adds the game to db and then creates backlog entry
-        new_game = crud.create_game(title, description, rawg_id, image, genre) 
-        crud.create_backlog(user.user_id, new_game.game_id, ownership_status, play_status, platform)  
+        new_game = crud.create_game(title, description, rawg_id, image) 
+        crud.create_backlog(user.user_id, new_game.game_id, ownership_status, play_status, platform,genre)  
     else:
         #creates backlog entry of a game that's already in our db
-        crud.create_backlog(user.user_id, game.game_id, ownership_status, play_status, platform)
+        crud.create_backlog(user.user_id, game.game_id, ownership_status, play_status, platform, genre)
 
     flash("Game added.")
     return redirect("/view_backlog") 

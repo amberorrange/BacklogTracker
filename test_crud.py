@@ -34,15 +34,27 @@ class genresTestCase(unittest.TestCase):
         self.assertNotEqual(crud.get_genres(), [])
 
 
-# class gamesTestCase(unittest.TestCase):
-#     """Unit tests about Game class"""
+class creationsTestCase(unittest.TestCase):
+    """Unit tests about creating instances of Game, Backlog, and Review classes"""
 
+    # def test_create_game(self): 
+    #     self.assertIsInstance(crud.create_game("Test", "", "0", ""), object)
 
+    # def test_create_backlog(self):
+    #     self.assertIsInstance(crud.create_backlog(1, 1, "Owned", True, "PlayStation 4", "RPG"), object)
 
+    # def test_create_review(self):
+    #     self.assertIsInstance(crud.create_review(1, 1, "Great", 10, 100, "RPG"), object)
 
+    # next three tests are to delete fake data previously created-problem: they can only be repeated once
+    def test_delete_review(self): 
+        self.assertIsNone(crud.delete_review(1))
 
+    def test_delete_backlog_entry_by_id(self):
+        self.assertIsNone(crud.delete_backlog_entry_by_id(1))
 
-
+    def test_delete_game(self):
+        self.assertIsNone(crud.delete_game(1))
 
 
 if __name__ == "__main__":

@@ -65,6 +65,14 @@ def create_game(title, description, rawg_id, image):
 
     return game
 
+def delete_game(id):
+    """Deletes a game(based on its id)"""
+
+    game = Game.query.get(id)
+
+    db.session.delete(game)
+    db.session.commit()
+
 def create_backlog(user_id, game_id, ownership_status, play_status, platform, genre):
     """Creates a Backlog entry and returns it"""
 
@@ -79,7 +87,6 @@ def get_game_by_id(id):
     """Returns game with the given id"""
 
     return  Game.query.get(id)
-
 
 def get_game_by_rawg_id(rawg_id):
     """Checks for a game by rawg_id and returns it"""
