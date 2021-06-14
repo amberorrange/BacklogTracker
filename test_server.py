@@ -17,6 +17,6 @@ class MyAppIntegrationTestCase(unittest.TestCase):
     def test_m(self):
         result = self.client.post('/', data={})
         self.assertIn(b'', result.data)
-
+##
 if __name__ == '__main__':
     unittest.main()
