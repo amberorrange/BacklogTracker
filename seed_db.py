@@ -12,7 +12,6 @@ os.system('createdb backlogs')
 connect_to_db(server.app)
 db.create_all()
 
-
 #get all the genres and add to db
 url = 'https://api.rawg.io/api/genres'
 payload = {'key': os.environ['RAWG_KEY']}
@@ -54,8 +53,17 @@ platforms = [ "PC",
        		"Game Boy",
 			"Other"]
 
-
 for platform in platforms:
 	added_platform =  Platform(name = platform)
 	db.session.add(added_platform)
 	db.session.commit()
+
+#create 10 users
+for i in range(10):
+	fname = f"test{n}"
+	lname = f"test{n}"
+	email = f"test{n}@test.test"
+	password = "testpw!!"
+
+	user = crud.create_user(fname.fname, email, password)
+
