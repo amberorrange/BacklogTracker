@@ -76,8 +76,7 @@ class Game(db.Model):
     description = db.Column(db.Text)
     rawg_id = db.Column(db.Integer, unique=True) 
     image = db.Column(db.Text)
-    genre = db.Column(db.String(20)) 
- 
+    
     backlogs = db.relationship("Backlog", backref="game") #primary key to backlogs foreign key
     reviews = db.relationship("Review", backref="game") #primary key to reviews foreign key
 
@@ -97,6 +96,7 @@ class Backlog(db.Model):
     ownership_status = db.Column(db.String(30), nullable=False) 
     play_status = db.Column(db.Boolean, nullable=False) 
     platform = db.Column(db.String(30)) 
+    genre = db.Column(db.String(20)) 
 
     def __repr__(self):
         return f'<Backlog Entry backlog_id={self.backlog_id} user_id={self.user_id} game_id={self.game_id}>'

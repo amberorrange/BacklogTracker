@@ -55,20 +55,20 @@ def get_genres():
 
     return genre_names
 
-def create_game(title, description, rawg_id, image, genre):
+def create_game(title, description, rawg_id, image):
     """Creates a game and returns it"""
 
-    game = Game(title=title, description=description, rawg_id=rawg_id, image=image, genre=genre)
+    game = Game(title=title, description=description, rawg_id=rawg_id, image=image)
 
     db.session.add(game)
     db.session.commit()
 
     return game
 
-def create_backlog(user_id, game_id, ownership_status, play_status, platform):
+def create_backlog(user_id, game_id, ownership_status, play_status, platform, genre):
     """Creates a Backlog entry and returns it"""
 
-    backlog = Backlog(user_id=user_id, game_id=game_id, ownership_status=ownership_status, play_status=play_status, platform=platform)
+    backlog = Backlog(user_id=user_id, game_id=game_id, ownership_status=ownership_status, play_status=play_status, platform=platform, genre=genre)
 
     db.session.add(backlog)
     db.session.commit()
