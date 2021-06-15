@@ -69,8 +69,8 @@ for n in range(10):
 
 
 
-#add a fake game, backlog, review for testing purposes
-crud.create_game("Test", "", "0", "")
-crud.create_backlog(1, 1, "Owned", True, "PlayStation 4", "RPG")
-crud.create_review(1, 1, "Great", 10, 100, "RPG")
+# #add a fake game, backlog, review for testing purposes
+# crud.create_game("Test", "", "0", "")
+# crud.create_backlog(1, 1, "Owned", True, "PlayStation 4", "RPG")
+# crud.create_review(1, 1, "Great", 10, 100, "RPG")
 

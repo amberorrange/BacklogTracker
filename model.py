@@ -134,6 +134,48 @@ def connect_to_db(flask_app, db_uri='postgresql:///backlogs', echo=True):
     print('Connected to the db!')
 
 
+def example_data():
+    """Create some sample data."""
+
+    # In case this is run more than once, empty out existing data
+    User.query.delete()
+    Game.query.delete()
+    Backlog.query.delete()
+    Review.query.delete()
+    Genre.query.delete()
+    Platform.query.delete()
+
+    #sample data
+    user1 = User(fname='user1',lname='luser1', email="user1@test.test", password='testpw!!')
+    user2 = User(fname='user2',lname='luser2', email="user2@test.test", password='testpw!!')
+    user3 = User(fname='user3',lname='luser3', email="user3@test.test", password='testpw!!')
+    user4 = User(fname='user4',lname='luser4', email="user4@test.test", password='testpw!!')
+
+    game1 = Game(title="Persona 5",description="Fun JRPG with dungeons.", rawg_id=11, image= "")
+    game2 = Game(title="Quantum Break",description="Freeze Time and save the world.", rawg_id=2, image= "")
+    game3 = Game(title="Ace Attorney",description="Protect your clients and defend their innocence.", rawg_id=224, image= "")
+   
+    bl1 = Backlog(user_id=1, game_id=1, ownership_status="Owned", play_status=False, platform="PlayStation 4", genre="RPG")
+    bl2 = Backlog(user_id=2, game_id=2, ownership_status="Not Owned", play_status=False, platform="Xbox One", genre="Action")
+    bl3 = Backlog(user_id=3, game_id=3, ownership_status="Owned", play_status=True, platform="Nintendo Switch", genre="Action")
+    bl4 = Backlog(user_id=4, game_id=3, ownership_status="Not Owned", play_status=True, platform="Xbox One", genre="Puzzle")
+
+    review1 = Review(user_id=1, game_id=1, body="Fun", score=8, completion_time=11, platform="PlayStation 4")
+    review2 = Review(user_id=2, game_id=2, body="Boring", score=4, completion_time=4, platform="Nintendo Switch")
+    review3 = Review(user_id=3, game_id=3, body="Okay", score=7, completion_time=22, platform="Xbox One")
+    
+    genre1 = Genre(name="RPG")
+    genre2 = Genre(name="Action")
+    genre3 = Genre(name="Puzzle")
+
+    pf1 = Platform(name="PlayStation 4")
+    pf2 = Platform(name="Nintendo Switch")
+    pf3 = Platform(name="Xbox One")
+    
+    db.session.add_all([user1, user2, user3, user4, game1, game2, game3, bl1, bl2, bl3, bl4, review1, review2, review3, genre1, genre2, genre3, pf1, pf2, pf3])
+    db.session.commit()
+
+
 if __name__ == '__main__':
     from server import app
 
