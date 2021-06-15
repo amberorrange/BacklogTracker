@@ -5,7 +5,7 @@ from flask import (Flask, render_template, request, flash, session,
 
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
-from model import connect_to_db, User, db, Platform, Genre, Review, Backlog
+from model import connect_to_db, User, db, Platform, Genre, Review, Backlog, Game
 import os
 import crud 
 import requests
@@ -326,19 +326,22 @@ def confirm_delete_backlog():
 def organize_backlogs():
     """Display backlogs organized by genre, platform, ownership status, or play status."""
 
-    organized_by = request.args.get("organize_backlogs")
+    organized_by = request.args.get("backlog_organization")
 
     if organized_by == "Play Status":
-        backlogs = Backlog.query.
+        backlogs = Backlog.query.order_by(Backlog.play_status).all()
     elif organized_by == "Ownership Status":
-        backlogs = Backlog.query.
+       backlogs = Backlog.query.order_by(Backlog.ownership_status).all()
     elif organized_by == "Genre":
-        backlogs = Backlog.query.
-    elif organized_by == "Platform"
-         backlogs = Backlog.query.
+        backlogs = Backlog.query.order_by(Backlog.genre).all()
+    elif organized_by == "Platform":
+          backlogs = Backlog.query.order_by(Backlog.platform).all()
+    elif organized_by == "Alphabetical":
+        # backlogs = Backlog.query.order_by(Backlog.game.title).all()
+        backlogs = Backlog.query.join(Game).order_by(Game.title).all()
     else: 
         flash("Please choose an option")
-        return redtirect("/view_backlogs")
+        return redirect("/view_backlog")
 
     return render_template("organized_backlogs.html", backlogs=backlogs)
 
