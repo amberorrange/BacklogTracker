@@ -22,6 +22,17 @@
         </div>          
     {% endfor %}
 
+    
+    View Backlogs By:
+    <form action="/organize_backlogs">
+        <select name="backlog_organization"> 
+            <option value="Ownership Status">Ownership Status</option>
+            <option value="Platform">Platform<option>
+            <option value="Genre">Genre</option>
+            <option value="Play Status">Play Status</option>        
+        </select>
+        <input type="submit">
+    </form>
 
 
     <ul>

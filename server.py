@@ -288,7 +288,7 @@ def add_game_and_backlog():
     if game is None:
         #if game isn't in db, adds the game to db and then creates backlog entry
         new_game = crud.create_game(title, description, rawg_id, image) 
-        crud.create_backlog(user.user_id, new_game.game_id, ownership_status, play_status, platform,genre)  
+        crud.create_backlog(user.user_id, new_game.game_id, ownership_status, play_status, platform, genre)  
     else:
         #creates backlog entry of a game that's already in our db
         crud.create_backlog(user.user_id, game.game_id, ownership_status, play_status, platform, genre)
@@ -321,7 +321,26 @@ def confirm_delete_backlog():
     return redirect("/view_backlog")
 
 
+@app.route('/organize_backlogs')
+@login_required
+def organize_backlogs():
+    """Display backlogs organized by genre, platform, ownership status, or play status."""
 
+    organized_by = request.args.get("organize_backlogs")
+
+    if organized_by == "Play Status":
+        backlogs = Backlog.query.
+    elif organized_by == "Ownership Status":
+        backlogs = Backlog.query.
+    elif organized_by == "Genre":
+        backlogs = Backlog.query.
+    elif organized_by == "Platform"
+         backlogs = Backlog.query.
+    else: 
+        flash("Please choose an option")
+        return redtirect("/view_backlogs")
+
+    return render_template("organized_backlogs.html", backlogs=backlogs)
 
 @app.route('/add_review')
 @login_required
