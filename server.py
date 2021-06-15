@@ -254,7 +254,6 @@ def view_backlog():
     return render_template('backlogs.html', backlogs=current_user.backlogs)
 
 
-
 @app.route("/backlog_validation", methods=["POST"])
 @login_required
 def add_game_and_backlog():
@@ -324,21 +323,20 @@ def confirm_delete_backlog():
 @app.route('/organize_backlogs')
 @login_required
 def organize_backlogs():
-    """Display backlogs organized by genre, platform, ownership status, or play status."""
+    """Displays backlogs organized by genre, platform, ownership status, play status, or ABC order."""
 
     organized_by = request.args.get("backlog_organization")
 
     if organized_by == "Play Status":
-        backlogs = Backlog.query.order_by(Backlog.play_status).all()
+        backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).order_by(Backlog.play_status).all()
     elif organized_by == "Ownership Status":
-       backlogs = Backlog.query.order_by(Backlog.ownership_status).all()
+       backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).order_by(Backlog.ownership_status).all()
     elif organized_by == "Genre":
-        backlogs = Backlog.query.order_by(Backlog.genre).all()
+        backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).order_by(Backlog.genre).all()
     elif organized_by == "Platform":
-          backlogs = Backlog.query.order_by(Backlog.platform).all()
+          backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).order_by(Backlog.platform).all()
     elif organized_by == "Alphabetical":
-        # backlogs = Backlog.query.order_by(Backlog.game.title).all()
-        backlogs = Backlog.query.join(Game).order_by(Game.title).all()
+        backlogs = Backlog.query.join(Game).filter(Backlog.user_id==current_user.user_id).order_by(Game.title).all()
     else: 
         flash("Please choose an option")
         return redirect("/view_backlog")
