@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {% if current_user.is_authenticated %}
+    {{ current_user.fname }}'s Data 
+    {% endif %} {% endblock %} 
+   
+{% block content %}
+
+    <h3>Total Hours Played: <!--Insert Queried Data here-->Hours</h3>
+
+    <!--need a way to transfer data queried from db into chart: js-->
+
+    <!-- import chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js"></script>
+
+    <canvas id="hoursByGenreChart" width="100" height="100"></canvas>
+    <script src="/static/js/charts.js"></script>  
+
+{% endblock %}

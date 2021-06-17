@@ -301,9 +301,7 @@ def add_game_and_backlog():
 def delete_backlog():
     """Shows form to delete a backlog entry. """
 
-    backlogs = current_user.backlogs
-
-    return render_template("delete_backlog.html", backlogs=backlogs)
+    return render_template("delete_backlog.html", backlogs=current_user.backlogs)
 
 
 @app.route('/delete_backlog_confirmation', methods=["POST"])
@@ -348,9 +346,7 @@ def organize_backlogs():
 def select_game_to_review():
     """Users choose which game they want to review."""
 
-    backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).all()
-
-    return render_template("add_review.html", backlogs=backlogs)
+    return render_template("add_review.html", backlogs=current_user.backlogs)
 
 
 @app.route('/review_game')
@@ -392,8 +388,7 @@ def add_review_to_db():
 def show_reviews():
     """Displays all a users reviews. """
 
-    reviews = Review.query.filter(Review.user_id==current_user.user_id).all()
-
+    reviews = current_user.reviews
     return render_template("show_reviews.html", reviews=reviews)
 
 
@@ -407,6 +402,19 @@ def delete_review():
     flash("Your review has been deleted.")
     
     return redirect("/view_reviews")
+
+@app.route("/show_charts")
+@login_required
+def show_charts():
+    """Display a user's data."""
+
+    reviews = current_user.reviews
+    backlogs = current_user.backlogs
+
+    return render_template("user_charts.html", 
+                            reviews=reviews,
+                            backlogs=backlogs)
+
 
 if __name__ == '__main__':
     connect_to_db(app)
