@@ -152,8 +152,7 @@ def get_completion_time(reviews):
     return completion_time
 
 def get_sums(rows):
-    """Gets sums of hours played for each genre"""
-
+    """Gets sums of hours played for each genre(of a user)"""
     empty_dict = {}
     for review in rows:
         empty_dict[review.genre]= empty_dict.get(review.genre, 0) + review.completion_time

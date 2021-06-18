@@ -421,8 +421,8 @@ def show_charts():
 def get_chart_info():
     """Gets users data(reviews) to input into data visualization."""
 
-    #get dictionary of genres and sum of hours played per genre
-    hours_played_by_genre = reviews = db.session.query(Review.genre, Review.completion_time).all() 
+    #get dictionary of genres and sum of hours played per genre of the user
+    hours_played_by_genre = db.session.query(Review.genre, Review.completion_time).filter(Review.user_id==current_user.user_id).all() 
     data = crud.get_sums(hours_played_by_genre)
 
     # hours played_by: genre, platform (from reviews)
