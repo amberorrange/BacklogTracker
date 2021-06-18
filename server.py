@@ -358,8 +358,9 @@ def review_game_form():
     game = crud.get_game_by_id(game_id)
 
     platforms = Platform.query.all()
+    genres = Genre.query.all()
 
-    return render_template("add_review_form.html", game=game, platforms=platforms)
+    return render_template("add_review_form.html", game=game, platforms=platforms, genres=genres)
 
 
 @app.route('/review_confirmation', methods=["POST"])
@@ -372,12 +373,13 @@ def add_review_to_db():
     score =request.form.get("score")
     completion_time =request.form.get("completion_time")
     platform = request.form.get("platforms")
+    genre = request.form.get("genres")
 
     if score == "" or completion_time == "":
         flash("Please fill out all fields.")
         return redirect("/add_review")
 
-    crud.create_review(current_user.user_id, game_id, body, score, completion_time, platform)
+    crud.create_review(current_user.user_id, game_id, body, score, completion_time, platform, genre)
     flash("Your review has been added.")
 
     return redirect("/view_reviews")
@@ -408,13 +410,30 @@ def delete_review():
 def show_charts():
     """Display a user's data."""
 
-    reviews = current_user.reviews
-    backlogs = current_user.backlogs
+    reviews = Review.query.filter(Review.user_id == current_user.user_id).all()
+    total_completion_time = crud.get_completion_time(reviews)
 
-    return render_template("user_charts.html", 
-                            reviews=reviews,
-                            backlogs=backlogs)
+    return render_template("user_charts.html", completion_time=total_completion_time)
 
+# #route to send chart information (ajax request)
+@app.route("/get_chart_info.json")
+@login_required
+def get_chart_info():
+    """Gets users data(reviews) to input into data visualization."""
+
+    #may or may not need this information
+    reviews = Review.query.filter(Review.user_id == current_user.user_id).all()
+    total_completion_time = crud.get_completion_time(reviews)
+
+    
+    #cannot do genre bc no genre in reviews table....
+    # hours played_by: genre, platform (from reviews)
+
+    # genres pecentages (from bl)= length of items in each genre /  length of total items in bl (*100 for percentage )
+
+    # platforms_percentages % (from bl table) = length of items in each platform /  length of total items in bl (*100 for percentage )
+
+    return {"action": 12, "rpg": 2}
 
 if __name__ == '__main__':
     connect_to_db(app)

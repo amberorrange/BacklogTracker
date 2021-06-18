@@ -115,10 +115,10 @@ def get_backlog_by_id(id):
 
     return Backlog.query.get(id)
 
-def create_review(user_id, game_id, body, score, completion_time, platform):
+def create_review(user_id, game_id, body, score, completion_time, platform, genre):
     """Creates and returns a review"""
 
-    review = Review(user_id=user_id, game_id=game_id, body=body, score=score, completion_time=completion_time, platform=platform)
+    review = Review(user_id=user_id, game_id=game_id, body=body, score=score, completion_time=completion_time, platform=platform, genre=genre)
 
     db.session.add(review)
     db.session.commit()
@@ -143,6 +143,21 @@ def check_play_status(status):
             return True
     return False
 
+def get_completion_time(reviews):
+    """Returns sum of completion times in a user's reviews """
+    completion_time = 0
+    for review in reviews:
+        completion_time += review.completion_time 
+    
+    return completion_time
+
+def get_sums(rows):
+    """Gets sums of hours played for each genre"""
+
+    empty_dict = {}
+    for review in rows:
+        empty_dict[review.genre]= empty_dict.get(review.genre, 0) + review.completion_time
+    return empty_dict
 
 if __name__ == '__main__':
     from server import app

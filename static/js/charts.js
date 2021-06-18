@@ -1,6 +1,19 @@
 "use strict";
 
 
+// $.get('//get_chart_info.json', (res) => { // ajax request to get info from flask
+//     const data = [];
+//     // for (const dailyTotal of res.data) {
+//     //   data.push({x: dailyTotal.date, y: dailyTotal.melons_sold});
+//     }
+
+
+$(window).on("load", function() {
+    $.get("/get_chart_info.json"), {}, (res) => {
+     console.log(res)
+  }
+  });
+
 const ctx = document.getElementById('hoursByGenreChart');
 const hours_by_genre = new Chart(ctx, {
 type: 'bar',

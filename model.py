@@ -116,6 +116,8 @@ class Review(db.Model):
     score = db.Column(db.Integer, nullable=False) 
     completion_time = db.Column(db.Integer)
     platform = db.Column(db.String(30)) 
+    genre = db.Column(db.String(30)) 
+
 
     #has relationships with user and games
 

@@ -21,6 +21,14 @@
             {% endfor %}
         </select>
 
+        Genre:
+        <select name="genres" >
+            <option></option>
+            {% for genre in genres %}
+                <option value="{{ genre.name }}">{{ genre.name }}</option>
+            {% endfor %}
+        </select>
+
         <input type="hidden" name="game_id" value="{{ game.game_id }}">
 
         <p>Add review, notes, or comments: </p> 
