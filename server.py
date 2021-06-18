@@ -421,19 +421,17 @@ def show_charts():
 def get_chart_info():
     """Gets users data(reviews) to input into data visualization."""
 
-    #may or may not need this information
-    reviews = Review.query.filter(Review.user_id == current_user.user_id).all()
-    total_completion_time = crud.get_completion_time(reviews)
+    #get dictionary of genres and sum of hours played per genre
+    hours_played_by_genre = reviews = db.session.query(Review.genre, Review.completion_time).all() 
+    data = crud.get_sums(hours_played_by_genre)
 
-    
-    #cannot do genre bc no genre in reviews table....
     # hours played_by: genre, platform (from reviews)
 
     # genres pecentages (from bl)= length of items in each genre /  length of total items in bl (*100 for percentage )
 
     # platforms_percentages % (from bl table) = length of items in each platform /  length of total items in bl (*100 for percentage )
 
-    return {"action": 12, "rpg": 2}
+    return jsonify(data)
 
 if __name__ == '__main__':
     connect_to_db(app)

@@ -8,20 +8,23 @@
 //     }
 
 
-$(window).on("load", function() {
-    $.get("/get_chart_info.json"), {}, (res) => {
-     console.log(res)
-  }
-  });
+// $(window).on("load", function() {
+//     $.get("/get_chart_info.json"), {}, (res) => {
+//      console.log(res)
+//   }
+//   });
+
+
+
 
 const ctx = document.getElementById('hoursByGenreChart');
 const hours_by_genre = new Chart(ctx, {
 type: 'bar',
 data: {
-    labels: ['Action', 'RPG', 'Shooter', 'Adventure', 'Puzzle', 'Simulation'], // genres go here-rf
+    labels: [],          //['Action', 'RPG', 'Shooter', 'Adventure', 'Puzzle', 'Simulation'], // genres go here-rf
     datasets: [{
         label: 'Hours Played',
-        data: [33, 19, 3, 100, 70, 3], //hours played for each genre,
+        data: [], //hours played for each genre,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -49,3 +52,20 @@ options: {
     }
 }
 });
+
+
+
+
+ajax_chart(hours_by_genre, "/get_chart_info.json")
+
+
+
+function ajax_chart(chart, url, data) {
+    const data = data || {};
+
+    $.get(url, data).done(function(response) {
+        chart.data.labels = response.keys();
+        chart.data.datasets[0].data = response.values(); // or you can iterate for multiple datasets
+        chart.update(); // finally update our chart
+    });
+}
