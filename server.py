@@ -1,7 +1,7 @@
 """Server for my app."""
 
 from flask import (Flask, render_template, request, flash, session,
-                   redirect)
+                   redirect, jsonify)
 
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
@@ -415,21 +415,25 @@ def show_charts():
 
     return render_template("user_charts.html", completion_time=total_completion_time)
 
-# #route to send chart information (ajax request)
-@app.route("/get_chart_info.json")
+#route to send chart information (ajax request)
+@app.route("/get_hours_by_genre.json")
 @login_required
-def get_chart_info():
-    """Gets users data(reviews) to input into data visualization."""
+def get_hours_by_genre():
+    """Returns hours played by genres of a user as json"""
 
     #get dictionary of genres and sum of hours played per genre of the user
     hours_played_by_genre = db.session.query(Review.genre, Review.completion_time).filter(Review.user_id==current_user.user_id).all() 
-    data = crud.get_sums(hours_played_by_genre)
+    data = crud.get_sums_of_genres(hours_played_by_genre)
 
-    # hours played_by: genre, platform (from reviews)
+    return jsonify(data)
 
-    # genres pecentages (from bl)= length of items in each genre /  length of total items in bl (*100 for percentage )
+@app.route("/get_hours_by_platform.json")
+@login_required
+def get_hours_by_platform():
+    """Returns hours played by plaforms of a user as json"""
 
-    # platforms_percentages % (from bl table) = length of items in each platform /  length of total items in bl (*100 for percentage )
+    hours_played_by_platform = db.session.query(Review.platform, Review.completion_time).filter(Review.user_id==current_user.user_id).all() 
+    data = crud.get_sums_of_platforms(hours_played_by_platform)
 
     return jsonify(data)
 

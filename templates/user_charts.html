@@ -19,12 +19,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js"></script>
 
 
-    <h3>Hours Played By Genre</h3>
-    <canvas id="hoursByGenreChart" ></canvas>
+    <h2>Hours Played By Genre</h2>
+    <div class="chart-container">
+        <canvas id="hoursByGenreChart" width="2" height="2"></canvas>
+    </div>
 
+    <h2>Genre Percentages</h2>
+    <div class="chart-container">
+        <canvas id="genrePercentagesChart"></canvas>
+    </div>
 
+    <h2>Hours Played By Platform</h2>
+    <div class="chart-container">
+        <canvas id="hoursByPlatformChart"></canvas>
+    </div>
 
+    <h2>Platform Percentages</h2>
+    <div class="chart-container">
+        <canvas id="platformPercentagesChart"></canvas>
+    </div>
+
+    <small>*Data used from submitted reviews</small><br><br>
+
+    <button onclick="location.href='/view_backlog'" type="button">Back</button>
 
     <script src="/static/js/charts.js"></script>  
-
 {% endblock %}
