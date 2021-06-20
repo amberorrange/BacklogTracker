@@ -2,7 +2,7 @@
 
 
 {% block title %} {% if current_user.is_authenticated %}
-    {{ current_user.fname }}'s Data 
+    {{ current_user.fname }}'s Stats 
     {% endif %} {% endblock %} 
 
     
@@ -11,31 +11,30 @@
 
     <h1>{{ current_user.fname }}'s Stats</h1>    
 
-    <h2>Total Hours Played: {{ completion_time }} Hours</h2>
+    <p>Total Hours Played: {{ completion_time }}</p>
 
     <!--need a way to transfer data queried from db into chart: js-->
 
     <!-- import chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js"></script>
-
-
-    <h2>Hours Played By Genre</h2>
-    <div class="chart-container">
-        <canvas id="hoursByGenreChart" width="2" height="2"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0-rc.1/dist/chartjs-plugin-datalabels.min.js" integrity="sha256-Oq8QGQ+hs3Sw1AeP0WhZB7nkjx6F1LxsX6dCAsyAiA4=" crossorigin="anonymous"></script>
+    
+    <div class="chart-container" style="position: relative; height:70vh; width:80vw">
+        <canvas id="hoursByGenreChart"></canvas>
     </div>
 
-    <h2>Genre Percentages</h2>
-    <div class="chart-container">
+    
+    <div class="chart-container" style="position: relative; height:70vh; width:80vw">
         <canvas id="genrePercentagesChart"></canvas>
     </div>
 
-    <h2>Hours Played By Platform</h2>
-    <div class="chart-container">
+    
+    <div class="chart-container" style="position: relative; height:70vh; width:80vw">
         <canvas id="hoursByPlatformChart"></canvas>
     </div>
+    
 
-    <h2>Platform Percentages</h2>
-    <div class="chart-container">
+    <div class="chart-container" style="position: relative; height:70vh; width:80vw">
         <canvas id="platformPercentagesChart"></canvas>
     </div>
 

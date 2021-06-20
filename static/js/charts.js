@@ -24,18 +24,59 @@ const hoursByGenreChart = new Chart(ctx, {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 1
+            borderWidth: 1,
+            datalabels: {
+                color: 'black',
+                anchor: 'end',
+                align: 'top',
+                offset: 5
+            }
         }]
     },
+    plugins: [ChartDataLabels],  
     options: {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Number of Hours Played',
+                    font: {
+                        size: 18
+                    },
+                    padding: 22
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Genre',
+                    font: {
+                        size: 18
+                    },
+                    padding: 22
+                }
             }
         },
         responsive: true,
-        maintainAspectRatio: false
-    }
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Hours Played by Genre',
+                padding: {
+                    top: 20,
+                    bottom: 30,
+                },
+                font: {
+                    size: 26
+                }
+            },
+            legend: {
+                display: false  
+            },
+        }
+    },
 });
    
 const ctx2 = document.getElementById('genrePercentagesChart').getContext('2d');
@@ -54,12 +95,45 @@ const genrePercentagesChart = new Chart(ctx2, {
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
             ],
-            hoverOffset: 4
+            hoverOffset: 4,
+            datalabels: {
+                color: 'black',
+                display: true,
+                clip: false,
+                anchor: 'end',
+                offset: '5',
+                align: 'end',
+            formatter: (value) => {
+                        return value + '%';
+                    }                
+            }
         }]
     },
+    plugins: [ChartDataLabels],
     options: {
+        layout: {
+            padding: {
+                bottom: 30
+            }
+        },
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Percentage of Hours Played by Genre',
+                padding: {
+                    top: 30,
+                    bottom: 50
+                },
+                font: {
+                    size: 26
+                }
+            },
+            legend: {
+                position: 'right' 
+            }
+        }
     }
 });
 
@@ -76,7 +150,7 @@ $.get("/get_hours_by_genre.json", (response) => {
       }
     
     for (const hours of response.data.quantity) {
-        percentagesArry.push(((hours / totalHours) * 100).toFixed(2))
+        percentagesArry.push(Math.round(((hours / totalHours) * 100)))
     }
 
     genrePercentagesChart.data.labels = response.labels;
@@ -109,17 +183,59 @@ const hoursByPlatformChart = new Chart(ctx3, {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 1
+            borderWidth: 1,
+            datalabels: {
+                color: 'black',
+                anchor: 'end',
+                align: 'top',
+                offset: 5
+            }
         }]
     },
+    plugins: [ChartDataLabels], 
     options: {
         scales: {
-            y: {
-                beginAtZero: true
-            }
+            y: {  
+                beginAtZero: true,title: {
+                    display: true,
+                    text: 'Number of Hours Played',
+                    font: {
+                        size: 18
+                    },
+                    padding: 22
+                }
+                
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Platform',
+                    font: {
+                        size: 18
+                    },
+                    padding: 22
+                }
+            }  
         },
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Hours Played by Platform',
+                padding: {
+                    top: 40,
+                    bottom: 30
+                },
+                font: {
+                    size: 26
+                }
+            },
+            legend: {
+                display: false
+            }
+
+        }   
     }
 });
    
@@ -139,12 +255,45 @@ const platformPercentagesChart = new Chart(ctx4, {
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
             ],
-            hoverOffset: 4
+            hoverOffset: 4,
+            datalabels: {
+                color: 'black',
+                display: true,
+                clip: false,
+                anchor: 'end',
+                offset: '5',
+                align: 'end',
+            formatter: (value) => {
+                        return value + '%';
+                    }                
+            }
         }]
     },
+    plugins: [ChartDataLabels],
     options: {
+        layout: {
+            padding: {
+                bottom: 30
+            }
+        },
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Percentage of Hours Played by Platform',
+                padding: {
+                    top: 20,
+                    bottom: 50
+                },
+                font: {
+                    size: 26
+                }
+            },
+            legend: {
+                position: 'right' 
+            }
+        }
     }
 });
 
@@ -162,13 +311,14 @@ $.get("/get_hours_by_platform.json", (response) => {
       }
     
     for (const hours of response.data.quantity) {
-        percentagesArry.push(((hours / totalHours) * 100).toFixed(2))
+        percentagesArry.push(Math.round(((hours / totalHours) * 100)))
     }
 
     platformPercentagesChart.data.labels = response.labels;
     platformPercentagesChart.data.datasets[0].data = percentagesArry;
     platformPercentagesChart.update();
 });
+
 
 
 
