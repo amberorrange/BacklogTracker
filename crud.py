@@ -2,6 +2,9 @@
 
 from model import db, User, Game, Genre, Review, Backlog, Platform, connect_to_db
 
+def get_user_by_id(id):
+        """Returns user with id """
+        return User.query.get(id)
 
 def check_login(email, password):
     """Returns a user if their login information exists in db"""
@@ -26,6 +29,17 @@ def get_user_by_email(email):
     """Returns a user by their email"""
 
     return User.query.filter(User.email == email).first()
+
+
+def get_all_user_data(email):
+
+    user = User.query.options(
+        db.joinedload('backlogs').joinedload('game')
+    ).filter_by(
+        email=email
+    ).first()
+
+    return user
 
 def delete_account(email):
     """Deletes a user's account"""
@@ -123,6 +137,30 @@ def get_backlog_by_id(id):
 
     return Backlog.query.get(id)
 
+
+def organize_backlogs(filters, user_id):
+    """Returns backlogs organized by certain filter"""
+
+    if filters ==  "Play Status":
+        backlogs = Backlog.query.filter(Backlog.user_id==user_id).order_by(Backlog.play_status).all()
+    elif filters == "Ownership Status":
+       backlogs = Backlog.query.filter(Backlog.user_id==user_id).order_by(Backlog.ownership_status).all()
+    elif filters == "Genre":
+        backlogs = Backlog.query.filter(Backlog.user_id==user_id).order_by(Backlog.genre).all()
+    elif filters == "Platform":
+          backlogs = Backlog.query.filter(Backlog.user_id==user_id).order_by(Backlog.platform).all()
+    elif filters == "Alphabetical":
+        backlogs = Backlog.query.join(Game).filter(Backlog.user_id==user_id).order_by(Game.title).all()
+    else: 
+        return None
+    
+    return backlogs
+       
+
+
+
+
+
 def create_review(user_id, game_id, body, score, completion_time, platform, genre):
     """Creates and returns a review"""
 
@@ -202,7 +240,7 @@ def get_top_articles(articles):
     """Returns the top 5 articles as a list"""
     count = 0
     article_lst = []
-    
+
     if not articles:
         pass
     elif len(articles) < 5:
@@ -213,6 +251,31 @@ def get_top_articles(articles):
             article_lst.append(articles[count])
             count += 1
     return article_lst
+
+def get_hours_by_platform(user_id):
+    """Returns platforms and completion times of a user's reviews"""
+
+    info = db.session.query(Review.platform, Review.completion_time).filter(Review.user_id==user_id).all() 
+
+    return info 
+
+
+def get_hours_by_genre(user_id):
+    """Returns genres and completion times of a user's reviews"""
+
+    info = db.session.query(Review.genre, Review.completion_time).filter(Review.user_id==user_id).all() 
+
+    return info 
+
+def get_all_genres():
+    """Returns all genres in db"""
+    return Genre.query.all()
+
+def get_all_platforms():
+    """Returns all platforms in db"""
+
+    return Platform.query.all()
+
 
 if __name__ == '__main__':
     from server import app

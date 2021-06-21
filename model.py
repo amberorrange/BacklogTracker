@@ -72,7 +72,7 @@ class Game(db.Model):
     __tablename__ = 'games'
 
     game_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
     rawg_id = db.Column(db.Integer, unique=True) 
     image = db.Column(db.Text)
@@ -96,7 +96,7 @@ class Backlog(db.Model):
     ownership_status = db.Column(db.String(30), nullable=False) 
     play_status = db.Column(db.Boolean, nullable=False) 
     platform = db.Column(db.String(30)) 
-    genre = db.Column(db.String(20)) 
+    genre = db.Column(db.String(30)) 
 
     def __repr__(self):
         return f'<Backlog Entry backlog_id={self.backlog_id} user_id={self.user_id} game_id={self.game_id}>'

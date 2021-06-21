@@ -1,5 +1,4 @@
 """Server for my app."""
-
 from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify)
 
@@ -11,10 +10,8 @@ import crud
 import requests
 from jinja2 import StrictUndefined
 
-
 app = Flask(__name__)
 app.secret_key = "dev"
-
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -27,8 +24,7 @@ NEWS_API_KEY = os.environ['NEWS_KEY']
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
-
+    return crud.get_user_by_id(user_id)
 
 @app.route('/')
 def homepage():
@@ -79,6 +75,7 @@ def logout():
     flash("Successfully logged out of account.")
     return redirect("/")
 
+
 @app.route("/show_user_details")
 @login_required
 def show_user_details():
@@ -86,11 +83,13 @@ def show_user_details():
 
     return render_template("user_details.html")
 
+
 @app.route("/delete_account_confirmation")
 @login_required
 def delete_account_confirmation():
     """Confirms user wants to delete their account."""
     return render_template("delete_account.html")
+
 
 @app.route("/delete_account")
 @login_required
@@ -100,6 +99,7 @@ def delete_account():
     crud.delete_account(email)
     flash("Your account has been deleted.")
     return redirect("/")
+
 
 @app.route("/create_account")
 def create_account():
@@ -193,12 +193,13 @@ def change_account_info():
 
     return redirect("/")
 
+
 @app.route('/add_game')
 @login_required
 def add_game():
     """Takes user to form to search for game to add to their backlog"""
 
-    genres = crud.get_genres()
+    genres = crud.get_genres() 
     return render_template("add_game.html", genres=genres)
 
 
@@ -241,9 +242,8 @@ def show_game_info(rawg_id):
         esrb_rating = data['esrb_rating']['name']
 
     #for form in game_details.html
-    platforms = Platform.query.all() 
-    genres = Genre.query.all()
-
+    genres = crud.get_all_genres()
+    platforms = crud.get_all_platforms()
 
     #request news info about game(NEWSAPI)
     url2 = 'https://newsapi.org/v2/everything'
@@ -287,12 +287,7 @@ def add_game_and_backlog():
     platform = request.form.get("platforms")
 
    #get user object and all its data 
-    user = User.query.options(
-        db.joinedload('backlogs').joinedload('game')
-    ).filter_by(
-        email=current_user.email
-    ).first()
-
+    user = crud.get_all_user_data(current_user.email)
     game = crud.get_game_by_rawg_id(rawg_id)
 
     #check if there is already a backlog entry of that game
@@ -312,11 +307,13 @@ def add_game_and_backlog():
     flash("Game added.")
     return redirect("/view_backlog") 
 
+
 @app.route('/edit_backlog_selection')
 @login_required
 def edit_backlog_selection():
     """Shows form to select which backlog entry to edit. """
     return render_template("edit_backlog_selection.html", backlogs=current_user.backlogs)
+
 
 @app.route('/edit_backlog', methods=['POST'])
 @login_required
@@ -326,13 +323,14 @@ def edit_backlog():
     backlog_to_edit = request.form.get('edited_backlog')
     backlog_to_edit = crud.get_backlog_by_id(backlog_to_edit)
 
-    platforms = Platform.query.all() 
-    genres = Genre.query.all()
+    genres = crud.get_all_genres()
+    platforms = crud.get_all_platforms()
 
     return render_template("edit_backlog_form.html", 
                             backlog=backlog_to_edit,
                             platforms=platforms, 
                             genres=genres)
+
 
 @app.route('/confirm_backlog_change', methods=['POST'])
 @login_required
@@ -380,22 +378,13 @@ def organize_backlogs():
     """Displays backlogs organized by genre, platform, ownership status, play status, or ABC order."""
 
     organized_by = request.args.get("backlog_organization")
-
-    if organized_by == "Play Status":
-        backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).order_by(Backlog.play_status).all()
-    elif organized_by == "Ownership Status":
-       backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).order_by(Backlog.ownership_status).all()
-    elif organized_by == "Genre":
-        backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).order_by(Backlog.genre).all()
-    elif organized_by == "Platform":
-          backlogs = Backlog.query.filter(Backlog.user_id==current_user.user_id).order_by(Backlog.platform).all()
-    elif organized_by == "Alphabetical":
-        backlogs = Backlog.query.join(Game).filter(Backlog.user_id==current_user.user_id).order_by(Game.title).all()
-    else: 
+    backlogs = crud.organize_backlogs(organized_by, current_user.user_id)
+    if backlogs == None:
         flash("Please choose an option")
         return redirect("/view_backlog")
 
     return render_template("organized_backlogs.html", backlogs=backlogs)
+
 
 @app.route('/add_review')
 @login_required
@@ -413,8 +402,8 @@ def review_game_form():
     game_id = request.args.get("game_to_review")
     game = crud.get_game_by_id(game_id)
 
-    platforms = Platform.query.all()
-    genres = Genre.query.all()
+    genres = crud.get_all_genres()
+    platforms = crud.get_all_platforms()
 
     return render_template("add_review_form.html", game=game, platforms=platforms, genres=genres)
 
@@ -449,6 +438,7 @@ def show_reviews():
     reviews = current_user.reviews
     return render_template("show_reviews.html", reviews=reviews)
 
+
 @app.route('/edit_review_form', methods=["POST"])
 @login_required
 def show_edit_review_form():
@@ -457,8 +447,8 @@ def show_edit_review_form():
     review_to_edit = request.form.get("review")
     review_to_edit = crud.get_review_by_id(review_to_edit)
 
-    genres = Genre.query.all()
-    platforms = Platform.query.all()
+    genres = crud.get_all_genres()
+    platforms = crud.get_all_platforms()
 
     return render_template("edit_review_form.html", 
                             review=review_to_edit, 
@@ -501,15 +491,17 @@ def delete_review():
     
     return redirect("/view_reviews")
 
+
 @app.route("/show_charts")
 @login_required
 def show_charts():
     """Display a user's data."""
-
-    reviews = Review.query.filter(Review.user_id == current_user.user_id).all()
+       
+    reviews = crud.get_reviews_by_user_id(current_user.user_id)
     total_completion_time = crud.get_completion_time(reviews)
 
     return render_template("user_charts.html", completion_time=total_completion_time)
+
 
 #route to send chart information (ajax request)
 @app.route("/get_hours_by_genre.json")
@@ -518,17 +510,18 @@ def get_hours_by_genre():
     """Returns hours played by genres of a user as json"""
 
     #get dictionary of genres and sum of hours played per genre of the user
-    hours_played_by_genre = db.session.query(Review.genre, Review.completion_time).filter(Review.user_id==current_user.user_id).all() 
+    hours_played_by_genre = crud.get_hours_by_genre(current_user.user_id)
     data = crud.get_sums_of_category(hours_played_by_genre, "genres")
 
     return jsonify(data)
+
 
 @app.route("/get_hours_by_platform.json")
 @login_required
 def get_hours_by_platform():
     """Returns hours played by plaforms of a user as json"""
 
-    hours_played_by_platform = db.session.query(Review.platform, Review.completion_time).filter(Review.user_id==current_user.user_id).all() 
+    hours_played_by_platform = crud.get_hours_by_platform(current_user.user_id)
     data = crud.get_sums_of_category(hours_played_by_platform, "platforms")
 
     return jsonify(data)
