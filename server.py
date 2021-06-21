@@ -85,6 +85,12 @@ def show_user_details():
 
     return render_template("user_details.html")
 
+@app.route("/delete_account_confirmation")
+@login_required
+def delete_account_confirmation():
+    """Confirms user wants to delete their account."""
+    return render_template("delete_account.html")
+
 @app.route("/delete_account")
 @login_required
 def delete_account():
@@ -294,8 +300,47 @@ def add_game_and_backlog():
 
     flash("Game added.")
     return redirect("/view_backlog") 
-                            
 
+@app.route('/edit_backlog_selection')
+@login_required
+def edit_backlog_selection():
+    """Shows form to select which backlog entry to edit. """
+    return render_template("edit_backlog_selection.html", backlogs=current_user.backlogs)
+
+@app.route('/edit_backlog', methods=['POST'])
+@login_required
+def edit_backlog():
+    """Shows form to edit backlog entry"""
+    
+    backlog_to_edit = request.form.get('edited_backlog')
+    backlog_to_edit = crud.get_backlog_by_id(backlog_to_edit)
+
+    platforms = Platform.query.all() 
+    genres = Genre.query.all()
+
+    return render_template("edit_backlog_form.html", 
+                            backlog=backlog_to_edit,
+                            platforms=platforms, 
+                            genres=genres)
+
+@app.route('/confirm_backlog_change', methods=['POST'])
+@login_required
+def confirm_backlog_change():
+    """Updates/comfirms a backlog entries changes"""
+
+    backlog_id = request.form.get('backlog_id')
+    backlog_to_edit = crud.get_backlog_by_id(backlog_id)
+
+    ownership_status = request.form.get("ownership_status")     
+    play_status = crud.check_play_status(request.form.get("play_status"))
+    platform = request.form.get("platforms")
+    genre = request.form.get("genres")
+
+    crud.change_backlog_entry(backlog_id, ownership_status, play_status, platform, genre)
+    flash(f" Information for {backlog_to_edit.game.title} was changed.")
+
+    return redirect("/view_backlog")
+                      
 @app.route('/delete_backlog')
 @login_required
 def delete_backlog():

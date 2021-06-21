@@ -103,6 +103,14 @@ def check_backlogs(game_id):
 
     return Backlog.query.filter(Backlog.game_id==game_id).first()
 
+def change_backlog_entry(backlog_id, ownership_status, play_status, platform, genre):
+    """Changes info for a backlog entry"""
+
+    backlog_entry = Backlog.query.filter(Backlog.backlog_id==backlog_id).update({Backlog.ownership_status: ownership_status, Backlog.play_status: play_status, Backlog.platform: platform, Backlog.genre: genre})
+    db.session.commit()
+
+    return backlog_entry
+
 def delete_backlog_entry_by_id(id):
     """Deletes a backlog entry from db"""
 

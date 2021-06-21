@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Backlog {% endblock %} 
+
+
+{% block content %}
+    <h1>Edit Backlog</h1>
+    <p>Which entry would you like to change?</p>
+
+
+    <form action="/edit_backlog" class="inline" method="POST">
+        <select name="edited_backlog">
+                {% for backlog in backlogs %}
+                <option value="{{ backlog.backlog_id }}">{{ backlog.game.title }}</option>
+            {% endfor %}
+        </select>
+        <input value="Edit" type="submit">
+    </form> 
+
+
+    <button onclick="location.href='/view_backlog'" class="inline" type="button">Cancel</button> 
+
+
+    {% endblock %}

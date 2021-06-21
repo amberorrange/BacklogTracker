@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Backlog {% endblock %} 
+
+
+{% block content %}
+<h2>Edit {{ backlog.game.title }}</h2>
+
+<form action="/confirm_backlog_change" class="inline" method="POST">
+
+    <input type="hidden" name="backlog_id" value="{{ backlog.backlog_id }}">
+
+    <p>Ownership Status:
+        <select name="ownership_status" >
+            <option value="Owned">Owned</option>
+            <option value="Not Owned">Not Owned</option>
+            <option value="Unreleased">Unreleased</option>
+        </select> </p>
+      
+
+   <p>Currently Playing:
+    <select name="play_status">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select> </p>
+   
+
+    <p>Platform:
+    <select name="platforms" >
+        <option></option>
+        {% for platform in platforms %}
+            <option value="{{ platform.name}}">{{ platform.name }}</option>
+        {% endfor %}
+    </select> </p>
+
+
+    <p>Genre: 
+        <select name="genres" >
+            <option></option>
+            {% for genre in genres %}
+                <option value="{{ genre.name }}">{{ genre.name }}</option>
+            {% endfor %}
+        </select> </p>
+
+    <input value="Add Game" type="submit">
+</form>
+
+<button onclick="location.href='/edit_backlog_selection'" type="button">Cancel</button> 
+
+
+{% endblock %}

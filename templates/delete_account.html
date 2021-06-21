@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Delete Account{% endblock %} 
+
+
+{% block content %}
+    <h1>Confirm Account Deletion</h1>
+    <p>Are you sure you want to delete your account? This change is permanent.</p>
+    <button onclick="location.href='/delete_account'" type="button">Delete</button>
+    <button onclick="location.href='/show_user_details'" type="button">Cancel</button> 
+
+{% endblock %}
