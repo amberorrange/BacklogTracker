@@ -1,10 +1,10 @@
-.search_image {
+.search_image { /*search results images */
 
     height: 300px;
     width: 400px;
 }
 
-#game_details_image {
+#game_details_image { /*image from a single game's page */
 
     height: 300px;
     width: 400px;
@@ -20,7 +20,9 @@ label {
 
 
 body{
+    margin-right: 10px;
     margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 
@@ -29,14 +31,14 @@ body{
     display: inline
 }
 
-.backlog_image {
+.backlog_image { /*images from "/view_backlog" */
 
     width: 180px;
     height: 160px;
     outline: auto;
 }
 
-.backlog_entry {
+.backlog_entry { /* for each backlog entry */
 
     display: inline-block;
     padding-inline: 30px;
@@ -46,24 +48,29 @@ body{
     padding-bottom: 10px;
 }
 
-.backlog_title {
+.backlog_title { /* titles in "/view_backlog  */
     overflow-wrap: break-word;
 }
 
-.review_display {
+.review_display { /* used for each review in show_reviews.html */
 
     padding-top: 10px;
     padding-bottom: 5px;
 }
 
-.inline {
+.inline { /* anything that you want to make inline */
 
     display: inline;
 }
 
 
-.chart-container{
+.chart-container{ /* for charts used with chart.js */
     padding-top: 20px;
     padding-left: 30px;
     padding-bottom: 20px;
+}
+
+.logout_button{ /* logout buttons */
+
+    float:right;
 }

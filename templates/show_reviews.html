@@ -18,10 +18,23 @@
     
     {% endfor %}
 
+    <a href="/add_review"><h2 class="inline"> Add Review </h2></a>
+    <!-- <button onclick="location.href='/add_review'" type="button">Add</button>  -->
+    
 
-    <button onclick="location.href='/add_review'" type="button">Add Review</button> 
+    <h2>Edit Review?</h2>
+    <h4> Which review would you like to change?</h4>
 
-    <h2>Delete a Review?</h2>
+    <form action="/edit_review_form" class="inline" method="POST">
+        <select name="review">
+                {% for review in reviews %}
+                <option value="{{ review.review_id }}">{{ review.game.title }}</option>
+            {% endfor %}
+        </select>
+        <input value="Edit" type="submit">
+    </form> 
+
+    <h2>Delete Review?</h2>
 
     <h4>Which review would you like to remove?</h4>
  

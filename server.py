@@ -416,7 +416,7 @@ def add_review_to_db():
     game_id = request.form.get("game_id")
     body = request.form.get("body")
     score =request.form.get("score")
-    completion_time =request.form.get("completion_time")
+    completion_time = request.form.get("completion_time")
     platform = request.form.get("platforms")
     genre = request.form.get("genres")
 
@@ -437,6 +437,46 @@ def show_reviews():
 
     reviews = current_user.reviews
     return render_template("show_reviews.html", reviews=reviews)
+
+@app.route('/edit_review_form', methods=["POST"])
+@login_required
+def show_edit_review_form():
+    """Displays form to edit a review."""
+
+    review_to_edit = request.form.get("review")
+    review_to_edit = crud.get_review_by_id(review_to_edit)
+
+    genres = Genre.query.all()
+    platforms = Platform.query.all()
+
+    return render_template("edit_review_form.html", 
+                            review=review_to_edit, 
+                            platforms=platforms, 
+                            genres=genres)
+
+
+@app.route('/edit_review_confirmation', methods=["POST"])
+@login_required
+def confirm_edited_review():
+    """Edits a review and confirms the changes."""
+
+    review_id = request.form.get("review_id")
+    review_to_edit = crud.get_review_by_id(review_id)
+
+    body = request.form.get("body")
+    score =request.form.get("score")
+    completion_time = request.form.get("completion_time")
+    platform = request.form.get("platforms")
+    genre = request.form.get("genres")
+
+    if score == "" or completion_time == "":
+        flash("Please fill out all fields.")
+        return redirect("/view_reviews")
+
+    crud.change_review_info(review_id, body, score, completion_time, platform, genre)
+    flash(f"Review for {review_to_edit.game.title} changed.")
+
+    return redirect("/view_reviews")
 
 
 @app.route('/delete_review', methods=["POST"])

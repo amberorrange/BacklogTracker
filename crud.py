@@ -138,6 +138,19 @@ def get_reviews_by_user_id(user_id):
 
     return Review.query.filter(Review.user_id==user_id).all()
 
+def get_review_by_id(id):
+    """Returns a review by its id """
+
+    return Review.query.get(id)
+
+def change_review_info(review_id, body, score, completion_time, platform, genre):
+    """Changes information for a review"""
+
+    review = Review.query.filter(Review.review_id==review_id).update({Review.body: body, Review.score: score, Review.completion_time: completion_time, Review.platform: platform, Review.genre: genre})
+    db.session.commit()
+
+    return review
+
 def delete_review(id):
     """Deletes a review from db"""
 

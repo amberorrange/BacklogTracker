@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Review Form {% endblock %} 
+
+
+{% block content %}
+    <h3>Edit Review of {{ review.game.title}}</h3>
+
+
+    <form action="/edit_review_confirmation" class="inline" method="POST">
+
+        <p>Score: <input type="number" name="score" min="1" max="10"> </p>
+
+        <p>Hours Played: <input type="number" name="completion_time" min="1" max="500">  </p>
+
+        Platform: 
+        <select name="platforms" >
+            <option></option>
+            {% for platform in platforms %}
+                <option value="{{ platform.name }}">{{ platform.name }}</option>
+            {% endfor %}
+        </select>
+
+        Genre:
+        <select name="genres" >
+            <option></option>
+            {% for genre in genres %}
+                <option value="{{ genre.name }}">{{ genre.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="hidden" name="review_id" value="{{ review.review_id }}">
+
+        <p>Add review, notes, or comments: </p> 
+        
+        <textarea rows="8" cols="50" name="body">{{ review.body }} </textarea>
+
+        <p><input type="submit" value="Submit"></p>
+
+    </form>
+
+    <button onclick="location.href='/view_reviews'" type="button">Cancel</button> 
+
+
+{% endblock %}
