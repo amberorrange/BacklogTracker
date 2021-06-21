@@ -1,9 +1,8 @@
 "use strict";
 
 
-
-// Toggles password visibility(identified by the class "password")
-function myFunction() {
+// Toggles password visibility(elements identified by the class "password")
+function togglePasswordVisibilty() {
     const x = document.querySelectorAll(".password");
     for (const element of x) {
         if (element.type === "password") {
