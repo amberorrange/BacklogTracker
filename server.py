@@ -508,7 +508,7 @@ def get_hours_by_genre():
 
     #get dictionary of genres and sum of hours played per genre of the user
     hours_played_by_genre = db.session.query(Review.genre, Review.completion_time).filter(Review.user_id==current_user.user_id).all() 
-    data = crud.get_sums_of_genres(hours_played_by_genre)
+    data = crud.get_sums_of_category(hours_played_by_genre, "genres")
 
     return jsonify(data)
 
@@ -518,7 +518,7 @@ def get_hours_by_platform():
     """Returns hours played by plaforms of a user as json"""
 
     hours_played_by_platform = db.session.query(Review.platform, Review.completion_time).filter(Review.user_id==current_user.user_id).all() 
-    data = crud.get_sums_of_platforms(hours_played_by_platform)
+    data = crud.get_sums_of_category(hours_played_by_platform, "platforms")
 
     return jsonify(data)
 

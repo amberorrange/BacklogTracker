@@ -172,42 +172,28 @@ def get_completion_time(reviews):
     
     return completion_time
 
-def get_sums_of_genres(rows):
-    """Gets sums of hours played for each genre of a user and reformats it"""
+def get_sums_of_category(rows, category):
+    """Gets sums of hours played for each genre or platform of a user and reformats it"""
     dict1 = {}
-    for review in rows:
-        dict1[review.genre] = dict1.get(review.genre, 0) + review.completion_time
+
+    if category == "genres":
+        for review in rows:
+            dict1[review.genre] = dict1.get(review.genre, 0) + review.completion_time
     
-    genres_lst = []
+    if category == "platforms":
+        for review in rows:
+            dict1[review.platform] = dict1.get(review.platform, 0) + review.completion_time
+    
+    category_lst = []
     hours_lst = []
 
-    for genre in dict1.keys():
-        genres_lst.append(genre)
+    for category in dict1.keys():
+        category_lst.append(category)
     
     for hours in dict1.values():
         hours_lst.append(hours)
 
-    final_dict = { "labels": genres_lst,
-                    "data": {"quantity": hours_lst} }
-
-    return final_dict
-
-def get_sums_of_platforms(rows):
-    """Gets sums of hours played for each platform of a user and reformats it"""
-    dict1 = {}
-    for review in rows:
-        dict1[review.platform] = dict1.get(review.platform, 0) + review.completion_time
-    
-    genres_lst = []
-    hours_lst = []
-
-    for genre in dict1.keys():
-        genres_lst.append(genre)
-    
-    for hours in dict1.values():
-        hours_lst.append(hours)
-
-    final_dict = { "labels": genres_lst,
+    final_dict = { "labels": category_lst,
                     "data": {"quantity": hours_lst} }
 
     return final_dict
