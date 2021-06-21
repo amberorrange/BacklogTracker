@@ -173,9 +173,9 @@ def get_completion_time(reviews):
     return completion_time
 
 def get_sums_of_category(rows, category):
-    """Gets sums of hours played for each genre or platform of a user and reformats it"""
-    dict1 = {}
+    """Gets sums of hours played for either genre or platform (of a user) and formats it"""
 
+    dict1 = {}
     if category == "genres":
         for review in rows:
             dict1[review.genre] = dict1.get(review.genre, 0) + review.completion_time
@@ -198,6 +198,21 @@ def get_sums_of_category(rows, category):
 
     return final_dict
 
+def get_top_articles(articles):
+    """Returns the top 5 articles as a list"""
+    count = 0
+    article_lst = []
+    
+    if not articles:
+        pass
+    elif len(articles) < 5:
+        for article in articles:
+            article_lst.append(article)
+    else:
+        while count < 5:
+            article_lst.append(articles[count])
+            count += 1
+    return article_lst
 
 if __name__ == '__main__':
     from server import app

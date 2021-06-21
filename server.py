@@ -21,7 +21,8 @@ login_manager.init_app(app)
 
 app.jinja_env.undefined = StrictUndefined
 
-API_KEY = os.environ['RAWG_KEY']
+RAWG_API_KEY = os.environ['RAWG_KEY']
+NEWS_API_KEY = os.environ['NEWS_KEY']
 
 
 @login_manager.user_loader
@@ -211,9 +212,9 @@ def search_results():
 
     if genre == "":
         #add ability to search without genre field
-        payload =  {'key': API_KEY,'search': user_query}
+        payload =  {'key': RAWG_API_KEY,'search': user_query}
     else:
-        payload = {'key': API_KEY,'search': user_query, 'genres': genre}
+        payload = {'key': RAWG_API_KEY,'search': user_query, 'genres': genre}
 
     url = 'https://api.rawg.io/api/games'
     res = requests.get(url, params=payload)
@@ -229,7 +230,7 @@ def show_game_info(rawg_id):
     """Shows user individual game info and option to add game to backlog."""
 
     url = f'https://api.rawg.io/api/games/{rawg_id}'
-    payload =  {'key': API_KEY}
+    payload =  {'key': RAWG_API_KEY}
     res = requests.get(url, params=payload)
     data = res.json()
 
@@ -242,11 +243,21 @@ def show_game_info(rawg_id):
     #for form in game_details.html
     platforms = Platform.query.all() 
     genres = Genre.query.all()
+
+
+    #request news info about game(NEWSAPI)
+    url2 = 'https://newsapi.org/v2/everything'
+    payload2 = {'apiKey': NEWS_API_KEY, 'qInTitle': data['name'], 'language': 'en'}
+    res2 = requests.get(url2, params=payload2)
+    news_data = res2.json()
+    articles = crud.get_top_articles(news_data['articles'])
+    
     return render_template("game_details.html", 
                             data=data,
                             esrb=esrb_rating,
                             platforms=platforms,
-                            genres=genres) 
+                            genres=genres, 
+                            articles=articles) 
 
 
 @app.route('/view_backlog')

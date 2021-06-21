@@ -20,6 +20,13 @@
         <li> {{ platform['platform']['name'] }}</li>
     {% endfor %}
     
+    <p>In the News:</p>
+    {% for article in articles %}
+    <li><a href="{{  article['url']  }}"> {{ article['title'] }}</a> </li>
+    {% endfor %}
+
+
+
 
     <h2>Add game to your Backlog?</h2>
 
