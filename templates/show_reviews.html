@@ -15,13 +15,10 @@
             <p> Completion Time: {{ review.completion_time }} Hours</p>  
             <p>Review: {{ review.body }}</p>    
         </div>
-    
     {% endfor %}
 
-    <a href="/add_review"><h2 class="inline"> Add Review </h2></a>
-    <!-- <button onclick="location.href='/add_review'" type="button">Add</button>  -->
-    
-
+    <a href="/add_review"><h2 class="inline">Add Review</h2></a>
+   
     <h2>Edit Review?</h2>
     <h4> Which review would you like to change?</h4>
 
@@ -34,8 +31,8 @@
         <input value="Edit" type="submit">
     </form> 
 
-    <h2>Delete Review?</h2>
 
+    <h2>Delete Review?</h2>
     <h4>Which review would you like to remove?</h4>
  
     <form action="/delete_review" class="inline" method="POST">

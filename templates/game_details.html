@@ -30,7 +30,7 @@
 
     <h2>Add game to your Backlog?</h2>
 
-    <form action="/backlog_validation" id="details_form" method="POST">  
+    <form action="/backlog_validation" method="POST">  
 
         <input type="hidden" name="title" value="{{ data['name'] }}">
         <input type="hidden" name="description" value="{{ data['description'] }}">
@@ -69,10 +69,8 @@
 
         <input value="Add Game" type="submit" >
 
-    </form>
+    </form><br>
 
-    <button onclick="location.href='/add_game'" type="button">Back to Search</button> 
-
-  
+    <button onclick="location.href='/add_game'" type="button">Back to Search</button>
 
 {% endblock %}

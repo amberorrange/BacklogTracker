@@ -1,22 +1,19 @@
 .search_image { /*search results images */
-
     height: 300px;
     width: 400px;
 }
+
 
 #game_details_image { /*image from a single game's page */
-
     height: 300px;
     width: 400px;
 }
 
 
-
-label {
+label { /*used in change_account.html- keeps form structure */
     width: 90px;
     display: inline-block;
 }
-
 
 
 body{
@@ -26,20 +23,14 @@ body{
 }
 
 
-#details_form {
-
-    display: inline
-}
-
 .backlog_image { /*images from "/view_backlog" */
-
     width: 180px;
     height: 160px;
     outline: auto;
 }
 
-.backlog_entry { /* for each backlog entry */
 
+.backlog_entry { /* for each backlog entry */
     display: inline-block;
     padding-inline: 30px;
     align-items: center;
@@ -52,14 +43,14 @@ body{
     overflow-wrap: break-word;
 }
 
-.review_display { /* used for each review in show_reviews.html */
 
+.review_display { /* used for each review in show_reviews.html */
     padding-top: 10px;
     padding-bottom: 5px;
 }
 
-.inline { /* anything that you want to make inline */
 
+.inline { /* anything that you want to make inline */
     display: inline;
 }
 
@@ -70,7 +61,7 @@ body{
     padding-bottom: 20px;
 }
 
-.logout_button{ /* logout buttons */
 
+.logout_button{ /* logout buttons */
     float:right;
 }
