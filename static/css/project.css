@@ -4,7 +4,7 @@
 }
 
 
-#game_details_image { /*image from a single game's page */
+#game_details_image { /*image from a single game's details page */
     height: 300px;
     width: 400px;
 }
@@ -17,9 +17,7 @@ label { /*used in change_account.html- keeps form structure */
 
 
 body{
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
+    margin: 10px;
 }
 
 
@@ -50,7 +48,7 @@ body{
 }
 
 
-.inline { /* anything that you want to make inline */
+.inline { /* anything that needs to be inline */
     display: inline;
 }
 

@@ -271,6 +271,34 @@ def view_backlog():
     return render_template('backlogs.html', backlogs=current_user.backlogs)
 
 
+@app.route('/api/backlog')
+@login_required
+def get_backlog_entries_json():
+    json_backlogs = []
+    for backlog in current_user.backlogs:
+        json_backlogs.append({
+            "user_fname": backlog.user.fname,
+            "backlog_id": backlog.backlog_id,
+            "ownership_status": backlog.ownership_status,
+            "game": {
+                "game_id": backlog.game.game_id,
+                "title": backlog.game.title,
+                "image": backlog.game.image.strip()
+            },
+            "play_status": backlog.play_status,
+            "platform": backlog.platform,
+            "genre": backlog.genre           
+        })
+        
+    return jsonify(json_backlogs)
+
+
+@app.route('/view_backlog/react')
+def view_backlog_react():
+    """Shows backlog using react"""
+    return render_template("organize_backlogs_w_react.html")
+
+
 @app.route("/backlog_validation", methods=["POST"])
 @login_required
 def add_game_and_backlog():

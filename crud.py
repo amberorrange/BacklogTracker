@@ -157,10 +157,6 @@ def organize_backlogs(filters, user_id):
     return backlogs
        
 
-
-
-
-
 def create_review(user_id, game_id, body, score, completion_time, platform, genre):
     """Creates and returns a review"""
 
@@ -240,14 +236,15 @@ def get_top_articles(articles):
     """Returns the top 5 articles as a list"""
     count = 0
     article_lst = []
+    num_articles = 5
 
     if not articles:
         pass
-    elif len(articles) < 5:
+    elif len(articles) < num_articles:
         for article in articles:
             article_lst.append(article)
     else:
-        while count < 5:
+        while count < num_articles:
             article_lst.append(articles[count])
             count += 1
     return article_lst

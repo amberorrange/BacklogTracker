@@ -25,10 +25,12 @@ class FlaskTests(unittest.TestCase):
         db.drop.all()
 
 
-    # def test_home(self):
-    #     client = server.app.test_client()
-    #     result = client.get('/')
-    #     self.assertEqual(result.status_code, 200)
+    def test_home(self):
+        client = server.app.test_client()
+        result = client.get('/')
+        self.assertEqual(result.status_code, 200)
+
+
 
     # def test_login(self):
     #     """Test login page."""

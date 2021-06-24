@@ -1,0 +1,28 @@
+
+{% extends 'base.html' %}
+
+{% block title %} {{ current_user.fname}}'s Backlog {% endblock %} 
+
+
+
+{% block content %}
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+
+  {% if current_user.is_authenticated %}<h1>
+    {{ current_user.fname}}'s Backlog:</h1>
+  {% endif %}
+
+  <div id="container"></div>
+  <script type="text/jsx" src="/static/js/organize_backlogs.jsx"></script>
+
+{% endblock %}
+
+    
+
+
+
+
+
