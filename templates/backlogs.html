@@ -16,7 +16,7 @@
             <img class="backlog_image" src="{{ backlog.game.image }}">
             Genre: {{ backlog.genre }} <br>
             Ownership Status: {{ backlog.ownership_status }} <br>
-            Play Status: {{ backlog.play_status }} <br>
+            Play Status: {{ 'Currently playing' if backlog.play_status else 'Not playing' }} <br>
             Playing On: {{ backlog.platform}}
         </div>          
     {% endfor %}
