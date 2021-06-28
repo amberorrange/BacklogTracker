@@ -131,7 +131,6 @@ const BacklogContainer = () => {
 
 
 
-
   React.useEffect(() => {
     let updatedList = backlogs.map((backlog) => backlog.ownership_status)
     updatedList = new Set(updatedList)
