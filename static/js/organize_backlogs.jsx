@@ -110,7 +110,6 @@ const BacklogContainer = () => {
 
 
 
-
   React.useEffect(() => {
     let updatedList = backlogs.map((backlog) => backlog.play_status ? 'Currently Playing' : 'Not Playing')
     updatedList = new Set(updatedList)
