@@ -89,7 +89,6 @@ const BacklogContainer = () => {
   }, []);
 
 
-
   React.useEffect(() => {
     let updatedList = backlogs.map((backlog) => backlog.platform)
     updatedList = new Set(updatedList)
