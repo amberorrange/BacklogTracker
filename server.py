@@ -260,15 +260,15 @@ def show_game_info(rawg_id):
                             articles=articles) 
 
 
-@app.route('/view_backlog')
-def view_backlog():
-    """Displays user's backlog entries."""
+# @app.route('/view_backlog')
+# def view_backlog():
+#     """Displays user's backlog entries."""
     
-    if current_user.is_authenticated == False:
-        flash('Please Log In.')
-        return redirect("/")
+#     if current_user.is_authenticated == False:
+#         flash('Please Log In.')
+#         return redirect("/")
 
-    return render_template('backlogs.html', backlogs=current_user.backlogs)
+#     return render_template('backlogs.html', backlogs=current_user.backlogs)
 
 
 @app.route('/api/backlog')
@@ -293,9 +293,15 @@ def get_backlog_entries_json():
     return jsonify(json_backlogs)
 
 
-@app.route('/view_backlog/react')
+@app.route('/view_backlog')
+@login_required
 def view_backlog_react():
     """Shows backlog using react"""
+
+    if current_user.is_authenticated == False:
+        flash('Please Log In.')
+        return redirect("/")
+
     return render_template("organize_backlogs_w_react.html")
 
 

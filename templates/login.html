@@ -5,25 +5,39 @@
 
 
 {% block content %}
+  <div class="container">
+    <div id="login-background">
+      <div class="row">
+        <div class="col" >
 
-
-  <h1>Welcome to the Backlog Tracker</h1>
- 
-  <form action="/login_confirmation" method="POST">
-
-    <h3>Please enter your login information.</h3>
-
-    <p><label>Email</label><input type="email" name="email"> &nbsp;</p>
-    <p><label>Password</label><input type="password" class="password" name="password"> </p>
-    <p><input type="checkbox" onclick="togglePasswordVisibilty()">Show Password</p>
+        <h1 class="bold">Welcome to the Backlog Tracker</h1>
       
-    <p><input type="submit"></p>
+        <form action="/login_confirmation" role="form" method="POST">
+          <h3>Please enter your login information.</h3>
 
-    <p>Don't have an account? <a href="/create_account">Sign Up</a> </p>
+          <div class="form-group">
+            <p><label>Email</label><input class="form-control" type="email" name="email"> &nbsp;</p>
+          </div>
 
-  </form>
- 
-    
+          <div class="form-group"></div>
+            <p><label>Password</label><input class="form-control password" type="password" name="password"> </p>
+          </div>
+
+          <div class="checkbox"></div>
+            <p><input type="checkbox" onclick="togglePasswordVisibilty()"> Show Password</p>
+          </div>
+            
+          <div>
+            <p><input type="submit"  value= "Log In"></p>
+          </div>
+
+          <p>Don't have an account? <a href="/create_account">Sign Up</a> </p>
+        </form>
+
+        </div>
+      </div>
+    </div>  
+  </div>  
 
 {% endblock %}
 

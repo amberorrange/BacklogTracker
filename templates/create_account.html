@@ -6,27 +6,30 @@
 
 {% block content %}
 
+    <div class="container">
+
     <h2>Please Enter Your Desired Account Information</h2>
   
-    <form action="/register_account" method="POST">
+        <form action="/register_account" role="form" method="POST">
 
-        <p><input type="text" name="fname" placeholder="First Name"></p>
+            <p><input type="text" name="fname" placeholder="First Name"></p>
 
-        <p> <input type="text" name="lname" placeholder="Last Name"></p>
+            <p> <input type="text" name="lname" placeholder="Last Name"></p>
 
-        <p><input type="email" name="email" placeholder="Email"></p>
+            <p><input type="email" name="email" placeholder="Email"></p>
 
-        <p> <input type="password" class="password" name="password" placeholder="Password"></p>
+            <p> <input type="password" class="password" name="password" placeholder="Password"></p>
 
-        <p> <input type="password" class="password" name="pw_confirmation" placeholder="Confirm Password"></p>
+            <p> <input type="password" class="password" name="pw_confirmation" placeholder="Confirm Password"></p>
 
-        <input type="checkbox" onclick="togglePasswordVisibilty()">Show Password
+            <input type="checkbox" onclick="togglePasswordVisibilty()">Show Password
 
-        <p><input type="submit"> </p>
-    </form>
-         
-    <p>Already have an account? <a href="/login">Log in</a></p>
-    
+            <p><input type="submit"> </p>
+        </form>
+            
+        <p>Already have an account? <a href="/login">Log in</a></p>
+        
 
+    </div>
 {% endblock %}
 
