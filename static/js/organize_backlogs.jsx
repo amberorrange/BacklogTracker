@@ -3,7 +3,7 @@
 const BacklogEntry = (props) => {
   return (
     <div className="backlog_entry">
-      {props.title} <br></br>
+      <h4 className="backlog_title">{props.title}</h4>
       <img  className="backlog_image" src={props.image} /> <br></br>
       Genre: {props.genre} <br></br>
       Ownership Status: {props.ownership_status}<br></br>
@@ -40,18 +40,6 @@ const Select = (props) => {
   )
 }
 
-// const Select = ({ value, onchange, options }) => {
-//   return (
-//     <div>
-//       <select value={value} onChange={onchange}>
-//         <FilterOption
-//           options={options}
-//         />
-//       </select>
-//     </div>
-//   )
-// }
-
 const FilterOptions = (props) => {
   return (
     <div> 
@@ -64,10 +52,11 @@ const FilterOptions = (props) => {
   )
 }
 
+
 const BacklogContainer = () => {
   const [backlogs, updateBacklogs] = React.useState([]);
   const [displayedBacklogs, updateDisplayedBacklogs] = React.useState([]);
-  const [genreFilter, updateGenreFilter] = React.useState(""); // ex.: 'fantasy', 'RPG'
+  const [genreFilter, updateGenreFilter] = React.useState(""); 
   const [genresList, updateGenresList] = React.useState([])
   const [platformFilter, updatePlatformFilter] = React.useState("")
   const [platformsList, updatePlatformsList] = React.useState([])
@@ -75,6 +64,8 @@ const BacklogContainer = () => {
   const [ownershipList, updateOwnershipList] = React.useState([])
   const [playstatusFilter, updatePlaystatusFilter] = React.useState("")
   const [playstatusList, updatePlaystatusList] = React.useState([])
+  const [sortingChoice, updateSortingChoice] = React.useState("")
+  const [sortingList, updateSortingList] = React.useState([])
 
 
   React.useEffect(() => {
@@ -89,6 +80,7 @@ const BacklogContainer = () => {
   }, []);
 
 
+
   React.useEffect(() => {
     let updatedList = backlogs.map((backlog) => backlog.platform)
     updatedList = new Set(updatedList)
@@ -96,17 +88,14 @@ const BacklogContainer = () => {
   }, [backlogs])
 
   React.useEffect(() => {
-    console.log(platformFilter, 'THIS IS THE CURRENTLY SELECTED Platform!')
-    let updatedDisplay = backlogs.filter((backlog) => backlog.platform === platformFilter)
-    updateDisplayedBacklogs(updatedDisplay)
-  }, [platformFilter])
-
-  React.useEffect(() => {
-    console.log(platformFilter, 'THIS IS THE CURRENTLY SELECTED Platform!')
-  if (platformFilter === "All") {
-    updateDisplayedBacklogs(backlogs)
+    if (platformFilter === "All") {
+      updateDisplayedBacklogs(backlogs)
+    } else {
+      let updatedDisplay = backlogs.filter((backlog) => backlog.platform === platformFilter)
+      updateDisplayedBacklogs(updatedDisplay)
     }
   }, [platformFilter])
+
 
 
 
@@ -115,19 +104,21 @@ const BacklogContainer = () => {
     updatedList = new Set(updatedList)
     updatePlaystatusList([...updatedList, ...playstatusList])
   }, [backlogs])
-
+  
   React.useEffect(() => {
-    console.log(playstatusFilter, 'THIS IS THE CURRENTLY SELECTED play status!')
-    let updatedDisplay = backlogs.filter((backlog) => backlog.play_status ? 'Currently Playing' : 'Not Playing' === playstatusFilter)
-    updateDisplayedBacklogs(updatedDisplay)
-  }, [playstatusFilter])
-
-  React.useEffect(() => {
-    console.log(playstatusFilter, 'THIS IS THE CURRENTLY SELECTED playstatus!')
-  if (playstatusFilter === "All") {
-    updateDisplayedBacklogs(backlogs)
+    if (playstatusFilter === 'Currently Playing') {
+      updateDisplayedBacklogs(backlogs.filter((backlog) => {
+        return backlog.play_status === true;
+      }));
+    } else if (playstatusFilter === 'Not Playing') {
+      updateDisplayedBacklogs(
+        backlogs.filter((backlog) => backlog.play_status === false)
+      );
+    } else {
+      updateDisplayedBacklogs(backlogs)
     }
   }, [playstatusFilter])
+
 
 
 
@@ -138,19 +129,15 @@ const BacklogContainer = () => {
   }, [backlogs])
 
   React.useEffect(() => {
-    console.log(ownershipFilter, 'THIS IS THE CURRENTLY SELECTED OS Status!')
-    let updatedDisplay = backlogs.filter((backlog) => backlog.ownership_status === ownershipFilter)
-    updateDisplayedBacklogs(updatedDisplay)
-  }, [ownershipFilter])
-
-  React.useEffect(() => {
-    console.log(ownershipFilter, 'THIS IS THE CURRENTLY SELECTED OS Status!')
-  if (ownershipFilter === "All") {
-    updateDisplayedBacklogs(backlogs)
+    if (ownershipFilter === "All") {
+      updateDisplayedBacklogs(backlogs)
+    } else {
+      let updatedDisplay = backlogs.filter((backlog) => backlog.ownership_status === ownershipFilter)
+      updateDisplayedBacklogs(updatedDisplay)
     }
   }, [ownershipFilter])
 
-
+  
 
   React.useEffect(() => {
     let updatedList = backlogs.map((backlog) => backlog.genre)
@@ -159,55 +146,79 @@ const BacklogContainer = () => {
   }, [backlogs])
 
   React.useEffect(() => {
-    console.log(genreFilter, 'THIS IS THE CURRENTLY SELECTED GENRE!')
-    let updatedDisplay = backlogs.filter((backlog) => backlog.genre === genreFilter)
-    updateDisplayedBacklogs(updatedDisplay)
-  }, [genreFilter])
-
-  React.useEffect(() => {
-    console.log(genreFilter, 'THIS IS THE CURRENTLY SELECTED GENRE!')
     if (genreFilter === "All") {
       updateDisplayedBacklogs(backlogs)
+    } else {
+      let updatedDisplay = backlogs.filter((backlog) => backlog.genre === genreFilter)
+      updateDisplayedBacklogs(updatedDisplay)
     }
   }, [genreFilter])
 
 
 
+  
+
+  React.useEffect(() => {
+    updateSortingList(['Genre', 'Platform', 'Ownership Status', 'Play Status'])
+  }, [backlogs])
+
+
+  React.useEffect(() => {
+    // let choice = '';
+
+    // if (sortingChoice === 'Genre') {
+    //   choice = 'genre'
+    // } else if (sortingChoice === 'Platform') {
+    //   choice = 'platform'
+    // } else if (sortingChoice === 'Play Status') {
+    //   choice = 'play_status'
+    // } else if (sortingChoice === 'Ownership Status') {
+    //   choice = 'ownership_status'
+    // } else {
+    //   choice = 'All'
+    // } 
+    
+    // console.log(sortingChoice, 'SORTING CHOICE')
+    // console.log(choice, 'CHOICE')
+
+    if (sortingChoice === "All") {
+      updateDisplayedBacklogs(backlogs)
+    } else {
+      const updatedBacklogs = backlogs.sort((backlog1, backlog2) => {
+        if (backlog1[sortingChoice] > backlog2[sortingChoice]) {
+          return 1;
+        } else if ((backlog1[sortingChoice] < backlog2[sortingChoice])) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+      updateDisplayedBacklogs(updatedBacklogs)
+      console.log(updatedBacklogs, ' UPDATED DISPLAY THAT SHOULD BE SHOWING')
+    }
+  }, [sortingChoice])
+
+
+
+  const handleSortSelect = (e) => {
+    updateSortingChoice(e.target.value)
+  }
+
   const handleSelect = (e) => {
     updateGenreFilter(e.target.value)
-    console.log(genreFilter)
   }
 
   const handleplatformSelect = (e) => {
     updatePlatformFilter(e.target.value)
-    console.log(platformFilter)
   }
 
   const handleOwnershipSelect = (e) => {
     updateOwnershipFilter(e.target.value)
-    console.log(ownershipFilter)
   }
 
   const handlePlaystatusSelect = (e) => {
     updatePlaystatusFilter(e.target.value)
-    console.log(playstatusFilter)
   }
-
-
-  // console.log(backlogs, '## BACKLOGS ##')
-  // console.log(displayedBacklogs, '## DISPLAYEDBACKLOGS ##')
-  // console.log(genreFilter, '## GENREFILTER SELECTION##')
-  // console.log(genresList, '## GENRESLIST ##')
-
-  // console.log(platformFilter, '## PLATFORMFILTER SELECTION##')
-  // console.log(platformsList, '## PLATFORMSLIST ##')
-
-  // console.log(ownershipFilter, '## OWNERSHIPFILTER SELECTION##')
-  // console.log(ownershipList, '## OWNERSHIPLIST ##')
-
-  console.log(playstatusFilter, '## play status FILTER SELECTION##')
-  console.log(playstatusList, '## play status LIST ##')
-  console.log(displayedBacklogs, '## DISPLAYEDBACKLOGS ##')
 
 
   const backlogEntries = [];
@@ -254,13 +265,21 @@ const BacklogContainer = () => {
       />
 
 
-
       <br></br>
       Play Status:
       <FilterOptions 
         value={playstatusFilter}
         onchange={handlePlaystatusSelect}
         options={playstatusList}
+      />
+
+
+      <br></br>
+      Sort By:
+      <FilterOptions
+        value={sortingChoice}
+        onchange={handleSortSelect}
+        options={sortingList}
       />
     </div>
   )
