@@ -5,21 +5,41 @@
 
 {% block content %}
 
-    <form action="/search_results">
+    <div class="container-fluid bc-img-search">
 
-        Search for a game <input type="text" name="game"> &nbsp;
-        Search By Genre: 
-        <select name="genres" >
+        <h4 class="text-center card-title">Search Games</h4>
 
-            <option></option>
-            {% for genre in genres %}
-                <option value="{{ genre }}">{{ genre }}</option>
-            {% endfor %}
+        <div class="form-row pt-3 pb-3 mg-4">
+            <div class="col-3 mx-auto card-transparent pb-2 ">
+              <div class="card-body">
+         
 
-        </select>
-        <input type="submit">
-    </form>
+                <form action="/search_results">
 
-    <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p>
+                    
+                    <div class="form-group pt-4  pb-2 mx-auto">
+                        <div class="col-1">
+                            <input type="text" class="form-control" name="game"> &nbsp;
+                        </div>
+                    </div>
+
+
+                    Search By Genre: 
+                    <select name="genres" >
+
+                        <option></option>
+                        {% for genre in genres %}
+                            <option value="{{ genre }}">{{ genre }}</option>
+                        {% endfor %}
+
+                    </select>
+                    <input type="submit">
+
+                    <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p>
+                </form>
+            </div>  
+        </div>    
+        <!-- <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p> -->
+    </div>
 
 {% endblock %}

@@ -136,7 +136,7 @@ def register_user():
     elif password != pw_confirm: #make sure passwords are the same
         flash("Your passwords don't match. Please try again.")
         return redirect("/create_account")
-    elif len(password) < 8:
+    elif len(password) < 8 or len(password) > 20:
         flash("Password must be 8 or more characters.")
         return redirect("/create_account")
     else:

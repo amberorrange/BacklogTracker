@@ -10,7 +10,7 @@
 
         
         <div class="form-row mt-3 pt-5 ">
-            <div class="col-4 mx-auto card-transparent pb-2 ">
+            <div class="col-3 mx-auto card-transparent pb-2 ">
                 <div class="card-body">
                     <h4 class="text-center card-title">Sign Up</h4>
 
@@ -37,22 +37,25 @@
                         </div>
 
 
+
                         <div class="form-group pt-4  pb-2 mx-auto">
                             <div class="col">
-                                <input  class="form-control password pwrequirements" onchange="passwordRequirements()" type="password" name="password" placeholder="Password">
+                                <input  class="form-control password" id="pw" oninput="passwordRequirements()" type="password" name="password" placeholder="Password">
                             </div>
                         </div>
+
 
                         <div class="form-group pt-4  pb-4 mx-auto">
                             <div class="col">
-                                <input class="form-control password pwrequirements" onchange="passwordRequirements()" type="password" name="pw_confirmation" placeholder="Confirm Password">
+                                <input class="form-control password" id="pwconfirm" oninput="passwordRequirements()" type="password" name="pw_confirmation" placeholder="Confirm Password">
 
-                                <small id="passwordHelpBlock" class="form-text text-light">
-                                    Password must be at least 8 characters
-                                  </small>
+                                <small id="passwordHelpBlock" class="form-text">
+                                    &nbsp; <span id="charLength">Password must be 8-20 characters</span>
+                                    <span id="pwMatch"> and match </span>
+                                </small>
+
                             </div>
                         </div>
-
 
 
                         <div class="form-group ">

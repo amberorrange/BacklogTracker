@@ -64,7 +64,6 @@ body {
 }
 
 h1 h2 h3 {
-    padding-top: 50px;
     padding-bottom: 50px;
 }
 
@@ -118,4 +117,18 @@ h1 h2 h3 {
 #passwordHelpBlock {
     font-size: smaller;
     opacity: .8
+}
+
+
+#charLength {
+    color: white;
+}
+
+
+#pwMatch {
+    color: white;
+}
+
+.big {
+    font-size: 50px;;
 }

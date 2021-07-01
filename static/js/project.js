@@ -16,13 +16,24 @@ function togglePasswordVisibilty() {
 
 //Reminds user of password requirements
 function passwordRequirements() {
-    const pw = getElementById('pw')
-    const pwconfirm = getElementById('pwconfirm')
+    const pw = document.getElementById('pw')
+    const pwconfirm = document.getElementById('pwconfirm')
+    const length = document.getElementById('charLength')
+    const match = document.getElementById('pwMatch')
 
-    if (pw.value.length >= 8 && pwconfirm.value.length >= 8) {
-        $('#passwordHelpBack').css('color', 'green');
-        // document.getElementById('passwordHelpBlock').style.color = 'green';   
+    console.log(pw.value, pwconfirm.value)
+    
+
+    if (pw.value.length >= 8 && pw.value.length <= 20 && pwconfirm.value.length >= 8 && pwconfirm.value.length <= 20) {
+        length.style.color = 'green';
     } else {
-        document.getElementById('passwordHelpBlock').style.color = 'red';  
+        length.style.color = 'red';
     }
+
+    if (pw.value != pwconfirm.value) {
+        match.style.color = 'red'
+    } else{
+        match.style.color = 'green'
+    }  
 }
+
