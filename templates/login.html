@@ -5,39 +5,53 @@
 
 
 {% block content %}
-  <div class="container">
-    <div id="login-background">
-      <div class="row">
-        <div class="col" >
+  <div class="container-fluid  text-white bg-image-login">
 
-        <h1 class="bold">Welcome to the Backlog Tracker</h1>
-      
-        <form action="/login_confirmation" role="form" method="POST">
-          <h3>Please enter your login information.</h3>
+    <h1 class="bold text-center">Backlog Tracker</h1>
+    
+    <div class="form-row mt-3 pt-5 ">
+      <div class="col-4 mx-auto card-transparent pb-2 ">
+        <div class="card-body">
+          <h4 class="text-center card-title">Login</h4>
 
-          <div class="form-group">
-            <p><label>Email</label><input class="form-control" type="email" name="email"> &nbsp;</p>
-          </div>
+          <form action="/login_confirmation" method="POST">
 
-          <div class="form-group"></div>
-            <p><label>Password</label><input class="form-control password" type="password" name="password"> </p>
-          </div>
 
-          <div class="checkbox"></div>
-            <p><input type="checkbox" onclick="togglePasswordVisibilty()"> Show Password</p>
-          </div>
-            
-          <div>
-            <p><input type="submit"  value= "Log In"></p>
-          </div>
+            <div class="form-group pt-4  pb-2 mx-auto">
+              <div class="col">
+                <input class="form-control" placeholder="Email" type="email" name="email"> 
+              </div>
+            </div>
 
-          <p>Don't have an account? <a href="/create_account">Sign Up</a> </p>
-        </form>
 
+            <div class="form-group pt-4 pb-3 mx-auto">
+              <div class="col">
+                <input class="form-control password" placeholder="Password" type="password" name="password">
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <div class="col pb-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" onclick="togglePasswordVisibilty()"> 
+                  <label>Show Password</label> 
+                </div>
+              </div>
+            </div>
+
+            <input type="submit" class="btn-transparent form-control mb-4" value= "Log In">
+          
+
+            <p>Don't have an account? <a href="/create_account">Sign Up</a> </p>
+
+          </form>
         </div>
+
       </div>
-    </div>  
-  </div>  
+    </div>
+
+  </div>   
+
 
 {% endblock %}
 
