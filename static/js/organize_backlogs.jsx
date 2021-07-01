@@ -286,4 +286,4 @@ const BacklogContainer = () => {
 };
 
 
-ReactDOM.render(<BacklogContainer />, document.getElementById("container"));
+ReactDOM.render(<BacklogContainer />, document.getElementById("page"));

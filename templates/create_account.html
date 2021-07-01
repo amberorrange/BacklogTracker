@@ -8,8 +8,13 @@
 
     <div class="container-fluid text-white bc-image-create-acct">
 
-        
-        <div class="form-row mt-3 pt-5 ">
+        <ul>
+            {% for message in get_flashed_messages() %}
+                <p class="flash">{{ message }}</p>
+            {% endfor %}
+        </ul>
+
+        <div class="form-row mt-3 pt-4 ">
             <div class="col-3 mx-auto card-transparent pb-2 ">
                 <div class="card-body">
                     <h4 class="text-center card-title">Sign Up</h4>
@@ -50,8 +55,8 @@
                                 <input class="form-control password" id="pwconfirm" oninput="passwordRequirements()" type="password" name="pw_confirmation" placeholder="Confirm Password">
 
                                 <small id="passwordHelpBlock" class="form-text">
-                                    &nbsp; <span id="charLength">Password must be 8-20 characters</span>
-                                    <span id="pwMatch"> and match </span>
+                                    &nbsp; <span id="charLength">Password: 8-20 characters</span>
+                                    <span id="pwMatch"> and matching </span>
                                 </small>
 
                             </div>
@@ -67,9 +72,9 @@
                             </div>
                         </div>
 
-                        <input type="submit" class="btn-transparent form-control mb-4" value= "Submit">
+                        <input type="submit"  id="creatAcct" class="btn-transparent  form-control mb-4" value= "Submit">
 
-                        <p>Already have an account? <a href="/login">Log in</a></p>
+                        <p class="hyper">Already have an account? <a href="/login">Log in</a></p>
                     </form>
                 </div>
             </div>

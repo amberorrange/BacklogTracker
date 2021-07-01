@@ -10,7 +10,15 @@
     {{ current_user.fname}}'s Backlog</h1>
   {% endif %}
 
-  <div id="container"></div> <br>
+
+  <ul>
+    {% for message in get_flashed_messages() %}
+        <p class="flash">{{ message }}</p>
+    {% endfor %}
+  </ul>
+
+  <div id="page"></div> <br>
+
 
 
   <ul>

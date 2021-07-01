@@ -62,7 +62,7 @@ def login_confirmation():
         flash("You have successfully logged in.")
         return redirect("/view_backlog")
     else:
-        flash('Email or Password not found. Please try again or create an account.')
+        flash('Email or Password not found.\nPlease try again or create an account.')
         return redirect('/login')
 
 
@@ -137,7 +137,7 @@ def register_user():
         flash("Your passwords don't match. Please try again.")
         return redirect("/create_account")
     elif len(password) < 8 or len(password) > 20:
-        flash("Password must be 8 or more characters.")
+        flash("Password must be 8-20 characters.")
         return redirect("/create_account")
     else:
         created_user = crud.create_user(fname, lname, email, password)

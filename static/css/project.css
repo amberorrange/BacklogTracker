@@ -106,6 +106,8 @@ h1 h2 h3 {
 
 .form-control {
     opacity: .8;
+    border-style: solid;
+    border-color: white;
 }
 
 .bc-image-create-acct {
@@ -115,7 +117,7 @@ h1 h2 h3 {
 }
 
 #passwordHelpBlock {
-    font-size: smaller;
+    /* font-size: ; */
     opacity: .8
 }
 
@@ -131,4 +133,26 @@ h1 h2 h3 {
 
 .big {
     font-size: 50px;;
+}
+
+
+.btn-transparent {
+    border-radius: 5px;
+    border-style: solid;
+    border-color: white;
+    border-width: 1pt;
+}
+
+.checkbox {
+    border-color: white;
+}
+
+.hyper {
+    font-size: large;
+}
+
+
+.flash{
+    text-align: center;
+    font-size: large;
 }

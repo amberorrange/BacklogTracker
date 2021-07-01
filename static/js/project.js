@@ -25,7 +25,7 @@ function passwordRequirements() {
     
 
     if (pw.value.length >= 8 && pw.value.length <= 20 && pwconfirm.value.length >= 8 && pwconfirm.value.length <= 20) {
-        length.style.color = 'green';
+        length.style.color = 'white';
     } else {
         length.style.color = 'red';
     }
@@ -33,7 +33,7 @@ function passwordRequirements() {
     if (pw.value != pwconfirm.value) {
         match.style.color = 'red'
     } else{
-        match.style.color = 'green'
+        match.style.color = 'white'
     }  
 }
 
