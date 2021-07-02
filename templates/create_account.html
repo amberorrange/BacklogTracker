@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <div class="container-fluid text-white bc-image-create-acct">
+    <div class="container-fluid vertical-center text-white bc-image-create-acct">
 
         <ul>
             {% for message in get_flashed_messages() %}
@@ -15,7 +15,7 @@
         </ul>
 
         <div class="form-row mt-3 pt-4 ">
-            <div class="col-3 mx-auto card-transparent pb-2 ">
+            <div class="col-3 col-xs-10 col-sm-7 col-md-6 col-lg-5 col-xl-4 col-xxl-3  mx-auto card-transparent pb-2 ">
                 <div class="card-body">
                     <h4 class="text-center card-title">Sign Up</h4>
 
@@ -72,7 +72,7 @@
                             </div>
                         </div>
 
-                        <input type="submit"  id="creatAcct" class="btn-transparent  form-control mb-4" value= "Submit">
+                        <input type="submit"  id="creatAcct" class="btn-transparent  form-control mb-4" value= "Create Account">
 
                         <p class="hyper">Already have an account? <a href="/login">Log in</a></p>
                     </form>

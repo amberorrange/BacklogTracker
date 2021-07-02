@@ -7,8 +7,6 @@
 
     <div class="container-fluid bc-img-search">
 
-        <h4 class="text-center card-title">Search Games</h4>
-
         <div class="form-row pt-3 pb-3 mg-4">
             <div class="col-3 mx-auto card-transparent pb-2 ">
               <div class="card-body">
@@ -16,9 +14,10 @@
 
                 <form action="/search_results">
 
-                    
+                    <h4 class="text-center card-title">Search Games</h4>
+      
                     <div class="form-group pt-4  pb-2 mx-auto">
-                        <div class="col-1">
+                        <div class="col">
                             <input type="text" class="form-control" name="game"> &nbsp;
                         </div>
                     </div>
@@ -35,7 +34,7 @@
                     </select>
                     <input type="submit">
 
-                    <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p>
+                    <!-- <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p> -->
                 </form>
             </div>  
         </div>    

@@ -142,7 +142,7 @@ def register_user():
     else:
         created_user = crud.create_user(fname, lname, email, password)
         if created_user == None: #if some of the fields are left empty, the function create_user will return none
-            flash("Please fill out all required fields.")
+            flash("Please fill out all fields.")
             return redirect("/create_account")
         else:   
             flash('Account created successfully. Please log in.')

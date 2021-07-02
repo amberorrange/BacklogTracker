@@ -6,35 +6,29 @@
 
 
 {% block content %}
-  {% if current_user.is_authenticated %}<h1>
-    {{ current_user.fname}}'s Backlog</h1>
-  {% endif %}
 
 
-  <ul>
-    {% for message in get_flashed_messages() %}
-        <p class="flash">{{ message }}</p>
-    {% endfor %}
-  </ul>
+  <div class="container-fluid text-white bg-img-backlogs">
+ 
+    <div class="row">
+      </div class="col">
 
-  <div id="page"></div> <br>
+        {% if current_user.is_authenticated %}<h1 id="backlog-title">
+          {{ current_user.fname}}'s Backlog</h1>
+        {% endif %}
+    
+        <ul>
+          {% for message in get_flashed_messages() %}
+              <p class="flash">{{ message }}</p>
+          {% endfor %}
+        </ul>
+        
+        <div id="page"></div> 
+        <script type="text/jsx" src="/static/js/organize_backlogs.jsx"></script>
+      </div>
+    </div>
 
-
-
-  <ul>
-      <li><a href="/add_game">Add a game to your backlog.</a> </li>
-      <li><a href="/edit_backlog_selection">Edit a backlog entry.</a> </li>
-      <li><a href="/delete_backlog">Delete a game from your backlog.</a> </li>
-      <li><a href="/add_review">Review a game you've completed.</a> </li> 
-      <li><a href="/view_reviews">See Your Reviews.</a> </li> 
-      <li><a href="/show_user_details">See Account Details.</a></li> 
-      <li><a href="/show_charts">See your play statistics.</a> </li>
-  </ul>
-
-  
-  
-  
-  <script type="text/jsx" src="/static/js/organize_backlogs.jsx"></script>
+  </div>
 {% endblock %}
 
     

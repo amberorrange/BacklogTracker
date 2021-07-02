@@ -2,18 +2,44 @@
 
 const BacklogEntry = (props) => {
   return (
-    <div className="backlog_entry">
-      <h4 className="backlog_title">{props.title}</h4>
-      <img  className="backlog_image" src={props.image} /> <br></br>
-      Genre: {props.genre} <br></br>
-      Ownership Status: {props.ownership_status}<br></br>
-      Play Status: {props.play_status ? 'Currently Playing' : 'Not Playing'}<br></br>
-      Playing On: {props.platform}<br></br>
+    
+    <div className="row bl-row">
+      <div className="col">
+
+        <div className="card card-style">
+
+          <div className='row g-0'>
+
+            <div className='col-3'>
+              <img  className="img-fluid bl-entry-img rounded-start" src={props.image}/>
+            </div>
+
+            <div className='col'>
+              <div className='card-body pt-0'>
+              <h4 className="backlog-entry-title card-title">{props.title}</h4>
+
+                <ul class="list-group list-group-horizontal">
+                  <h6 className="card-subtitle right-border list-group-item">Genre:  <p>{props.genre}</p></h6>
+                  <h6 className="card-subtitle right-border list-group-item">Ownership Status: {props.ownership_status}</h6>
+                  <h6 className="card-subtitle right-border list-group-item">Play Status: {props.play_status ? 'Currently Playing' : 'Not Playing'}</h6>
+                  <h6 className="card-subtitle list-group-item">Platform: {props.platform}</h6>
+                </ul>
+
+
+              </div>
+            </div> 
+
+
+          </div> 
+
+        </div> 
+
+      </div>
     </div>
   );
 }
 
-const FilterOption = ({ options, disabledLabel }) => {
+const FilterOption = ({ options, disabledLabel}) => {
   return (
     <React.Fragment>
        <option value="" defaultValue disabled>
@@ -30,7 +56,7 @@ const FilterOption = ({ options, disabledLabel }) => {
 const Select = (props) => {
   return (
     <div>
-      <select value={props.value} onChange={props.onchange}>
+      <select  value={props.value} onChange={props.onchange} className='form-select'>
         <FilterOption
           disabledLabel=""
           options={props.options}
@@ -46,7 +72,7 @@ const FilterOptions = (props) => {
       <Select 
         value={props.value}
         onchange={props.onchange}
-        options={props.options}
+        options={props.options} 
       />
   </div>
   )
@@ -71,11 +97,12 @@ const BacklogContainer = () => {
   React.useEffect(() => {
     fetch("/api/backlog")
       .then((response) => response.json())
-      .then((data) => {console.log(data); return data})
+      // .then((data) => {console.log(data); return data})
       .then((data) => {
         // Load initial backlog data into component
         updateBacklogs(data);
         updateDisplayedBacklogs(data);
+        console.log(backlogs)
       });
   }, []);
 
@@ -162,21 +189,24 @@ const BacklogContainer = () => {
     updateSortingList(['Genre', 'Platform', 'Ownership Status', 'Play Status'])
   }, [backlogs])
 
+  // React.useEffect(() => {
+  //   console.log(displayedBacklogs)
+  // }, [displayedBacklogs])
 
   React.useEffect(() => {
-    // let choice = '';
+    let choice = '';
 
-    // if (sortingChoice === 'Genre') {
-    //   choice = 'genre'
-    // } else if (sortingChoice === 'Platform') {
-    //   choice = 'platform'
-    // } else if (sortingChoice === 'Play Status') {
-    //   choice = 'play_status'
-    // } else if (sortingChoice === 'Ownership Status') {
-    //   choice = 'ownership_status'
-    // } else {
-    //   choice = 'All'
-    // } 
+    if (sortingChoice === 'Genre') {
+      choice = 'genre'
+    } else if (sortingChoice === 'Platform') {
+      choice = 'platform'
+    } else if (sortingChoice === 'Play Status') {
+      choice = 'play_status'
+    } else if (sortingChoice === 'Ownership Status') {
+      choice = 'ownership_status'
+    } else {
+      choice = 'All'
+    } 
     
     // console.log(sortingChoice, 'SORTING CHOICE')
     // console.log(choice, 'CHOICE')
@@ -185,9 +215,9 @@ const BacklogContainer = () => {
       updateDisplayedBacklogs(backlogs)
     } else {
       const updatedBacklogs = backlogs.sort((backlog1, backlog2) => {
-        if (backlog1[sortingChoice] > backlog2[sortingChoice]) {
+        if (backlog1[choice] > backlog2[choice]) {
           return 1;
-        } else if ((backlog1[sortingChoice] < backlog2[sortingChoice])) {
+        } else if ((backlog1[choice] < backlog2[choice])) {
           return -1;
         } else {
           return 0;
@@ -199,6 +229,10 @@ const BacklogContainer = () => {
   }, [sortingChoice])
 
 
+
+  React.useEffect(() => {
+    console.log(displayedBacklogs)
+  }, [displayedBacklogs])
 
   const handleSortSelect = (e) => {
     updateSortingChoice(e.target.value)
@@ -220,67 +254,90 @@ const BacklogContainer = () => {
     updatePlaystatusFilter(e.target.value)
   }
 
+  
 
-  const backlogEntries = [];
-  for (const backlog of displayedBacklogs) {
-    backlogEntries.push(
-      <BacklogEntry
-        key={backlog.backlog_id}
-        title={backlog.game.title}
-        image= {backlog.game.image}
-        genre= {backlog.genre}
-        ownership_status= {backlog.ownership_status}
-        play_status={backlog.play_status}
-        platform={backlog.platform}
-      />
-    );
-  }
+  //   const backlogEntries = [];
+  //   for (const backlog of displayedBacklogs) {
+  //     backlogEntries.push(
+  //       <BacklogEntry
+  //         key={backlog.backlog_id}
+  //         title={backlog.game.title}
+  //         image= {backlog.game.image}
+  //         genre= {backlog.genre}
+  //         ownership_status= {backlog.ownership_status}
+  //         play_status={backlog.play_status}
+  //         platform={backlog.platform}
+  //       />
+  //     );
+  //   }
+
+  console.log(displayedBacklogs)
 
   return (
     <div>
-      {backlogEntries} <br></br>
+
+      <div className="row">
+        <div className="col-3 card-transparent filters">    
+
+          <div className="card-body mb-5">
+
+            <h4 className="text-center card-title">Filter By:</h4>
+
+            <div className="card-subtitle">Genre</div>
+            <FilterOptions 
+              value={genreFilter}
+              onchange={handleSelect}
+              options={genresList} 
+            />
+
+            <div className="card-subtitle">Platform</div>
+            <FilterOptions 
+              value={platformFilter}
+              onchange={handleplatformSelect}
+              options={platformsList}
+            />
+
+
+            <div className="card-subtitle">Ownership Status</div>
+            <FilterOptions 
+              value={ownershipFilter}
+              onchange={handleOwnershipSelect}
+              options={ownershipList}
+            />
+
+          
+            <div className="card-subtitle">Play Status</div>
+            <FilterOptions 
+              value={playstatusFilter}
+              onchange={handlePlaystatusSelect}
+              options={playstatusList}
+
+            /> <br></br>
+
+            <h4 className="text-center card-title" id="sort-by">Sort By:</h4>
+            <FilterOptions
+              value={sortingChoice}
+              onchange={(e) => handleSortSelect(e)}
+              options={sortingList}
+            />
+          </div>  
+        </div>  
       
-      Genres:
-      <FilterOptions 
-        value={genreFilter}
-        onchange={handleSelect}
-        options={genresList}
-      />
-      
-      <br></br>
-      Platforms:
-      <FilterOptions 
-        value={platformFilter}
-        onchange={handleplatformSelect}
-        options={platformsList}
-      />
-
-
-      <br></br>
-      Ownership Status:
-      <FilterOptions 
-        value={ownershipFilter}
-        onchange={handleOwnershipSelect}
-        options={ownershipList}
-      />
-
-
-      <br></br>
-      Play Status:
-      <FilterOptions 
-        value={playstatusFilter}
-        onchange={handlePlaystatusSelect}
-        options={playstatusList}
-      />
-
-
-      <br></br>
-      Sort By:
-      <FilterOptions
-        value={sortingChoice}
-        onchange={handleSortSelect}
-        options={sortingList}
-      />
+        <div className="col">
+          {displayedBacklogs.map(backlog => {
+             return ( <BacklogEntry
+              key={backlog.backlog_id}
+              title={backlog.game.title}
+              image= {backlog.game.image}
+              genre= {backlog.genre}
+              ownership_status= {backlog.ownership_status}
+              play_status={backlog.play_status}
+              platform={backlog.platform}
+            />)
+            })}
+         
+        </div>
+      </div>    
     </div>
   )
 };

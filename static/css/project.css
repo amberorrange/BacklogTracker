@@ -3,47 +3,17 @@
     width: 400px;
 }
 
+body{
+
+    color: white;
+    background-color:rgba(0, 0, 0, 0.966);
+}
 
 #game_details_image { /*image from a single game's details page */
     height: 300px;
     width: 400px;
 }
 
-/* 
-label { /*used in change_account.html- keeps form structure */
-    /* width: 90px;
-    display: inline-block;
-} */ */
-
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.bold {  /*bold*/
-    font-weight: bold;
-}
-
-
-.backlog_image { /*images from "/view_backlog" */
-    width: 180px;
-    height: 160px;
-    outline: auto;
-}
-
-
-.backlog_entry { /* for each backlog entry */
-    display: inline-block;
-    padding-inline: 30px;
-    align-items: center;
-    width: 210px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.backlog_title { /* titles in "/view_backlog  */
-    overflow-wrap: break-word;
-}
 
 
 .review_display { /* used for each review in show_reviews.html */
@@ -68,21 +38,15 @@ h1 h2 h3 {
 }
 
 
-.logout_button{ /* logout buttons */
-    float:right;
-}
-
-
-
 .center-text {
     text-align: center
 }
 
-.bg-image-login {
+/* .bg-image-login {
     background-image: url("/static/img/bg56.jpeg");
     background-size: cover;
     height: 100vh; 
-}
+} */
 
 
 .card-transparent {
@@ -110,11 +74,11 @@ h1 h2 h3 {
     border-color: white;
 }
 
-.bc-image-create-acct {
+/* .bc-image-create-acct {
     background-image: url("/static/img/bg54.jpeg");
     background-size: cover;
     height: 100vh; 
-}
+} */
 
 #passwordHelpBlock {
     /* font-size: ; */
@@ -155,4 +119,102 @@ h1 h2 h3 {
 .flash{
     text-align: center;
     font-size: large;
+}
+
+.filters{
+    margin-left: 50px;
+    background-attachment: scroll;
+    height: 60%;
+}
+
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 40%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+
+
+#backlog-title {
+padding-left: 50px;
+padding-bottom: 80px;
+}
+
+
+.navbar-bg {
+    background-color: black;
+}
+
+.navbar-text {
+    border-bottom-style: solid;
+}
+.card-title {
+    padding-top: 20px;
+}
+
+.card-subtitle{
+    padding-top: 30px;
+}
+
+#sort-by{
+    padding-bottom: 30px;
+}
+
+.bl-cards {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: rgba(0, 0, 0, 0.842);
+    border-color: rgba(255, 255, 255, 0.64);
+    
+}
+
+
+.card-body {
+    font-size: medium;
+    padding-bottom: 2;
+    margin-bottom: 10px;;
+}
+
+.backlog-entry-title {
+    margin-bottom: 30px;;
+}
+
+
+
+.list-group-item{
+    background-color: rgba(0, 0, 0, 0.842);
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.right-border {
+    border-right-color: white;
+}
+
+
+.bl-entry-img {
+width: 100%;
+   /* object-fit: cover; */
+   height: 197px;
+   border-color: white;
+   border-right-style: solid;
+   border-right-width: 1px;
+   overflow-y: scroll;
+}
+
+.row-height {
+    height: 220px;
+}
+
+.card-style {
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0.842);
+    border-color:rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 100px;;
 }
