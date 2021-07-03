@@ -9,11 +9,12 @@
 
 body{
     /* margin-left: 30px; */
+    background-color: #121212;
 
     color: white;
-    background-color: #1c0201;
-    background-size: cover;
-    height: 100vh; 
+    /* background-image:url('/static/img/Logos/bluebackground.jpg') ; */
+    /* background-size: cover;
+    height: 100vh;  */
 }
 
 #game_details_image { /*image from a single game's details page */
@@ -66,14 +67,10 @@ body{
 }
 
 .form-control {
-    opacity: .8;
+    background-color: white;
+    opacity: .95;
     border-style: solid;
     border-color: white;
-}
-
-.login-card {
-    background-color: white;
-    opacity: .8;
 }
 
 
@@ -125,7 +122,7 @@ body{
 .vertical-center {
     margin: 0;
     position: absolute;
-    top: 50%;
+    top: 40%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
@@ -213,7 +210,25 @@ margin-left: 50px;
     max-width: 590px;
 }
 
+
 .login-image {
-    height: 30vh;
-    width: 30vh
+    margin-left: 20%;
+    height: 20%;
+    max-width: 590px;
+}
+
+.login-form {
+    margin-right: 25%;
+    padding-bottom: 20x;
+    max-width: 590px;
+}
+
+
+.login-pad-bottom {
+    padding-bottom: 20px;
+}
+
+.flash-login {
+    margin-top: 20px;
+    text-align:center ;
 }

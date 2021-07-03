@@ -307,7 +307,7 @@ const BacklogContainer = () => {
           </div>  
         </div>  
       
-        <div className="colss">
+        <div className="col">
           {displayedBacklogs.map(backlog => {
              return ( <BacklogEntry
               key={backlog.backlog_id}
