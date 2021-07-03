@@ -3,8 +3,8 @@
 const BacklogEntry = (props) => {
   return (
     
-    <div className="row bl-row">
-      <div className="col">
+    <div className="row">
+      <div className="col col-3 col-sm-9 offset-sm-2 col-md-4 col-lg-6  col-xl-6 col-xxl-8 offset-xxl-2 ">
 
         <div className="card card-style">
 
@@ -56,7 +56,7 @@ const FilterOption = ({ options, disabledLabel}) => {
 const Select = (props) => {
   return (
     <div>
-      <select  value={props.value} onChange={props.onchange} className='form-select'>
+      <select  value={props.value} onChange={props.onchange} className='form-select form-select-sm'>
         <FilterOption
           disabledLabel=""
           options={props.options}
@@ -255,31 +255,15 @@ const BacklogContainer = () => {
   }
 
   
-
-  //   const backlogEntries = [];
-  //   for (const backlog of displayedBacklogs) {
-  //     backlogEntries.push(
-  //       <BacklogEntry
-  //         key={backlog.backlog_id}
-  //         title={backlog.game.title}
-  //         image= {backlog.game.image}
-  //         genre= {backlog.genre}
-  //         ownership_status= {backlog.ownership_status}
-  //         play_status={backlog.play_status}
-  //         platform={backlog.platform}
-  //       />
-  //     );
-  //   }
-
   console.log(displayedBacklogs)
 
   return (
     <div>
 
       <div className="row">
-        <div className="col-3 card-transparent filters">    
+        <div className="col-3 col-sm-2 col-md-3 col-lg-3 col-xl-2 col-xxl-2 card-transparent filters">    
 
-          <div className="card-body mb-5">
+          <div className="card-body mb-3">
 
             <h4 className="text-center card-title">Filter By:</h4>
 
@@ -323,7 +307,7 @@ const BacklogContainer = () => {
           </div>  
         </div>  
       
-        <div className="col">
+        <div className="colss">
           {displayedBacklogs.map(backlog => {
              return ( <BacklogEntry
               key={backlog.backlog_id}

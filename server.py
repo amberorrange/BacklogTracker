@@ -59,7 +59,7 @@ def login_confirmation():
     user = crud.check_login(email, password)
     if user:
         login_user(user)
-        flash("You have successfully logged in.")
+        flash("You are logged in.")
         return redirect("/view_backlog")
     else:
         flash('Email or Password not found.\nPlease try again or create an account.')

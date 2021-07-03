@@ -3,8 +3,12 @@
     width: 400px;
 }
 
-body{
+#navbar {
+    margin-left: 0;
+}
 
+body{
+    /* margin-left: 30px; */
     color: white;
     background-color:rgba(0, 0, 0, 0.966);
 }
@@ -65,7 +69,6 @@ h1 h2 h3 {
 .container-fluid {
     font-family: montserrat ;
     padding-top: 55px ;
-    margin: 0;
 }
 
 .form-control {
@@ -74,14 +77,8 @@ h1 h2 h3 {
     border-color: white;
 }
 
-/* .bc-image-create-acct {
-    background-image: url("/static/img/bg54.jpeg");
-    background-size: cover;
-    height: 100vh; 
-} */
 
 #passwordHelpBlock {
-    /* font-size: ; */
     opacity: .8
 }
 
@@ -121,10 +118,8 @@ h1 h2 h3 {
     font-size: large;
 }
 
-.filters{
-    margin-left: 50px;
-    background-attachment: scroll;
-    height: 60%;
+.align-left{
+    text-align: left;
 }
 
 
@@ -138,9 +133,9 @@ h1 h2 h3 {
 
 
 
-#backlog-title {
-padding-left: 50px;
+#homepage-title {
 padding-bottom: 80px;
+margin-left: 50px;
 }
 
 
@@ -152,40 +147,27 @@ padding-bottom: 80px;
     border-bottom-style: solid;
 }
 .card-title {
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .card-subtitle{
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 #sort-by{
     padding-bottom: 30px;
 }
 
-.bl-cards {
-    margin-left: 20px;
-    margin-right: 20px;
-    background-color: rgba(0, 0, 0, 0.842);
-    border-color: rgba(255, 255, 255, 0.64);
-    
-}
-
-
-.card-body {
-    font-size: medium;
-    padding-bottom: 2;
-    margin-bottom: 10px;;
-}
-
 .backlog-entry-title {
-    margin-bottom: 30px;;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    
 }
 
 
 
 .list-group-item{
-    background-color: rgba(0, 0, 0, 0.842);
+    background-color: rgba(0, 0, 0, 0.642);
     color: white;
     text-align: center;
     margin-bottom: 10px;
@@ -197,24 +179,32 @@ padding-bottom: 80px;
 
 
 .bl-entry-img {
-width: 100%;
-   /* object-fit: cover; */
-   height: 197px;
-   border-color: white;
-   border-right-style: solid;
-   border-right-width: 1px;
-   overflow-y: scroll;
+    width: 100%;
+    object-fit: cover;
+    height: 160px;
+    border-color: white;
+    border-right-style: solid;
+    border-right-width: 1px;
 }
 
-.row-height {
-    height: 220px;
-}
 
 .card-style {
-    height: 200px;
+    height: 163px;
     background-color: rgba(0, 0, 0, 0.842);
     border-color:rgba(255, 255, 255, 0.5);
     margin-bottom: 20px;
-    margin-left: 10px;
-    margin-right: 100px;;
+    margin-left: 70px;
+}
+
+
+.filters{
+    position:fixed;
+    top: 305px;
+    margin-left: 50px;
+    /* margin-right: 20px; */
+    padding-top: 0
+}
+
+#homepage-flash {
+    text-align: right
 }
