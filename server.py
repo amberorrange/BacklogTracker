@@ -189,7 +189,7 @@ def change_account_info():
         return redirect("/change_account_info_form")
     else:    
         logout_user()
-        flash("Your account information is changed. Please log in again.")
+        flash("Your account information has been changed. Please log in again.")
 
     return redirect("/")
 

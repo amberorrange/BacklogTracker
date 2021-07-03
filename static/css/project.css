@@ -3,18 +3,10 @@
     width: 400px;
 }
 
-#navbar {
-    margin-left: 0;
-}
 
 body{
-    /* margin-left: 30px; */
     background-color: #121212;
-
-    color: white;
-    /* background-image:url('/static/img/Logos/bluebackground.jpg') ; */
-    /* background-size: cover;
-    height: 100vh;  */
+    color: white;  
 }
 
 #game_details_image { /*image from a single game's details page */
@@ -135,13 +127,6 @@ margin-left: 50px;
 }
 
 
-.navbar-bg {
-    background-color: black;
-}
-
-.navbar-text {
-    border-bottom-style: solid;
-}
 .card-title {
     padding-top: 10px;
 }
@@ -195,7 +180,7 @@ margin-left: 50px;
 
 .filters{
     position:fixed;
-    top: 305px;
+    top: 355px;
     margin-left: 50px;
     /* margin-right: 20px; */
     padding-top: 0
@@ -232,3 +217,16 @@ margin-left: 50px;
     margin-top: 20px;
     text-align:center ;
 }
+
+.navbar-custom{
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.648);
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-bottom: 120px;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white;
+}
+

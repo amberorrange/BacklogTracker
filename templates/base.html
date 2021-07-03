@@ -33,11 +33,11 @@
       </ul> -->
 
       {% if current_user.is_authenticated %}
-        <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <nav class="navbar navbar-expand  navbar-custom ">
 
           <div class="container-fluid">
 
-            <a class="navbar-brand" href="/view_backlog">Backlog Tracker</a>
+            <a class="navbar-brand" href="/view_backlog"> <img src="/static/img/Logos/aorrang 1R2.png" width="110" height="110" class="d-inline-block align-top" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,18 +51,19 @@
 
             
                 <li class="nav-item dropdown">
+
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Games
                   </a>
+
                   <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="/add_game">Add Game</a></li>
+                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="delete_backlog">Delete Game</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="/edit_backlog_selection">Edit Game Entry</a></li>
                   </ul>
                 </li>
-
-
 
 
                  
@@ -72,6 +73,7 @@
                   </a>
                   <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="/view_reviews">See Reviews</a></li>
+                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="/add_review">Add Review</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Edit/Remove</a></li>
@@ -92,8 +94,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/logout">Log Out</a>
                 </li>
-
-
+              </ul>
 
             </div>
           </div>
