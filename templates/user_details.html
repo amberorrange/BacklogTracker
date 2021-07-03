@@ -7,17 +7,30 @@
 
 {% block content %}
 
-<h1> Account Information </h1>
+    <div class="container-fluid">
 
-<p>First Name: {{ current_user.fname }}</p>
-<p>Last Name: {{ current_user.lname }}</p>
-<p>Email: {{ current_user.email }}</p>
+        <h1 class="center-text">Account Information </h1>
+
+        <div class="row vertical center mt-5">
+            <div id="sign-up-width" class="col-8 mx-auto pb-2">
+                <div class="card-transparent #account-info">
+                    <div class="card-body">
 
 
-<!-- add an option to delete account or change account info -->
-<a href="/change_account_info_form">Change Account Information.</a> <br>
-<a href="/delete_account_confirmation" id="delete_account">Delete your account?</a>
-<p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p>
+                        <p>First Name: {{ current_user.fname }}</p>
+                        <p>Last Name: {{ current_user.lname }}</p>
+                        <p>Email: {{ current_user.email }}</p>
+
+
+                        <!-- add an option to delete account or change account info -->
+                        <a href="/change_account_info_form">Change Account Information.</a> <br>
+                        <a href="/delete_account_confirmation" id="delete_account">Delete your account?</a>
+                        <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
