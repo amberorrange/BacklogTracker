@@ -119,6 +119,19 @@ const BacklogContainer = () => {
       updateDisplayedBacklogs(backlogs)
     } else {
       let updatedDisplay = backlogs.filter((backlog) => backlog.platform === platformFilter)
+    
+
+      if (genreFilter != "") {
+        updatedDisplay = updatedDisplay.filter((backlog) => backlog.genre === genreFilter);
+      }
+
+      if (ownershipFilter != "") {
+        updatedDisplay = updatedDisplay.filter((backlog) => backlog.ownership_status === ownershipFilter);
+      }
+
+      if (playstatusFilter != "") {
+        updatedDisplay = updatedDisplay.filter((backlog) => backlog.play_status === playstatusFilter);
+      }
       updateDisplayedBacklogs(updatedDisplay)
     }
   }, [platformFilter])
@@ -160,6 +173,20 @@ const BacklogContainer = () => {
       updateDisplayedBacklogs(backlogs)
     } else {
       let updatedDisplay = backlogs.filter((backlog) => backlog.ownership_status === ownershipFilter)
+      
+
+      if (playstatusFilter != "") {
+        updatedDisplay = updatedDisplay.filter((backlog) => backlog.play_status === playstatusFilter);
+      }
+
+      if (genreFilter != "") {
+        updatedDisplay = updatedDisplay.filter((backlog) => backlog.genre === genreFilter);
+      }
+
+      if (platformFilter != "") {
+        updatedDisplay = updatedDisplay.filter((backlog) => backlog.platform === platformFilter);
+      }
+
       updateDisplayedBacklogs(updatedDisplay)
     }
   }, [ownershipFilter])
@@ -177,6 +204,19 @@ const BacklogContainer = () => {
       updateDisplayedBacklogs(backlogs)
     } else {
       let updatedDisplay = backlogs.filter((backlog) => backlog.genre === genreFilter)
+
+      if (platformFilter != "") {
+        updatedDisplay = updatedDisplay.filter((backlog) => backlog.platform === platformFilter);
+      }
+
+      if (ownershipFilter != "") {
+        updatedDisplay = updatedDisplay.filter((backlog) => backlog.ownership_status === ownershipFilter);
+      }
+
+      if (playstatusFilter != "") {
+        updatedDisplay = updatedDisplay.filter((backlog) => backlog.play_status === playstatusFilter);
+      }
+      
       updateDisplayedBacklogs(updatedDisplay)
     }
   }, [genreFilter])
@@ -189,9 +229,7 @@ const BacklogContainer = () => {
     updateSortingList(['Genre', 'Platform', 'Ownership Status', 'Play Status'])
   }, [backlogs])
 
-  // React.useEffect(() => {
-  //   console.log(displayedBacklogs)
-  // }, [displayedBacklogs])
+
 
   React.useEffect(() => {
     let choice = '';
