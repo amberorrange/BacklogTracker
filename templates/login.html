@@ -7,23 +7,17 @@
 {% block content %}
   <div class="container-fluid vertical-center">
 
-    <div class="row">
-      <div class="col mb-5">
-        <h1 class="bold text-center big">Backlog Tracker</h1>
-      </div>
-    </div>
     
 
-
     <div class="row">
 
-      <div class='col-sm-4 col-md-4 col-lg-5 col-xl-3 col-xxl-4 login-image '>
+      <div class='col col-sm-4 col-md-4 col-lg-5 col-xl-3 col-xxl-4 login-image '>
         <img src="/static/img/Logos/aorrang 1R2.png" class="img-fluid">
       </div>
 
-      <div id="sign-up-width" class="col col-sm-4 col-md-4 col-lg-3  col-xl-64col-xxl-3 mx-auto card-transparent login-form">
-        <div class="card-body">
-          <h4 class="text-center card-title">Login</h4>
+      <div class="col col-sm-4 col-md-4 col-lg-4  col-xl-64 col-xxl-3 mx-auto card-transparent login-form">
+        <div class="card-body p-1">
+          <h4 class="text-center card-title mt-4">Login</h4>
 
           <form action="/login_confirmation" method="POST">
 
@@ -53,7 +47,7 @@
             <input type="submit" class="btn-transparent  form-control mb-4" value= "Log In">
           
 
-            <p class="hyper login-pad-bt">Don't have an account? <a href="/create_account">Sign Up</a> </p>
+            <p class="hyper">Don't have an account? <a href="/create_account">Sign Up</a> </p>
           </form>
         </div>
       </div> 

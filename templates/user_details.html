@@ -9,23 +9,24 @@
 
     <div class="container-fluid">
 
-        <h1 class="center-text">Account Information </h1>
 
-        <div class="row vertical center mt-5">
-            <div id="sign-up-width" class="col-8 mx-auto pb-2">
-                <div class="card-transparent #account-info">
-                    <div class="card-body">
+        <div class="row mt-5">
+            <div id="sign-up-width" class="col-8 mx-auto">
+                <div class="card-transparent acct-info-card">
+                    <div class="card-body ">
 
-
-                        <p>First Name: {{ current_user.fname }}</p>
-                        <p>Last Name: {{ current_user.lname }}</p>
-                        <p>Email: {{ current_user.email }}</p>
+                        
+                        <h4 class=" card-title account-info-title">Account Information </h4>
 
 
-                        <!-- add an option to delete account or change account info -->
-                        <a href="/change_account_info_form">Change Account Information.</a> <br>
-                        <a href="/delete_account_confirmation" id="delete_account">Delete your account?</a>
-                        <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p>
+                        <h5 class="acct-info-data" >First Name: {{ current_user.fname }}</h5>
+                        <h5 class="acct-info-data">Last Name: {{ current_user.lname }}</h5>
+                        <h5 class="acct-info-data">Email: {{ current_user.email }}</h5>
+
+                        <a class="btn btn-light btn-sm col mb-2 mt-2 form-control" href="/change_account_info_form">Change Account</a> 
+
+                        <a class="btn btn-light col btn-sm form-control " href="/delete_account_confirmation" id="delete_account">Delete account</a>
+                    
                     </div>
                 </div>    
             </div>

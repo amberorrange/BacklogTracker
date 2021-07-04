@@ -6,18 +6,24 @@
 
 {% block content %}
 
-    <h4>Which game would you like to remove?</h4>
+    <div class="container-fluid">
+        
+        <div class="del-game center-text  col-7">
+            <h4>Which game would you like to remove?</h4>
 
+            <form action="/delete_backlog_confirmation" class="inline" method="POST">
+                <select class="form-select-sm mt-4" name="deleted_backlog">
+                        {% for backlog in backlogs %}
+                        <option value="{{ backlog.backlog_id }}">{{ backlog.game.title }}</option>
+                    {% endfor %}
+                </select>
+                <input value="Delete" class="btn btn-sm del-btn" type="submit">
+            </form> 
     
-    <form action="/delete_backlog_confirmation" class="inline" method="POST">
-        <select name="deleted_backlog">
-                {% for backlog in backlogs %}
-                <option value="{{ backlog.backlog_id }}">{{ backlog.game.title }}</option>
-            {% endfor %}
-        </select>
-        <input value="Delete" type="submit">
-    </form> 
-    
+            <button onclick="location.href='/view_backlog'" class="inline btn btn-sm del-btn" type="button">Cancel</button> 
 
-    <button onclick="location.href='/view_backlog'" class="inline" type="button">Cancel</button> 
+        </div>
+       
+    </div>
+
 {% endblock %}

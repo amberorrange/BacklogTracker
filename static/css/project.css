@@ -5,9 +5,11 @@
 
 
 body{
+    min-width:1000px;
     background-color: #121212;
     color: white;  
 }
+
 
 #game_details_image { /*image from a single game's details page */
     height: 300px;
@@ -97,7 +99,7 @@ body{
 }
 
 .hyper {
-    font-size: large;
+    font-size: medium;
 }
 
 
@@ -127,16 +129,16 @@ margin-left: 50px;
 }
 
 
-.card-title {
+/* .card-title {
     padding-top: 10px;
-}
+} */
 
 .card-subtitle{
     padding-top: 10px;
 }
 
 #sort-by{
-    padding-bottom: 30px;
+    padding-bottom: 15px;
 }
 
 .backlog-entry-title {
@@ -180,53 +182,137 @@ margin-left: 50px;
 
 .filters{
     position:fixed;
-    top: 355px;
+    top: 305px;
     margin-left: 50px;
-    /* margin-right: 20px; */
     padding-top: 0
 }
+
+
+.filter-reset-btn {
+    background-color: white;
+    margin-top: 15px;
+    color:black;
+    text-align: center;
+}
+
 
 #homepage-flash {
     text-align: right
 }
 
 
+
+
+
+
+/* SIGNUP PAGE */
 #sign-up-width {
-    max-width: 590px;
+    max-width: 400px;
 }
 
 
+
+
+/* LOGIN PAGE */
 .login-image {
+    margin-top: 10%;
     margin-left: 20%;
     height: 20%;
-    max-width: 590px;
-}
+    width: 25rem;
+    /* max-width: 400px; */
+} 
 
 .login-form {
-    margin-right: 25%;
-    padding-bottom: 20x;
-    max-width: 590px;
-}
-
-
-.login-pad-bottom {
-    padding-bottom: 20px;
+    margin-top: 10%;
+    margin-right: 40%;
+    width: 25rem;
 }
 
 .flash-login {
     margin-top: 20px;
-    text-align:center ;
+    text-align: center ;
 }
 
+
+
+
+
+
+
+
+
+/* Navbar */
 .navbar-custom{
     height: 100px;
     background-color: rgba(0, 0, 0, 0.648);
-    padding-top: 50px;
+    padding-top: 25px;
     padding-left: 50px;
-    padding-bottom: 120px;
+    padding-bottom: 80px;
 }
 
 .navbar-custom .navbar-nav .nav-link {
     color: white;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+USER DETAILS */
+.account-info-title {
+    margin-top: 5%;
+    margin-bottom: 8%;
+}
+
+.acct-info-card {
+    text-align: left;
+    padding-top: 0;
+    height:20rem;
+}
+.acct-info-data {
+    margin-bottom: 15px;
+}
+
+
+/* DELETE ACCOUNT */
+.delete-acct {
+    margin-top: 3%;
+    margin-left: 5%
+}
+.del-btn {
+    background-color: white ;
+}
+
+.del-question {
+    margin-bottom: 20px;
+}
+
+
+/* CHANGE ACCOUNT  */
+.change-acct-width {
+   max-width: 500px;
+
+}
+
+
+
+
+/* DELETE Game*/
+
+.del-game {
+    margin: auto
+
+}

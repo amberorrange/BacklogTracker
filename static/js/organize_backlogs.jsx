@@ -342,10 +342,12 @@ const BacklogContainer = () => {
               onchange={(e) => handleSortSelect(e)}
               options={sortingList}
             />
-          </div>  
+
+            <a href="/view_backlog" className="btn  form-control filter-reset-btn">Reset Filters</a>
+          </div> 
         </div>  
       
-        <div className="col">
+        <div className="col col-3 col-sm-9 offset-sm-2 col-md-4 col-lg-6  col-xl-6 col-xxl-8 offset-xxl-2 ">
           {displayedBacklogs.map(backlog => {
              return ( <BacklogEntry
               key={backlog.backlog_id}
