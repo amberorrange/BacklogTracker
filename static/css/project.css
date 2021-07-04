@@ -1,7 +1,7 @@
-/* .search_image { search results images */
-    /* height: 300px;
+.search_image { /*search results images */
+     height: 300px;
     width: 400px;
-} */
+}
 
 
 @font-face {
@@ -114,14 +114,14 @@ body{
     text-align: left;
 } */
 
-/* 
-.vertical-center {
+
+/* .vertical-center {
     margin: 0;
     position: absolute;
     top: 40%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-  } */
+  }  */
 
 
 
@@ -130,10 +130,6 @@ padding-bottom: 80px;
 margin-left: 50px;
 } */
 
-
-/* .card-title {
-    padding-top: 10px;
-} */
 
 /* .card-subtitle{
     padding-top: 10px;
@@ -223,9 +219,6 @@ margin-left: 50px;
 }
  */
  
-
-
-
 
 
 /* 
@@ -348,11 +341,11 @@ USER DETAILS */
 .filters{
     position:fixed;
     /* top: 305px; */
-    /* margin-left: 50px; */
     padding-top: 0;
     border-radius: 5px;
     border-color: white;
     border-style:groove;
+   
 }
 
 
@@ -362,3 +355,91 @@ USER DETAILS */
     color:black;
     text-align: center;
 }
+
+
+
+.backlog-cards {
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+.list-group-item {
+    color: white;
+    border-color: white;
+    background-color: transparent;
+}
+
+.card-img-top{
+    border-color: white;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+
+.card-title-homepage {
+    font-size: large;
+
+}
+
+
+.backlog-card-height {
+    height: 220px;
+    width:300px;
+}
+
+/* .container-fluid {
+    margin-left: 10px;
+}  */
+
+
+
+.bl-card:hover{
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+    
+}
+
+
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: auto;
+    content: "";
+    background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+.add-game-search-bar {
+    background-color: black;
+    border: none;
+   
+}
+
+.search-btn {
+    color: white;
+    border-color: white;
+    border-style: solid;
+}
+
+.search-game-row {
+    margin-top: 20%;
+}
+
+
+
+
+
+
+
+
+
+

@@ -7,9 +7,43 @@
 
     <div class="container-fluid">
 
-        <div class="row pt-3 pb-3 mg-4">
+        <div class="row search-game-row">
+            <!-- pt-3 pb-3 mg-4" -->
+           
+            <div class="col-12 col-md-10 col-lg-8 mx-auto">
+                <form action="/search_results" class="card add-game-search-bar card-sm">
 
-            <div class="col-5 mx-auto card-transparent pb-2 ">
+                    <h4 class="mx-auto">Search for a Game</h4>
+
+
+
+                    <div class="card-body add-game-search-bar row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-search h4 text-body"></i>
+                        </div>
+                
+
+                            <div class="col">
+                                <input type="text" class="form-control form-control-borderless src_fild"  placeholder="Search Here" name="game">      
+                            </div>
+
+                            
+                            <div class="col-auto">
+                                <input class="btn  bg-transparent search-btn form-control " value="Search" type="submit">
+                           </div>
+
+                    </div>
+                </form>
+            </div>
+            
+
+            
+
+
+
+
+
+            <!-- <div class="col-5 mx-auto card-transparent pb-2 ">
               <div class="card-body">
          
                 <form action="/search_results">
@@ -45,7 +79,7 @@
 
 
 
-                    <input class="btn btn-sm del-btn form-control mt-3" type="submit">
+                    <input class="btn btn-sm del-btn form-control mt-3" type="submit"> -->
 
                     <!-- <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p> -->
                 <!-- </form>

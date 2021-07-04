@@ -5,30 +5,30 @@ const BacklogEntry = (props) => {
 
 
 
-    <div className="row row-cols-1 row-cols-md-3 g-4">
-       <div className="col">
-        <div className="card h-100">
-          <img  className="card-img-top" src={props.image}/>
-          <div class="card-body">
+    // <div className="row row-cols-1 row-cols-md-3 g-4">
+      <div className="col">
 
-            <h4 className="card-title">{props.title}</h4>
+          <div className="card bl-card">
+            <img  className="card-img-top" src={props.image}/>
+            <div class="card-body backlog-cards h-100">
 
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">Genre: {props.genre}</li>
-              <li className="list-group-item">Platform: {props.platform}</li>
-              <li className="list-group-item">Ownership Status: {props.ownership_status}</li>
-              <li className="list-group-item">Play Status: {props.play_status ? 'Currently Playing' : 'Not Playing'}</li>
-          </ul>
-
-        </div>
+              <h4 className="card-title card-title-homepage">{props.title}</h4>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">Genre: {props.genre}</li>
+                <li className="list-group-item">Platform: {props.platform}</li>
+                <li className="list-group-item">Ownership Status: {props.ownership_status}</li>
+                <li className="list-group-item">Play Status: {props.play_status ? 'Playing' : 'Not Playing'}</li>
+                <a href="/add_game" class="stretched-link"></a>
+              </ul>
+            </div>
+          </div>
+        
       </div>
-    </div>
 
+     
+ 
 
-
-
-
-    </div>
+ 
     
     // <div className="row">
     //   <div className="col ">
@@ -171,13 +171,13 @@ const BacklogContainer = () => {
 
 
   React.useEffect(() => {
-    let updatedList = backlogs.map((backlog) => backlog.play_status ? 'Currently Playing' : 'Not Playing')
+    let updatedList = backlogs.map((backlog) => backlog.play_status ? 'Playing' : 'Not Playing')
     updatedList = new Set(updatedList)
     updatePlaystatusList([...updatedList, ...playstatusList])
   }, [backlogs])
   
   React.useEffect(() => {
-    if (playstatusFilter === 'Currently Playing') {
+    if (playstatusFilter === 'Playing') {
       updateDisplayedBacklogs(backlogs.filter((backlog) => {
         return backlog.play_status === true;
       }));
@@ -330,20 +330,22 @@ const BacklogContainer = () => {
     <div>
 
       <div className="row">
-        <div className="col-3 col-sm-2 col-md-3 col-lg-3 col-xl-2 col-xxl-2 card-transparent filters">    
+        <div className="col-3 filters">   
+
+        {/* col-sm-2 col-md-4 col-lg-1 col-xl-2 col-xxl-2  filters  */}
 
           <div className="card-body mb-3">
 
             <h4 className="text-center card-title">Filter By:</h4>
 
-            <div className="card-subtitle">Genre</div>
+            <div className="card-subtitle mt-1">Genre</div>
             <FilterOptions 
               value={genreFilter}
               onchange={handleSelect}
               options={genresList} 
             />
 
-            <div className="card-subtitle">Platform</div>
+            <div className="card-subtitle mt-2">Platform</div>
             <FilterOptions 
               value={platformFilter}
               onchange={handleplatformSelect}
@@ -351,7 +353,7 @@ const BacklogContainer = () => {
             />
 
 
-            <div className="card-subtitle">Ownership Status</div>
+            <div className="card-subtitle mt-2">Ownership Status</div>
             <FilterOptions 
               value={ownershipFilter}
               onchange={handleOwnershipSelect}
@@ -359,7 +361,7 @@ const BacklogContainer = () => {
             />
 
           
-            <div className="card-subtitle">Play Status</div>
+            <div className="card-subtitle mt-2">Play Status</div>
             <FilterOptions 
               value={playstatusFilter}
               onchange={handlePlaystatusSelect}
@@ -378,18 +380,25 @@ const BacklogContainer = () => {
           </div> 
         </div>  
       
-        <div className="col col-3 col-sm-9 offset-sm-2 col-md-8 col-lg-8  col-xl-6 col-xxl-8 offset-xxl-2 ">
-          {displayedBacklogs.map(backlog => {
-             return ( <BacklogEntry
-              key={backlog.backlog_id}
-              title={backlog.game.title}
-              image= {backlog.game.image}
-              genre= {backlog.genre}
-              ownership_status= {backlog.ownership_status}
-              play_status={backlog.play_status}
-              platform={backlog.platform}
-            />)
-            })}
+        <div className="col-8 offset-3 ">
+
+        {/* col-sm-9 offset-sm-2 col-md-8 col-lg-7 offset-lg-3 col-xl-6 col-xxl-8 offset-xxl-2 */}
+
+          <div className="row row-cols-1 row-cols-md-3 g-4">
+
+            {displayedBacklogs.map(backlog => {
+              return ( <BacklogEntry
+                key={backlog.backlog_id}
+                title={backlog.game.title}
+                image= {backlog.game.image}
+                genre= {backlog.genre}
+                ownership_status= {backlog.ownership_status}
+                play_status={backlog.play_status}
+                platform={backlog.platform}
+              />)
+              })}
+            
+          </div>
          
         </div>
       </div>    
