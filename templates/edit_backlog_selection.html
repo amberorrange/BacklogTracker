@@ -4,21 +4,25 @@
 
 
 {% block content %}
-    <h1>Edit Backlog</h1>
-    <p>Which entry would you like to change?</p>
+
+    <div class="container-fluid">
+
+        <div class="del-game center-text  col-7">
+            <h4>Which entry would you like to change?</h4>
+
+            <form action="/edit_backlog" class="inline" method="POST">
+                <select class=" form-select-sm mt-4" name="edited_backlog">
+                        {% for backlog in backlogs %}
+                        <option value="{{ backlog.backlog_id }}">{{ backlog.game.title }}</option>
+                    {% endfor %}
+                </select>
+                <input value="Edit" class="btn btn-sm del-btn" type="submit">
+            </form> 
 
 
-    <form action="/edit_backlog" class="inline" method="POST">
-        <select name="edited_backlog">
-                {% for backlog in backlogs %}
-                <option value="{{ backlog.backlog_id }}">{{ backlog.game.title }}</option>
-            {% endfor %}
-        </select>
-        <input value="Edit" type="submit">
-    </form> 
+            <button onclick="location.href='/view_backlog'" class="inline btn btn-sm del-btn" type="button">Cancel</button> 
+        </div>
 
+    </div>
 
-    <button onclick="location.href='/view_backlog'" class="inline" type="button">Cancel</button> 
-
-
-    {% endblock %}
+{% endblock %}

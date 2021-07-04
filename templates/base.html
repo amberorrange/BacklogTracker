@@ -20,6 +20,7 @@
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
 
     <script src="/static/js/project.js"></script>
+
     
     <title>{% block title %}{% endblock %}</title>
   </head>
@@ -27,10 +28,12 @@
   <body>
 
       {% if current_user.is_authenticated %}
-        <nav class="navbar navbar-expand  navbar-custom ">
+        <nav class="navbar navbar-expand sticky-top navbar-custom">
           <div class="container-fluid">
 
-            <a class="navbar-brand" href="/view_backlog"> <img src="/static/img/Logos/aorrang 1R2.png" width="90" height="90" class="d-inline-block align-top" alt=""></a>
+            <a class="navbar-brand" href="/view_backlog"> <img src="/static/img/Logos/aorrang 1R2.png" width="50" height="50" class="d-inline-block align-top" alt=""></a>
+
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>

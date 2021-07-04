@@ -4,12 +4,56 @@
 {% block title %} Log In {% endblock %} 
 
 
+
 {% block content %}
-  <div class="container-fluid vertical-center">
+
+  <div class=container-fluid>
+
+    <div class="row mt-3 pt-3"> 
+
+      <div class="col-3 mt-5 mx-auto">
+          <form action="/login_confirmation" method="POST">
+
+      
+            <img class="mb-4 img-fluid login-img " src="/static/img/Logos/aorrang 1R2 copy.png" alt="" >
+            <h1 class="h3 mb-3 font-weight-normal login-text">Sign In</h1>
+
+            <input class="form-control" placeholder="Email" type="email" name="email">
+            <input class="form-control password" placeholder="Password" type="password" name="password">
+
+            <div class="checkbox login-text mt-3 mb-3">
+              <label>
+              <input class="checkbox form-check-input" type="checkbox" onclick="togglePasswordVisibilty()"> 
+              <label>Show Password</label> 
+            </div>
+
+            <input type="submit" class="btn-primary form-control mb-4" value= "Sign In">
+            <p class="hyper login-text">Don't have an account? <a href="/create_account">Sign Up</a> </p> 
+          </form> 
+        </div>
+      </div>
+
+      <ul>
+        {% for message in get_flashed_messages() %}
+          <p class="flash flash-login login-text">{{ message }}</p>
+        {% endfor %}
+      </ul>
+
+
+    </div>
+  <div>
+
+  
+{% endblock %} 
+
+
+
+
+<!-- <div class="container-fluid vertical-center"> -->
 
     
 
-    <div class="row">
+    <!-- <div class="row">
 
       <div class='col col-sm-4 col-md-4 col-lg-5 col-xl-3 col-xxl-4 login-image '>
         <img src="/static/img/Logos/aorrang 1R2.png" class="img-fluid">
@@ -18,20 +62,17 @@
       <div class="col col-sm-4 col-md-4 col-lg-4  col-xl-64 col-xxl-3 mx-auto card-transparent login-form">
         <div class="card-body p-1">
           <h4 class="text-center card-title mt-4">Login</h4>
-
           <form action="/login_confirmation" method="POST">
-
-
             <div class="form-group pt-4  pb-2 mx-auto">
               <div class="col">
-                <input class="form-control" placeholder="Email" type="email" name="email"> 
+                <input class="form-control login-inputs" placeholder="Email" type="email" name="email"> 
               </div>
             </div>
 
 
             <div class="form-group pt-4 pb-3 mx-auto">
               <div class="col">
-                <input class="form-control password" placeholder="Password" type="password" name="password">
+                <input class="form-control  login-inputs password" placeholder="Password" type="password" name="password">
               </div>
             </div>
 
@@ -44,7 +85,7 @@
               </div>
             </div>
 
-            <input type="submit" class="btn-transparent  form-control mb-4" value= "Log In">
+            <input type="submit" class="btn login-inputs  form-control mb-4" value= "Log In">
           
 
             <p class="hyper">Don't have an account? <a href="/create_account">Sign Up</a> </p>
@@ -60,8 +101,4 @@
       {% endfor %}
     </ul>
 
-  </div>   
-{% endblock %}
-
-
-
+  </div>  -->

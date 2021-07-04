@@ -10,8 +10,6 @@
 
   <div class="container-fluid">
  
-    <!-- <div class="row"> -->
-      <!-- </div class="col"> -->
 
       {% for message in get_flashed_messages() %}
       <p class="flash"  id="homepage-flash">{{ message }}</p>
@@ -23,8 +21,7 @@
 
         <div id="page"></div> 
         <script type="text/jsx" src="/static/js/organize_backlogs.jsx"></script>
-      <!-- </div> -->
-    <!-- </div> -->
+  
 
   </div>
 {% endblock %}

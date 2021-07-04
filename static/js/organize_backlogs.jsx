@@ -2,40 +2,71 @@
 
 const BacklogEntry = (props) => {
   return (
-    
-    <div className="row">
-      <div className="col col-3 col-sm-9 offset-sm-2 col-md-4 col-lg-6  col-xl-6 col-xxl-8 offset-xxl-2 ">
-
-        <div className="card card-style">
-
-          <div className='row g-0'>
-
-            <div className='col-3'>
-              <img  className="img-fluid bl-entry-img rounded-start" src={props.image}/>
-            </div>
-
-            <div className='col'>
-              <div className='card-body pt-0'>
-              <h4 className="backlog-entry-title card-title">{props.title}</h4>
-
-                <ul class="list-group list-group-horizontal">
-                  <h6 className="card-subtitle right-border list-group-item">Genre:  <p>{props.genre}</p></h6>
-                  <h6 className="card-subtitle right-border list-group-item">Ownership Status: {props.ownership_status}</h6>
-                  <h6 className="card-subtitle right-border list-group-item">Play Status: {props.play_status ? 'Currently Playing' : 'Not Playing'}</h6>
-                  <h6 className="card-subtitle list-group-item">Platform: {props.platform}</h6>
-                </ul>
 
 
-              </div>
-            </div> 
 
+    <div className="row row-cols-1 row-cols-md-3 g-4">
+       <div className="col">
+        <div className="card h-100">
+          <img  className="card-img-top" src={props.image}/>
+          <div class="card-body">
 
-          </div> 
+            <h4 className="card-title">{props.title}</h4>
 
-        </div> 
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">Genre: {props.genre}</li>
+              <li className="list-group-item">Platform: {props.platform}</li>
+              <li className="list-group-item">Ownership Status: {props.ownership_status}</li>
+              <li className="list-group-item">Play Status: {props.play_status ? 'Currently Playing' : 'Not Playing'}</li>
+          </ul>
 
+        </div>
       </div>
     </div>
+
+
+
+
+
+    </div>
+    
+    // <div className="row">
+    //   <div className="col ">
+
+    //     <div className="card card-style">
+
+    //       <div className='row g-0'>
+
+    //         <div className='col-3'>
+    //           <img  className="img-fluid bl-entry-img rounded-start" src={props.image}/>
+    //         </div>
+
+    //         <div className='col'>
+    //           <div className='card-body pt-0'>
+    //           <h4 className="backlog-entry-title card-title">{props.title}</h4>
+
+    //             <ul class="list-group list-group-horizontal">
+    //               <h6 className="card-subtitle right-border list-group-item">Genre:  <p>{props.genre}</p></h6>
+
+
+
+
+    //               <h6 className="card-subtitle right-border list-group-item">Ownership Status: {props.ownership_status}</h6>
+    //               <h6 className="card-subtitle right-border list-group-item">Play Status: {props.play_status ? 'Currently Playing' : 'Not Playing'}</h6>
+    //               <h6 className="card-subtitle list-group-item">Platform: {props.platform}</h6>
+    //             </ul>
+
+
+    //           </div>
+    //         </div> 
+
+
+    //       </div> 
+
+    //     </div> 
+
+    //   </div>
+    // </div>
   );
 }
 
@@ -347,7 +378,7 @@ const BacklogContainer = () => {
           </div> 
         </div>  
       
-        <div className="col col-3 col-sm-9 offset-sm-2 col-md-4 col-lg-6  col-xl-6 col-xxl-8 offset-xxl-2 ">
+        <div className="col col-3 col-sm-9 offset-sm-2 col-md-8 col-lg-8  col-xl-6 col-xxl-8 offset-xxl-2 ">
           {displayedBacklogs.map(backlog => {
              return ( <BacklogEntry
               key={backlog.backlog_id}

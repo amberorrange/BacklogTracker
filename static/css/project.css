@@ -1,43 +1,49 @@
-.search_image { /*search results images */
-    height: 300px;
+/* .search_image { search results images */
+    /* height: 300px;
     width: 400px;
+} */
+
+
+@font-face {
+    font-family: montserrat ;
+    src: url("/static/Montserrat/Montserrat-LightItalic.ttf");
 }
 
-
-body{
-    min-width:1000px;
-    background-color: #121212;
+body{ 
+     min-width:1000px;
+    background-color: black; 
+    font-family: montserrat ;
     color: white;  
 }
 
-
-#game_details_image { /*image from a single game's details page */
-    height: 300px;
+/* 
+#game_details_image { image from a single game's details page */
+    /* height: 300px;
     width: 400px;
-}
+} */
 
 
 
-.review_display { /* used for each review in show_reviews.html */
-    padding-top: 10px;
+/* .review_display { used for each review in show_reviews.html */
+    /* padding-top: 10px;
     padding-bottom: 5px;
-}
+} */
 
 
-.inline { /* anything that needs to be inline */
-    display: inline;
-}
+/* .inline { anything that needs to be inline */
+    /* display: inline;
+} */
 
 
-.chart-container{ /* for charts used with chart.js */
-    padding-top: 20px;
+/* .chart-container{ for charts used with chart.js */
+    /* padding-top: 20px;
     padding-left: 30px;
     padding-bottom: 20px;
-}
+} */
 
 
 
-.center-text {
+/* .center-text {
     text-align: center
 }
 
@@ -50,13 +56,9 @@ body{
 }
 
 
-@font-face {
-    font-family: montserrat ;
-    src: url("/static/Montserrat/Montserrat-BoldItalic.ttf");
-}
+
 
 .container-fluid {
-    font-family: montserrat ;
     padding-top: 55px ;
 }
 
@@ -110,30 +112,30 @@ body{
 
 .align-left{
     text-align: left;
-}
+} */
 
-
+/* 
 .vertical-center {
     margin: 0;
     position: absolute;
     top: 40%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-  }
+  } */
 
 
 
-#homepage-title {
+/* #homepage-title {
 padding-bottom: 80px;
 margin-left: 50px;
-}
+} */
 
 
 /* .card-title {
     padding-top: 10px;
 } */
 
-.card-subtitle{
+/* .card-subtitle{
     padding-top: 10px;
 }
 
@@ -180,48 +182,31 @@ margin-left: 50px;
 }
 
 
-.filters{
-    position:fixed;
-    top: 305px;
-    margin-left: 50px;
-    padding-top: 0
-}
 
-
-.filter-reset-btn {
-    background-color: white;
-    margin-top: 15px;
-    color:black;
-    text-align: center;
-}
 
 
 #homepage-flash {
     text-align: right
 }
+ */
 
 
 
 
 
-
-/* SIGNUP PAGE */
-#sign-up-width {
-    max-width: 400px;
-}
 
 
 
 
 /* LOGIN PAGE */
-.login-image {
+/* .login-image {
     margin-top: 10%;
     margin-left: 20%;
     height: 20%;
     width: 25rem;
     /* max-width: 400px; */
-} 
-
+/* }  */
+/* 
 .login-form {
     margin-top: 10%;
     margin-right: 40%;
@@ -233,46 +218,39 @@ margin-left: 50px;
     text-align: center ;
 }
 
-
-
-
-
-
-
-
-
-/* Navbar */
-.navbar-custom{
-    height: 100px;
-    background-color: rgba(0, 0, 0, 0.648);
-    padding-top: 25px;
-    padding-left: 50px;
-    padding-bottom: 80px;
+.login-inputs {
+    background-color: white;
 }
-
-.navbar-custom .navbar-nav .nav-link {
-    color: white;
-}
-
-
-
-
-
-
-
-
-
-
-
-
+ */
+ 
 
 
 
 
 
 /* 
+.card{
+    border-radius: 4px;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 14px 80px 18px 36px;
+  cursor: pointer;
+}
+
+.card:hover{
+     transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+} */
+
+/* card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+
+} */
+/* 
 USER DETAILS */
-.account-info-title {
+/* .account-info-title {
     margin-top: 5%;
     margin-bottom: 8%;
 }
@@ -284,35 +262,103 @@ USER DETAILS */
 }
 .acct-info-data {
     margin-bottom: 15px;
-}
+} */
 
 
 /* DELETE ACCOUNT */
-.delete-acct {
+/* .delete-acct {
     margin-top: 3%;
     margin-left: 5%
-}
-.del-btn {
+} */
+/* .del-btn {
     background-color: white ;
-}
+} */
 
-.del-question {
-    margin-bottom: 20px;
-}
+/* .del-question {
+    margin-bottom: 20px; */
+/* } */
 
 
 /* CHANGE ACCOUNT  */
-.change-acct-width {
+/* .change-acct-width {
    max-width: 500px;
 
+} */
+
+
+
+
+/* DELETE Game */
+/* .del-game {
+    margin: auto
+}  */
+
+
+
+
+
+
+
+
+
+
+
+
+/* login page! */
+
+.login-text{
+    text-align: center;
+}
+
+.login-img {
+    max-height: 350px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* SIGNUP PAGE */
+#sign-up-width {
+    max-width: 400px;
+}
+
+
+
+/* Navbar */
+.navbar-custom{
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.608);
+    padding-left: 50px;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white;
+} 
+
+.nav-item {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
 
 
-/* DELETE Game*/
 
-.del-game {
-    margin: auto
+.filters{
+    position:fixed;
+    /* top: 305px; */
+    /* margin-left: 50px; */
+    padding-top: 0;
+    border-radius: 5px;
+    border-color: white;
+    border-style:groove;
+}
 
+
+.filter-reset-btn {
+    background-color: white;
+    margin-top: 15px;
+    color:black;
+    text-align: center;
 }

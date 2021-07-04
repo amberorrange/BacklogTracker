@@ -5,40 +5,53 @@
 
 {% block content %}
 
-    <div class="container-fluid bc-img-search">
+    <div class="container-fluid">
 
-        <div class="form-row pt-3 pb-3 mg-4">
-            <div class="col-3 mx-auto card-transparent pb-2 ">
+        <div class="row pt-3 pb-3 mg-4">
+
+            <div class="col-5 mx-auto card-transparent pb-2 ">
               <div class="card-body">
          
-
                 <form action="/search_results">
 
-                    <h4 class="text-center card-title">Search Games</h4>
+                    <h4 class="text-center card-title">Find A Game</h4>
       
-                    <div class="form-group pt-4  pb-2 mx-auto">
-                        <div class="col">
-                            <input type="text" class="form-control" name="game"> &nbsp;
+
+
+
+                    <div class="form-group pt-4  mb-2">
+                        <div class="col-10 mx-auto">
+                            <input type="text" class="form-control"  name="game"> 
+                        </div>
+                    </div>
+
+                    <div class="form-group pt-4  mb-2">
+                        <div class="col-10 mx-auto"></div>
+                            <label> Search By Genre: </label>
+                            <select class="form-select-sm mt-3" name="genres" >
+
+                                <option></option>
+                                {% for genre in genres %}
+                                    <option value="{{ genre }}">{{ genre }}</option>
+                                {% endfor %}
+
+                            </select>
                         </div>
                     </div>
 
 
-                    Search By Genre: 
-                    <select name="genres" >
 
-                        <option></option>
-                        {% for genre in genres %}
-                            <option value="{{ genre }}">{{ genre }}</option>
-                        {% endfor %}
 
-                    </select>
-                    <input type="submit">
+
+
+
+                    <input class="btn btn-sm del-btn form-control mt-3" type="submit">
 
                     <!-- <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p> -->
-                </form>
+                <!-- </form>
             </div>  
-        </div>    
-        <!-- <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p> -->
+        </div>     -->
+        <!-- <p><button onclick="location.href='/view_backlog'" type="button">Back </button> </p>
     </div>
 
 {% endblock %}
