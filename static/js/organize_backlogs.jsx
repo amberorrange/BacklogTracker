@@ -18,8 +18,8 @@ const BacklogEntry = (props) => {
                 <li className="list-group-item">Platform: {props.platform}</li>
                 <li className="list-group-item">Ownership Status: {props.ownership_status}</li>
                 <li className="list-group-item">Play Status: {props.play_status ? 'Playing' : 'Not Playing'}</li>
-                <a href="/add_game" class="stretched-link"></a>
               </ul>
+              <a href="/add_game" class="stretched-link"></a>
             </div>
           </div>
         

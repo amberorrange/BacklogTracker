@@ -10,15 +10,15 @@
 
     <div class="container-fluid">
 
-        <div class="row">
+        <div class="row mt-5 mb-5">
 
 
-            <div class="col mx-auto">
+            <div class="col-5 mx-auto">
                 <div class="card game-details-card">
                     <img class="card-img-top game-details-img" src="{{ data['background_image'] }}" alt="Card image cap">
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Metacritic Score: {{ data['metacritic'] }}</li>
+                            <li class="list-group-item pt-0">Metacritic Score: {{ data['metacritic'] }}</li>
                             <li class="list-group-item">Release Date: {{ data['released'] }}</li>
                             <!-- <li class="list-group-item" >Website: <a style="color: white" href=" {{ data['website'] }}"> {{ data['website'] }}</a></li> -->
                             <li class="list-group-item">Average Playtime: {{ data['playtime']}} hours</li>
@@ -32,11 +32,11 @@
 
 
 
-            <div class="col mx-auto">
+            <div class="col-5 mx-auto">
                 <div class="card add-game-card"></div>
                     <div class="card-body">
-                        <h4 class="card-title ">{{ data['name'] }} </h4>
-                        <h3 class="subtitle">Add to Backlog?</h3>
+                        <h2 class="card-title add-game-title ">{{ data['name'] }} </h2>
+                        <h3 class="subtitle add-game-subtitle">Add to Backlog?</h3>
                         <form action="/backlog_validation" method="POST"> 
 
                             <input type="hidden" name="title" value="{{ data['name'] }}">
@@ -45,7 +45,7 @@
                             <input type="hidden" name="game_image" value=" {{ data['background_image'] }}"> 
 
                             Ownership Status:
-                            <select class="form-select form-select-sm" name="ownership_status" >
+                            <select class="form-select mb-3 form-select-sm" name="ownership_status" >
                                 <option value="Owned">Owned</option>
                                 <option value="Not Owned">Not Owned</option>
                                 <option value="Unreleased">Unreleased</option>
@@ -53,14 +53,14 @@
 
 
                             Are you currently playing this game?
-                            <select class="form-select form-select-sm" name="play_status">
+                            <select class="form-select mb-3 form-select-sm" name="play_status">
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select> 
 
 
                             Genre: 
-                            <select class="form-select form-select-sm" name="genres" >
+                            <select class="form-select mb-3 form-select-sm" name="genres" >
                                 <option></option>
                                 {% for genre in genres %}
                                     <option value="{{ genre.name }}">{{ genre.name }}</option>
@@ -70,7 +70,7 @@
 
 
                             Platform:
-                            <select class="form-select form-select-sm" name="platforms" >
+                            <select class="form-select mb-4 form-select-sm" name="platforms" >
                                 <option></option>
                                 {% for platform in platforms %}
                                     <option value="{{ platform.name}}">{{ platform.name }}</option>
@@ -78,9 +78,9 @@
                             </select> 
 
 
-                            <input class="btn btn-primary" value="Add Game" type="submit" >
+                            <input class="btn mb-3 add-game-btn form-control" value="Add Game" type="submit" >
 
-                            <button  lass="btn btn-primary"  onclick="location.href='/add_game'" type="button">Back to Search</button> 
+                            <button  class="btn add-game-btn form-control"  onclick="location.href='/add_game'" type="button">Back to Search</button> 
 
                         </form>
             
@@ -92,24 +92,23 @@
        
 
 
-        <div class="row">
+        <div class="row mb-5 pb-5">
 
-            <div class="co-4 mx-auto">
+            <div class="col-9 mx-auto">
                 <div class="card game-des-card">
 
-
-                    <div class="card-text">
+                    <div class="card-text game-des-text">
         
-                        <p>Description: {{ data['description'] | safe }}</p>
+                        <h2>Description:</h2> <p>{{ data['description'] | safe }}</p>
 
-                        <p>Available on:</p>
+                        <h3 class="mt-4 mb-2">Available on:</h3>
                         {% for platform in data['platforms'] %}
                         <li> {{ platform['platform']['name'] }}</li>
                         {% endfor %}
 
-                        <p>In the News:</p>
+                        <h3 class="mt-4 mb-2" >In the News:</h3>
                         {% for article in articles %}
-                        <li><a href="{{  article['url']  }}"> {{ article['title'] }}</a> </li>
+                        <p><li><a style="color: white" href="{{  article['url']  }}"> {{ article['title'] }}</a> </li></p>
                         {% endfor %} 
                     </div>
             

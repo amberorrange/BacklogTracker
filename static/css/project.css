@@ -489,7 +489,7 @@ USER DETAILS */
     border-bottom-width: 1px;
 }
 
-game-details-img{
+.game-details-img{
     max-height: 400px;
 }
 
@@ -523,4 +523,31 @@ game-details-img{
 }
 
 
+.add-game-card {
+    border: none;
+}
 
+
+.add-game-title{
+    border-color: white;
+    text-align: center;
+    margin-bottom: 5%;
+
+}
+
+.add-game-subtitle {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.add-game-btn {
+    background-color: transparent;
+    color: white;
+    border-color: white;
+}
+
+
+
+.game-des-card {
+    border: none;
+}
