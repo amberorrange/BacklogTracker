@@ -362,6 +362,7 @@ USER DETAILS */
     text-align: center;
     background-color: black;
     color: white;
+    border-color: white;
 }
 .list-group-item {
     color: white;
@@ -434,12 +435,92 @@ USER DETAILS */
     margin-top: 20%;
 }
 
+.search-title{
+   display: inline;
+}
+
+
+.back-to-search{
+    color: white;
+    background: transparent;
+    border-color: white;
+    position: absolute; right:1%;
+}
+
+
+.search-results-card:hover{
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);   
+}
+
+
+
+
+.sign-in-btn{
+    background-color: transparent;
+    color: white;
+    border-color: white;
+
+}
 
 
 
 
 
 
+
+
+.game-details-card {
+    text-align: center;
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+.list-group-item {
+    color: white;
+    border-color: white;
+    background-color: transparent;
+}
+
+.card-img-top{
+    border-color: white;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+game-details-img{
+    max-height: 400px;
+}
+
+
+.card-title-game-details {
+    font-size: large;
+   
+}
+
+
+.backlog-card-height {
+    height: 220px;
+    width:300px;
+}
+
+
+.game-des-card {
+    background-color: black;
+    border-color: white;
+}
+
+
+
+
+
+.game-details-card:hover{
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+    
+}
 
 
 
