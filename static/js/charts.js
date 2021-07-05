@@ -9,27 +9,39 @@ const hoursByGenreChart = new Chart(ctx, {
             label: 'Hours Played',
             data: [],
             backgroundColor: [
+                'rgba(255,83,235, .2)',
+                'rgba(252,241,108, .2)',
+                'rgba(70, 200, 243, .2)',
+                'rgba(90,44,143, .2)',
+                'rgba(248,167,21, .2)',
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
+                 'rgba(255,83,235, 1)',
+                'rgba(252,241,108, 1)',
+                'rgba(70, 200, 243, 1)',
+                'rgba(90,44,143, 1)',
+                'rgba(248,167,21, 1)',
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1,
             datalabels: {
-                color: 'black',
+                color: 'white',
                 anchor: 'end',
                 align: 'top',
-                offset: 5
+                offset: 5,
+                font: {
+                    family: 'montserrat',
+                    size: 14
+                }
             }
         }]
     },
@@ -42,9 +54,21 @@ const hoursByGenreChart = new Chart(ctx, {
                     display: true,
                     text: 'Number of Hours Played',
                     font: {
-                        size: 18
+                        size: 20,
+                        family:  'montserrat'
                     },
+                    color: 'white',
                     padding: 22
+                },
+                ticks: {
+                    color: 'white',
+                    font:{
+                        family: 'montserrat',
+                        size: 12
+                    }
+                },
+                grid: {
+                    borderColor: 'white'
                 }
             },
             x: {
@@ -52,11 +76,23 @@ const hoursByGenreChart = new Chart(ctx, {
                     display: true,
                     text: 'Genre',
                     font: {
-                        size: 18
+                        size: 20,
+                        family:  'montserrat',
                     },
+                    color: 'white',
                     padding: 22
+                },
+                ticks: {
+                    color: 'white',
+                    font: {
+                        family: 'montserrat',
+                        size: 16
+                    }
+                },
+                grid: {
+                    borderColor: 'white'
                 }
-            }
+            }   
         },
         responsive: true,
         maintainAspectRatio: false,
@@ -69,8 +105,10 @@ const hoursByGenreChart = new Chart(ctx, {
                     bottom: 30,
                 },
                 font: {
-                    size: 26
-                }
+                    size: 30,
+                    family:  'montserrat'
+                },
+                color:'white'
             },
             legend: {
                 display: false  
@@ -88,16 +126,36 @@ const genrePercentagesChart = new Chart(ctx2, {
             label: 'Percent Played By Each Genre',
             data: [],
             backgroundColor: [
+                'rgba(255,83,235, .2)',
+                'rgba(252,241,108, .2)',
+                'rgba(70, 200, 243, .2)',
+                'rgba(90,44,143, .2)',
+                'rgba(248,167,21, .2)',
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
             ],
+            borderColor:  [
+                'rgba(255,83,235, 1)',
+               'rgba(252,241,108, 1)',
+               'rgba(70, 200, 243, 1)',
+               'rgba(90,44,143, 1)',
+               'rgba(248,167,21, 1)',
+               'rgba(255, 99, 132, 1)',
+               'rgba(54, 162, 235, 1)',
+               'rgba(75, 192, 192, 1)',
+               'rgba(153, 102, 255, 1)',
+               'rgba(255, 159, 64, 1)'
+           ],
             hoverOffset: 4,
             datalabels: {
-                color: 'black',
+                color: 'white',
+                font: {
+                    family: 'montserrat',
+                    size: 18
+                },
                 display: true,
                 clip: false,
                 anchor: 'end',
@@ -127,11 +185,20 @@ const genrePercentagesChart = new Chart(ctx2, {
                     bottom: 50
                 },
                 font: {
-                    size: 26
-                }
+                    size: 30,
+                    family: 'montserrat'
+                },
+                color: 'white'
             },
             legend: {
-                position: 'right' 
+                position: 'right',
+                labels: {
+                    color: 'white',
+                    font: {
+                        family: 'montserrat',
+                        size: 20
+                    }
+                } 
             }
         }
     }
@@ -168,27 +235,39 @@ const hoursByPlatformChart = new Chart(ctx3, {
             label: 'Hours Played',
             data: [],
             backgroundColor: [
+                'rgba(255,83,235, .2)',
+                'rgba(252,241,108, .2)',
+                'rgba(70, 200, 243, .2)',
+                'rgba(90,44,143, .2)',
+                'rgba(248,167,21, .2)',
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+                'rgba(255,83,235, 1)',
+               'rgba(252,241,108, 1)',
+               'rgba(70, 200, 243, 1)',
+               'rgba(90,44,143, 1)',
+               'rgba(248,167,21, 1)',
+               'rgba(255, 99, 132, 1)',
+               'rgba(54, 162, 235, 1)',
+               'rgba(75, 192, 192, 1)',
+               'rgba(153, 102, 255, 1)',
+               'rgba(255, 159, 64, 1)'
+           ],
             borderWidth: 1,
             datalabels: {
-                color: 'black',
+                color: 'white',
                 anchor: 'end',
                 align: 'top',
-                offset: 5
+                offset: 5,
+                font: { 
+                    family: 'montserrat',
+                    size: 14
+                }
             }
         }]
     },
@@ -196,24 +275,48 @@ const hoursByPlatformChart = new Chart(ctx3, {
     options: {
         scales: {
             y: {  
-                beginAtZero: true,title: {
+                beginAtZero: true,
+                title: {
                     display: true,
                     text: 'Number of Hours Played',
                     font: {
-                        size: 18
+                        size: 20,
+                        family: 'montserrat'
                     },
+                    color: 'white',
                     padding: 22
-                }
-                
+                },
+                ticks: {
+                    color: 'white',
+                    font: {
+                        family: 'montserrat',
+                        size: 12
+                    }
+                },
+                grid: {
+                    borderColor: 'white'
+                }              
             },
             x: {
                 title: {
                     display: true,
                     text: 'Platform',
                     font: {
-                        size: 18
+                        size: 20,
+                        family: 'montserrat'
                     },
+                    color: 'white',
                     padding: 22
+                },
+                ticks: {
+                    color: 'white',
+                    font: {
+                        family: 'montserrat',
+                        size: 16
+                    }
+                },
+                grid: {
+                    borderColor: 'white'
                 }
             }  
         },
@@ -228,8 +331,10 @@ const hoursByPlatformChart = new Chart(ctx3, {
                     bottom: 30
                 },
                 font: {
-                    size: 26
-                }
+                    size: 30,
+                    family: 'montserrat'
+                },
+                color: 'white'
             },
             legend: {
                 display: false
@@ -248,16 +353,36 @@ const platformPercentagesChart = new Chart(ctx4, {
             label: 'Percent Played By Each Platform',
             data: [],
             backgroundColor: [
+                'rgba(255,83,235, .2)',
+                'rgba(252,241,108, .2)',
+                'rgba(70, 200, 243, .2)',
+                'rgba(90,44,143, .2)',
+                'rgba(248,167,21, .2)',
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
             ],
+            borderColor:  [
+                'rgba(255,83,235, 1)',
+               'rgba(252,241,108, 1)',
+               'rgba(70, 200, 243, 1)',
+               'rgba(90,44,143, 1)',
+               'rgba(248,167,21, 1)',
+               'rgba(255, 99, 132, 1)',
+               'rgba(54, 162, 235, 1)',
+               'rgba(75, 192, 192, 1)',
+               'rgba(153, 102, 255, 1)',
+               'rgba(255, 159, 64, 1)'
+           ],
             hoverOffset: 4,
             datalabels: {
-                color: 'black',
+                color: 'white',
+                font: {
+                    family: 'montserrat',
+                    size: 18
+                },
                 display: true,
                 clip: false,
                 anchor: 'end',
@@ -287,11 +412,20 @@ const platformPercentagesChart = new Chart(ctx4, {
                     bottom: 50
                 },
                 font: {
-                    size: 26
-                }
+                    size: 30,
+                    family: 'montserrat'
+                },
+                color: 'white'
             },
             legend: {
-                position: 'right' 
+                position: 'right',
+                labels: {
+                    color: 'white',
+                    font: {
+                        family: 'montserrat',
+                        size: 20
+                    }
+                }
             }
         }
     }

@@ -72,7 +72,7 @@ def logout():
     """Logs a user out of their account. """
 
     logout_user()
-    flash("Successfully logged out of account.")
+    flash("Logged out of account.")
     return redirect("/")
 
 

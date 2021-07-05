@@ -35,13 +35,6 @@ body{
 } */
 
 
-/* .chart-container{ for charts used with chart.js */
-    /* padding-top: 20px;
-    padding-left: 30px;
-    padding-bottom: 20px;
-} */
-
-
 
 /* .center-text {
     text-align: center
@@ -364,11 +357,8 @@ USER DETAILS */
     color: white;
     border-color: white;
 }
-.list-group-item {
-    color: white;
-    border-color: white;
-    background-color: transparent;
-}
+
+
 
 .card-img-top{
     border-color: white;
@@ -517,7 +507,7 @@ USER DETAILS */
 
 .game-details-card:hover{
     transform: scale(1.1);
-    transition: transform 0.2s ease;
+    transition: transform 0.8s ease;
     box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
     
 }
@@ -531,7 +521,7 @@ USER DETAILS */
 .add-game-title{
     border-color: white;
     text-align: center;
-    margin-bottom: 5%;
+    margin-bottom: 4%;
 
 }
 
@@ -551,3 +541,57 @@ USER DETAILS */
 .game-des-card {
     border: none;
 }
+
+
+
+
+ .chart-container{ /*for charts used with chart.js  */
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-bottom: 20px;
+} 
+
+.charts-title {
+    margin-left: 20px;
+}
+
+
+#chart-hours-played {
+    background-color: transparent;
+    position: fixed;
+    left: 10px;
+}
+
+
+.pie-chart {
+    margin: auto
+}
+
+
+.nav-item:hover{
+    transform: scale(1.1);
+    transition: transform .8s ease;
+    box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+}
+
+
+.navbar-brand:hover{
+    transform: scale(1.1);
+    transition: transform 0.8s ease;
+    box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+}
+
+
+.review-cards {
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    /* border-color: white; */
+    margin-top: 2%;
+}
+
+/* .review-cards:hover{
+    transform: scale(1.1);
+    transition: transform 0.9s ease;
+    box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+} */

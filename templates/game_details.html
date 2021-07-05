@@ -18,11 +18,11 @@
                     <img class="card-img-top game-details-img" src="{{ data['background_image'] }}" alt="Card image cap">
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item pt-0">Metacritic Score: {{ data['metacritic'] }}</li>
+                            <li class="list-group-item pt-0 pb-2">Metacritic Score: {{ data['metacritic'] }}</li>
                             <li class="list-group-item">Release Date: {{ data['released'] }}</li>
                             <!-- <li class="list-group-item" >Website: <a style="color: white" href=" {{ data['website'] }}"> {{ data['website'] }}</a></li> -->
                             <li class="list-group-item">Average Playtime: {{ data['playtime']}} hours</li>
-                            <li class="list-group-item">ESRB Rating: {{ esrb }}</li>
+                            <li class="list-group-item pt-3">ESRB Rating: {{ esrb }}</li>
                           </ul>
                           <a href=" {{ data['website'] }}" class="stretched-link"></a>
      
@@ -34,7 +34,7 @@
 
             <div class="col-5 mx-auto">
                 <div class="card add-game-card"></div>
-                    <div class="card-body">
+                    <div class="card-body pt-0">
                         <h2 class="card-title add-game-title ">{{ data['name'] }} </h2>
                         <h3 class="subtitle add-game-subtitle">Add to Backlog?</h3>
                         <form action="/backlog_validation" method="POST"> 

@@ -9,11 +9,9 @@
    
 {% block content %}
 
-    <h1>{{ current_user.fname }}'s Stats</h1>    
+    <h1 class="charts-title">{{ current_user.fname }}'s Stats</h1>    
 
-    <p>Total Hours Played: {{ completion_time }}</p>
-
-    <!--need a way to transfer data queried from db into chart: js-->
+    <h4 id='chart-hours-played'>Total Hours Played: {{ completion_time }}</h4>
 
     <!-- import chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js"></script>
@@ -24,7 +22,7 @@
     </div>
 
     
-    <div class="chart-container" style="position: relative; height:70vh; width:80vw">
+    <div class="chart-container pie-chart" style="position: relative; height:70vh; width:80vw">
         <canvas id="genrePercentagesChart"></canvas>
     </div>
 
@@ -34,13 +32,13 @@
     </div>
     
 
-    <div class="chart-container" style="position: relative; height:70vh; width:80vw">
+    <div class="chart-container pie-chart" style="position: relative; height:70vh; width:80vw">
         <canvas id="platformPercentagesChart"></canvas>
     </div>
 
-    <small>*Data used from submitted reviews</small><br><br>
+    <small style="margin-left: 20px;">*Data used from submitted reviews</small><br><br>
 
-    <button onclick="location.href='/view_backlog'" type="button">Back</button>
+    <button class="btn mb-5 chart-back-btn" style="background-color: transparent; color: white; border-color: white; margin-left: 20px;" onclick="location.href='/view_backlog'" type="button">Back</button>
 
     <script src="/static/js/charts.js"></script>  
 {% endblock %}
