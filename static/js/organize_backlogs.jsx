@@ -3,9 +3,6 @@
 const BacklogEntry = (props) => {
   return (
 
-
-
-    // <div className="row row-cols-1 row-cols-md-3 g-4">
       <div className="col">
 
           <div className="card bl-card">
@@ -21,52 +18,8 @@ const BacklogEntry = (props) => {
               </ul>
               <a href="/add_game" class="stretched-link"></a>
             </div>
-          </div>
-        
+          </div>  
       </div>
-
-     
- 
-
- 
-    
-    // <div className="row">
-    //   <div className="col ">
-
-    //     <div className="card card-style">
-
-    //       <div className='row g-0'>
-
-    //         <div className='col-3'>
-    //           <img  className="img-fluid bl-entry-img rounded-start" src={props.image}/>
-    //         </div>
-
-    //         <div className='col'>
-    //           <div className='card-body pt-0'>
-    //           <h4 className="backlog-entry-title card-title">{props.title}</h4>
-
-    //             <ul class="list-group list-group-horizontal">
-    //               <h6 className="card-subtitle right-border list-group-item">Genre:  <p>{props.genre}</p></h6>
-
-
-
-
-    //               <h6 className="card-subtitle right-border list-group-item">Ownership Status: {props.ownership_status}</h6>
-    //               <h6 className="card-subtitle right-border list-group-item">Play Status: {props.play_status ? 'Currently Playing' : 'Not Playing'}</h6>
-    //               <h6 className="card-subtitle list-group-item">Platform: {props.platform}</h6>
-    //             </ul>
-
-
-    //           </div>
-    //         </div> 
-
-
-    //       </div> 
-
-    //     </div> 
-
-    //   </div>
-    // </div>
   );
 }
 
@@ -277,8 +230,6 @@ const BacklogContainer = () => {
       choice = 'All'
     } 
     
-    // console.log(sortingChoice, 'SORTING CHOICE')
-    // console.log(choice, 'CHOICE')
 
     if (sortingChoice === "All") {
       updateDisplayedBacklogs(backlogs)
@@ -332,8 +283,6 @@ const BacklogContainer = () => {
       <div className="row">
         <div className="col-3 filters">   
 
-        {/* col-sm-2 col-md-4 col-lg-1 col-xl-2 col-xxl-2  filters  */}
-
           <div className="card-body mb-3">
 
             <h4 className="text-center card-title">Filter By:</h4>
@@ -381,8 +330,6 @@ const BacklogContainer = () => {
         </div>  
       
         <div className="col-8 offset-3 ">
-
-        {/* col-sm-9 offset-sm-2 col-md-8 col-lg-7 offset-lg-3 col-xl-6 col-xxl-8 offset-xxl-2 */}
 
           <div className="row row-cols-1 row-cols-md-3 g-4">
 
